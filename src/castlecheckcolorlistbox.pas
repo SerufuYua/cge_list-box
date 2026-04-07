@@ -6,22 +6,27 @@ interface
 
 uses
   Classes, SysUtils, CastleClassUtils, CastleRectangles, CastleGLImages,
-  CastleKeysMouse, CastleVectors, CastleListBoxBase;
+  CastleKeysMouse, CastleVectors, CastleColors, CastleListBoxBase;
 
 type
   TCheckEvent = procedure(Sender: TObject; AIndex: Integer; ACheck: Boolean) of object;
 
   TCastleCheckColorListBox = class(TCastleListBoxBase)
   protected
+    FListColors: TStrings;
     FColorBoxWidth: Single;
     FColorBoxMargin: TBorder;
     FColorBox: TCastleImagePersistent;
+    FColors: Array of TCastleColor;
     FCheckList: Array of Boolean;
     FPressIndex: Integer;
     FCheckRect: TFloatRectangle;
     FSquareEmpty, FSquareChecked, FSquarePressedBG: TCastleImagePersistent;
     FOnCheck: TCheckEvent;
+    procedure SetListColors(const AValue: TStrings);
+    procedure ListColorsChange(Sender: TObject);
     procedure ListChange(Sender: TObject); override;
+    procedure UpdateColors;
     procedure CalcRectangles; override;
     procedure DoCheck(const AIndex: Integer; const ACheck: Boolean);
   public
@@ -38,6 +43,7 @@ type
     procedure SetCheck(const AIndex: Integer; const ACheck: Boolean);
     function GetCheck(const AIndex: Integer): Boolean;
   published
+    property ListColors: TStrings read FListColors write SetListColors;
     property ColorBoxWidth: Single read FColorBoxWidth write FColorBoxWidth
              {$ifdef FPC}default DefaultColorBoxWidth{$endif};
     property ColorBoxMargin: TBorder read FColorBoxMargin;
@@ -51,8 +57,7 @@ type
 implementation
 
 uses
-  CastleComponentSerialize, CastleUtils, CastleUIControls, CastleColors,
-  CastleGLUtils;
+  CastleComponentSerialize, CastleUtils, CastleUIControls, CastleGLUtils, Math;
 
 constructor TCastleCheckColorListBox.Create(AOwner: TComponent);
 begin
@@ -61,6 +66,9 @@ begin
   FOnCheck:= nil;
   FPressIndex:= -1;
   FColorBoxWidth:= DefaultColorBoxWidth;
+
+  FListColors:= TStringList.Create;
+  TStringList(FListColors).OnChange:= {$ifdef FPC}@{$endif}ListColorsChange;
 
   FSquareEmpty:= TCastleImagePersistent.Create;
   FSquareChecked:= TCastleImagePersistent.Create;
@@ -87,6 +95,10 @@ begin
 
   if Assigned(FColorBoxMargin) then
     FreeAndNil(FColorBoxMargin);
+
+  if Assigned(FListColors) then
+    FreeAndNil(FListColors);
+
   inherited;
 end;
 
@@ -190,13 +202,13 @@ begin
 
   if FColorBox.Empty then
   begin
-    DrawRectangle(ColorBoxRect, Aqua {FColors[AIndex]});
+    DrawRectangle(ColorBoxRect, FColors[AIndex]);
     DrawRectangleOutline(ColorBoxRect, FColorBox.Color, 2);
   end
   else
   begin
     FColorBox.DrawUiBegin(UIScale);
-    FColorBox.Color:= Aqua {FColors[AIndex]};
+    FColorBox.Color:= FColors[AIndex];
     FColorBox.Draw(ColorBoxRect);
     FColorBox.DrawUiEnd;
   end;
@@ -221,6 +233,16 @@ begin
   {$endif}
 end;
 
+procedure TCastleCheckColorListBox.SetListColors(const AValue: TStrings);
+begin
+  FListColors.Assign(AValue);
+end;
+
+procedure TCastleCheckColorListBox.ListColorsChange(Sender: TObject);
+begin
+  UpdateColors;
+end;
+
 procedure TCastleCheckColorListBox.ListChange(Sender: TObject);
 var
   i: Integer;
@@ -230,6 +252,17 @@ begin
   SetLength(FCheckList, FList.Count);
   for i:= 0 to High(FCheckList) do
     FCheckList[i]:= True;
+
+  UpdateColors;
+end;
+
+procedure TCastleCheckColorListBox.UpdateColors;
+var
+  i: Integer;
+begin
+  SetLength(FColors, Math.Max(FList.Count, FListColors.Count));
+  for i:= 0 to (FListColors.Count - 1) do
+    FColors[i]:= HexToColor(FListColors[i]);
 end;
 
 procedure TCastleCheckColorListBox.CalcRectangles;
@@ -267,7 +300,7 @@ function TCastleCheckColorListBox.PropertySections(const PropertyName: String): 
 begin
   if ArrayContainsString(PropertyName, [
        'SquareEmpty', 'SquareChecked', 'SquarePressedBack', 'ColorBoxWidth',
-       'ColorBoxMargin', 'ColorBox'
+       'ColorBoxMargin', 'ColorBox', 'ListColors'
      ]) then
     Result:= [psBasic]
   else

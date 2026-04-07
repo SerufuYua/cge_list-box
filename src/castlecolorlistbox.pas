@@ -159,7 +159,7 @@ end;
 function TCastleColorListBox.GetColor(const AIndex: Integer): TCastleColor;
 begin
   if ((AIndex > -1) AND (AIndex < FList.Count)) then
-    Result:= HexToColor(FList[AIndex])
+    Result:= FColors[AIndex]
   else
     Result:= Fuchsia;
 end;

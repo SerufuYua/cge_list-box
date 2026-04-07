@@ -145,6 +145,9 @@ begin
   if Assigned(FScrollbarSlider) then
     FreeAndNil(FScrollbarSlider);
 
+  if Assigned(FList) then
+    FreeAndNil(FList);
+
   inherited;
 end;
 
