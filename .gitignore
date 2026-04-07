@@ -1,0 +1,4 @@
+# Files ignored by GIT version control
+
+src/backup
+todo.txt
