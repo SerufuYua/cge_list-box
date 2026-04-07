@@ -11,6 +11,7 @@ uses
 type
   TCastleListBoxBase = class(TCastleUserInterfaceFont)
   protected
+    FTextMargin: Single;
     FIndex: Integer;
     FLineFrame, FLineCursor: TCastleImagePersistent;
     FScrollbarFrame, FScrollbarSlider: TCastleImagePersistent;
@@ -40,6 +41,7 @@ type
     procedure DoClick;
   public
     const
+      DefaultTextMargin = 12;
       DefaultScrollBarLeft = False;
       DefaultIndex = -1;
       DefaultLinePadding = 12;
@@ -66,6 +68,8 @@ type
     property SliderPosY: Single read FSliderPosY write SetSliderPosY;
   published
     property List: TStrings read FList write SetList;
+    property TextMargin: Single read FTextMargin write FTextMargin
+             {$ifdef FPC}default DefaultTextMargin{$endif};
     property ScrollBarLeft: Boolean read FScrollBarLeft write FScrollBarLeft
              {$ifdef FPC}default DefaultScrollBarLeft{$endif};
     property CursorSpeed: Single read FCursorSpeed write FCursorSpeed
@@ -99,6 +103,7 @@ begin
   FAreaPosY:= 0.0;
   FAreaTargetPosY:= 0.0;
   FSliderPosY:= 0.0;
+  FTextMargin:= DefaultTextMargin;
   FScrollBarLeft:= DefaultScrollBarLeft;
   FCursorSpeed:= DefaultCursorSpeed;
   FAreaSpeed:= DefaultAreaSpeed;
@@ -484,7 +489,7 @@ end;
 function TCastleListBoxBase.PropertySections(const PropertyName: String): TPropertySections;
 begin
   if ArrayContainsString(PropertyName, [
-       'ColorPersistent', 'LinePadding', 'ScrollBarWidth',
+       'TextMargin', 'ColorPersistent', 'LinePadding', 'ScrollBarWidth',
        'LineFrame', 'LineCursor', 'ScrollbarFrame', 'ScrollbarSlider', 'Index',
        'CursorSpeed', 'AreaSpeed', 'ClipChildren', 'List',
        'ScrollBarLeft'

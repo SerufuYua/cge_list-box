@@ -13,14 +13,13 @@ type
   protected
     FColors: Array of TCastleColor;
     FShowText, FShowTextLeft: Boolean;
-    FTextMargin, FTextWidth: Single;
+    FTextWidth: Single;
     FColorBox: TCastleImagePersistent;
     FColorBoxMargin: TBorder;
     procedure ListChange(Sender: TObject); override;
     procedure CalcTextWidth;
   public
     const
-      DefaultTextMargin = 12;
       DefaultShowText = False;
       DefaultShowTextLeft = False;
 
@@ -37,8 +36,6 @@ type
              {$ifdef FPC}default DefaultShowText{$endif};
     property ShowTextLeft: Boolean read FShowTextLeft write FShowTextLeft
              {$ifdef FPC}default DefaultShowTextLeft{$endif};
-    property TextMargin: Single read FTextMargin write FTextMargin
-             {$ifdef FPC}default DefaultTextMargin{$endif};
     property ColorBox: TCastleImagePersistent read FColorBox;
     property ColorBoxMargin: TBorder read FColorBoxMargin;
 end;
@@ -55,7 +52,6 @@ begin
   FTextWidth:= 0.0;
   FShowText:= DefaultShowText;
   FShowTextLeft:= DefaultShowTextLeft;
-  FTextMargin:= DefaultTextMargin;
 
   FColorBox:= TCastleImagePersistent.Create;
 

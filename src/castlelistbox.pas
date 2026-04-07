@@ -10,35 +10,18 @@ uses
 
 type
   TCastleListBox = class(TCastleListBoxBase)
-  protected
-    FTextMargin: Single;
   public
-    const
-      DefaultTextMargin = 12;
-
-    constructor Create(AOwner: TComponent); override;
     procedure RenderLine(const ARect: TFloatRectangle; const AIndex: Integer); override;
-    function PropertySections(const PropertyName: String): TPropertySections; override;
-  published
-    property TextMargin: Single read FTextMargin write FTextMargin
-             {$ifdef FPC}default DefaultTextMargin{$endif};
   end;
 
 implementation
 
 uses
-  CastleComponentSerialize, CastleUtils
+  CastleComponentSerialize
   {$if defined(CASTLE_DESIGN_MODE)}
   , CastleGLUtils
   , CastleColors
   {$endif};
-
-constructor TCastleListBox.Create(AOwner: TComponent);
-begin
-  inherited;
-
-  FTextMargin:= DefaultTextMargin;
-end;
 
 procedure TCastleListBox.RenderLine(const ARect: TFloatRectangle; const AIndex: Integer);
 var
@@ -64,16 +47,6 @@ begin
   {$if defined(CASTLE_DESIGN_MODE)}
   DrawRectangleOutline(TextRect, Orange, 1);
   {$endif}
-end;
-
-function TCastleListBox.PropertySections(const PropertyName: String): TPropertySections;
-begin
-  if ArrayContainsString(PropertyName, [
-       'TextMargin'
-     ]) then
-    Result:= [psBasic]
-  else
-    Result:= inherited PropertySections(PropertyName);
 end;
 
 initialization

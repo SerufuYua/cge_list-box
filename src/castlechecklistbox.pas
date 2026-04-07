@@ -6,12 +6,12 @@ interface
 
 uses
   Classes, SysUtils, CastleClassUtils, CastleRectangles, CastleGLImages,
-  CastleKeysMouse, CastleListBox;
+  CastleKeysMouse, CastleListBoxBase;
 
 type
   TCheckEvent = procedure(Sender: TObject; AIndex: Integer; ACheck: Boolean) of object;
 
-  TCastleCheckListBox = class(TCastleListBox)
+  TCastleCheckListBox = class(TCastleListBoxBase)
   protected
     FCheckList: Array of Boolean;
     FPressIndex: Integer;
