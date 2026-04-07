@@ -16,7 +16,7 @@ type
     FCheckList: Array of Boolean;
     FPressIndex: Integer;
     FCheckRect: TFloatRectangle;
-    FSquareEmpty, FSquareChecked, FSquarePressedBG: TCastleImagePersistent;
+    FCheckEmpty, FCheckChecked, FCheckPressedBG: TCastleImagePersistent;
     FCheckRight: Boolean;
     FOnCheck: TCheckEvent;
     procedure ListChange(Sender: TObject); override;
@@ -38,9 +38,9 @@ type
   published
     property CheckRight: Boolean read FCheckRight write FCheckRight
              {$ifdef FPC}default DefaultCheckRight{$endif};
-    property SquareEmpty: TCastleImagePersistent read FSquareEmpty;
-    property SquareChecked: TCastleImagePersistent read FSquareChecked;
-    property SquarePressedBack: TCastleImagePersistent read FSquarePressedBG;
+    property CheckEmpty: TCastleImagePersistent read FCheckEmpty;
+    property CheckChecked: TCastleImagePersistent read FCheckChecked;
+    property CheckPressedBack: TCastleImagePersistent read FCheckPressedBG;
     property OnCheck: TCheckEvent read FOnCheck write FOnCheck;
   end;
 
@@ -59,21 +59,21 @@ begin
   FOnCheck:= nil;
   FPressIndex:= -1;
   FCheckRight:= DefaultCheckRight;
-  FSquareEmpty:= TCastleImagePersistent.Create;
-  FSquareChecked:= TCastleImagePersistent.Create;
-  FSquarePressedBG:= TCastleImagePersistent.Create;
+  FCheckEmpty:= TCastleImagePersistent.Create;
+  FCheckChecked:= TCastleImagePersistent.Create;
+  FCheckPressedBG:= TCastleImagePersistent.Create;
 end;
 
 destructor TCastleCheckListBox.Destroy;
 begin
-  if Assigned(FSquareEmpty) then
-    FreeAndNil(FSquareEmpty);
+  if Assigned(FCheckEmpty) then
+    FreeAndNil(FCheckEmpty);
 
-  if Assigned(FSquareChecked) then
-    FreeAndNil(FSquareChecked);
+  if Assigned(FCheckChecked) then
+    FreeAndNil(FCheckChecked);
 
-  if Assigned(FSquarePressedBG) then
-    FreeAndNil(FSquarePressedBG);
+  if Assigned(FCheckPressedBG) then
+    FreeAndNil(FCheckPressedBG);
 
   inherited;
 end;
@@ -139,13 +139,13 @@ begin
   { CheckBox Background }
   if (AIndex = FPressIndex) then
   begin
-    if FSquarePressedBG.Empty then
+    if FCheckPressedBG.Empty then
       FinalBack:= Theme.ImagesPersistent[tiSquarePressedBackground]
     else
-      FinalBack:= FSquarePressedBG;
+      FinalBack:= FCheckPressedBG;
 
     FinalBack.DrawUiBegin(UIScale);
-    FinalBack.Color:= FSquarePressedBG.Color;
+    FinalBack.Color:= FCheckPressedBG.Color;
     FinalBack.Draw(CheckRect);
     FinalBack.DrawUiEnd;
   end;
@@ -154,19 +154,19 @@ begin
   { CheckBox Square }
   if FCheckList[AIndex] then
   begin
-    SquareColor:= FSquareChecked.Color;
-    if FSquareChecked.Empty then
+    SquareColor:= FCheckChecked.Color;
+    if FCheckChecked.Empty then
       FinalSquare:= Theme.ImagesPersistent[tiSquareChecked]
     else
-      FinalSquare:= FSquareChecked;
+      FinalSquare:= FCheckChecked;
   end
   else
   begin
-    SquareColor:= FSquareEmpty.Color;
-    if FSquareEmpty.Empty then
+    SquareColor:= FCheckEmpty.Color;
+    if FCheckEmpty.Empty then
       FinalSquare:= Theme.ImagesPersistent[tiSquareEmpty]
     else
-      FinalSquare:= FSquareEmpty;
+      FinalSquare:= FCheckEmpty;
   end;
 
   FinalSquare.DrawUiBegin(UIScale);
@@ -256,7 +256,7 @@ end;
 function TCastleCheckListBox.PropertySections(const PropertyName: String): TPropertySections;
 begin
   if ArrayContainsString(PropertyName, [
-       'CheckRight', 'SquareEmpty', 'SquareChecked', 'SquarePressedBack'
+       'CheckRight', 'CheckEmpty', 'CheckChecked', 'CheckPressedBack'
      ]) then
     Result:= [psBasic]
   else

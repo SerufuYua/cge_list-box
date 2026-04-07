@@ -21,7 +21,7 @@ type
     FCheckList: Array of Boolean;
     FPressIndex: Integer;
     FCheckRect: TFloatRectangle;
-    FSquareEmpty, FSquareChecked, FSquarePressedBG: TCastleImagePersistent;
+    FCheckEmpty, FCheckChecked, FCheckPressedBG: TCastleImagePersistent;
     FOnCheck: TCheckEvent;
     procedure SetListColors(const AValue: TStrings);
     procedure ListColorsChange(Sender: TObject);
@@ -51,9 +51,9 @@ type
     property ColorBoxMargin: TBorder read FColorBoxMargin;
     property ColorBox: TCastleImagePersistent read FColorBox;
     property ColorFrame: TCastleImagePersistent read FColorFrame;
-    property SquareEmpty: TCastleImagePersistent read FSquareEmpty;
-    property SquareChecked: TCastleImagePersistent read FSquareChecked;
-    property SquarePressedBack: TCastleImagePersistent read FSquarePressedBG;
+    property CheckEmpty: TCastleImagePersistent read FCheckEmpty;
+    property CheckChecked: TCastleImagePersistent read FCheckChecked;
+    property CheckPressedBack: TCastleImagePersistent read FCheckPressedBG;
     property OnCheck: TCheckEvent read FOnCheck write FOnCheck;
   end;
 
@@ -73,9 +73,9 @@ begin
   FListColors:= TStringList.Create;
   TStringList(FListColors).OnChange:= {$ifdef FPC}@{$endif}ListColorsChange;
 
-  FSquareEmpty:= TCastleImagePersistent.Create;
-  FSquareChecked:= TCastleImagePersistent.Create;
-  FSquarePressedBG:= TCastleImagePersistent.Create;
+  FCheckEmpty:= TCastleImagePersistent.Create;
+  FCheckChecked:= TCastleImagePersistent.Create;
+  FCheckPressedBG:= TCastleImagePersistent.Create;
   FColorBox:= TCastleImagePersistent.Create;
   FColorFrame:= TCastleImagePersistent.Create;
 
@@ -85,14 +85,14 @@ end;
 
 destructor TCastleCheckColorListBox.Destroy;
 begin
-  if Assigned(FSquareEmpty) then
-    FreeAndNil(FSquareEmpty);
+  if Assigned(FCheckEmpty) then
+    FreeAndNil(FCheckEmpty);
 
-  if Assigned(FSquareChecked) then
-    FreeAndNil(FSquareChecked);
+  if Assigned(FCheckChecked) then
+    FreeAndNil(FCheckChecked);
 
-  if Assigned(FSquarePressedBG) then
-    FreeAndNil(FSquarePressedBG);
+  if Assigned(FCheckPressedBG) then
+    FreeAndNil(FCheckPressedBG);
 
   if Assigned(FColorBox) then
     FreeAndNil(FColorBox);
@@ -166,13 +166,13 @@ begin
   { CheckBox Background }
   if (AIndex = FPressIndex) then
   begin
-    if FSquarePressedBG.Empty then
+    if FCheckPressedBG.Empty then
       FinalBack:= Theme.ImagesPersistent[tiSquarePressedBackground]
     else
-      FinalBack:= FSquarePressedBG;
+      FinalBack:= FCheckPressedBG;
 
     FinalBack.DrawUiBegin(UIScale);
-    FinalBack.Color:= FSquarePressedBG.Color;
+    FinalBack.Color:= FCheckPressedBG.Color;
     FinalBack.Draw(CheckRect);
     FinalBack.DrawUiEnd;
   end;
@@ -180,19 +180,19 @@ begin
   { CheckBox Square }
   if FCheckList[AIndex] then
   begin
-    DrawColor:= FSquareChecked.Color;
-    if FSquareChecked.Empty then
+    DrawColor:= FCheckChecked.Color;
+    if FCheckChecked.Empty then
       FinalSquare:= Theme.ImagesPersistent[tiSquareChecked]
     else
-      FinalSquare:= FSquareChecked;
+      FinalSquare:= FCheckChecked;
   end
   else
   begin
-    DrawColor:= FSquareEmpty.Color;
-    if FSquareEmpty.Empty then
+    DrawColor:= FCheckEmpty.Color;
+    if FCheckEmpty.Empty then
       FinalSquare:= Theme.ImagesPersistent[tiSquareEmpty]
     else
-      FinalSquare:= FSquareEmpty;
+      FinalSquare:= FCheckEmpty;
   end;
 
   FinalSquare.DrawUiBegin(UIScale);
@@ -336,7 +336,7 @@ end;
 function TCastleCheckColorListBox.PropertySections(const PropertyName: String): TPropertySections;
 begin
   if ArrayContainsString(PropertyName, [
-       'SquareEmpty', 'SquareChecked', 'SquarePressedBack', 'ColorBoxWidth',
+       'CheckEmpty', 'CheckChecked', 'CheckPressedBack', 'ColorBoxWidth',
        'ColorBoxMargin', 'ColorBox', 'ColorFrame', 'ListColors'
      ]) then
     Result:= [psBasic]
