@@ -24,7 +24,7 @@ type
     procedure DoCheck(const AIndex: Integer; const ACheck: Boolean);
   public
   const
-    DefaultCheckLeft = False;
+    DefaultCheckRight = False;
 
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -37,7 +37,7 @@ type
     function GetCheck(const AIndex: Integer): Boolean;
   published
     property CheckRight: Boolean read FCheckRight write FCheckRight
-             {$ifdef FPC}default DefaultCheckLeft{$endif};
+             {$ifdef FPC}default DefaultCheckRight{$endif};
     property SquareEmpty: TCastleImagePersistent read FSquareEmpty;
     property SquareChecked: TCastleImagePersistent read FSquareChecked;
     property SquarePressedBack: TCastleImagePersistent read FSquarePressedBG;
@@ -58,7 +58,7 @@ begin
 
   FOnCheck:= nil;
   FPressIndex:= -1;
-  FCheckRight:= DefaultCheckLeft;
+  FCheckRight:= DefaultCheckRight;
   FSquareEmpty:= TCastleImagePersistent.Create;
   FSquareChecked:= TCastleImagePersistent.Create;
   FSquarePressedBG:= TCastleImagePersistent.Create;
@@ -226,7 +226,7 @@ begin
   else
     FClickRect:= FMoveRect.RightPart(FMoveRect.Width - FLineHeight);
 
-  { move area }
+  { check area }
   if FCheckRight then
     FCheckRect:= FMoveRect.RightPart(FLineHeight)
   else
