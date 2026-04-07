@@ -16,7 +16,7 @@ type
     FListColors: TStrings;
     FColorBoxWidth: Single;
     FColorBoxMargin: TBorder;
-    FColorBox: TCastleImagePersistent;
+    FColorBox, FColorFrame: TCastleImagePersistent;
     FColors: Array of TCastleColor;
     FCheckList: Array of Boolean;
     FPressIndex: Integer;
@@ -50,6 +50,7 @@ type
              {$ifdef FPC}default DefaultColorBoxWidth{$endif};
     property ColorBoxMargin: TBorder read FColorBoxMargin;
     property ColorBox: TCastleImagePersistent read FColorBox;
+    property ColorFrame: TCastleImagePersistent read FColorFrame;
     property SquareEmpty: TCastleImagePersistent read FSquareEmpty;
     property SquareChecked: TCastleImagePersistent read FSquareChecked;
     property SquarePressedBack: TCastleImagePersistent read FSquarePressedBG;
@@ -76,6 +77,7 @@ begin
   FSquareChecked:= TCastleImagePersistent.Create;
   FSquarePressedBG:= TCastleImagePersistent.Create;
   FColorBox:= TCastleImagePersistent.Create;
+  FColorFrame:= TCastleImagePersistent.Create;
 
   FColorBoxMargin:= TBorder.Create(nil);
   FColorBoxMargin.SetSubComponent(true);
@@ -94,6 +96,9 @@ begin
 
   if Assigned(FColorBox) then
     FreeAndNil(FColorBox);
+
+  if Assigned(FColorFrame) then
+    FreeAndNil(FColorFrame);
 
   if Assigned(FColorBoxMargin) then
     FreeAndNil(FColorBoxMargin);
@@ -145,8 +150,8 @@ end;
 
 procedure TCastleCheckColorListBox.RenderLine(const ARect: TFloatRectangle; const AIndex: Integer);
 var
-  FinalSquare, FinalBack: TCastleImagePersistent;
-  SquareColor: TCastleColor;
+  FinalSquare, FinalBack, FinalColor, FinalColorFrame: TCastleImagePersistent;
+  DrawColor: TCastleColor;
   i, len: Integer;
   CheckRect, ColorBoxRect, TextRect: TFloatRectangle;
   Text: String;
@@ -175,7 +180,7 @@ begin
   { CheckBox Square }
   if FCheckList[AIndex] then
   begin
-    SquareColor:= FSquareChecked.Color;
+    DrawColor:= FSquareChecked.Color;
     if FSquareChecked.Empty then
       FinalSquare:= Theme.ImagesPersistent[tiSquareChecked]
     else
@@ -183,7 +188,7 @@ begin
   end
   else
   begin
-    SquareColor:= FSquareEmpty.Color;
+    DrawColor:= FSquareEmpty.Color;
     if FSquareEmpty.Empty then
       FinalSquare:= Theme.ImagesPersistent[tiSquareEmpty]
     else
@@ -191,7 +196,7 @@ begin
   end;
 
   FinalSquare.DrawUiBegin(UIScale);
-  FinalSquare.Color:= SquareColor;
+  FinalSquare.Color:= DrawColor;
   FinalSquare.Draw(CheckRect);
   FinalSquare.DrawUiEnd;
 
@@ -202,17 +207,33 @@ begin
   ColorBoxRect.Width:= ColorAreaWidth - FColorBoxMargin.TotalWidth;
   ColorBoxRect.Height:= ARect.Height - FColorBoxMargin.TotalHeight;
 
+  DrawColor:= FColors[AIndex] * FColorBox.Color;
+
   if FColorBox.Empty then
   begin
-    DrawRectangle(ColorBoxRect, FColors[AIndex]);
-    DrawRectangleOutline(ColorBoxRect, FColorBox.Color, 2);
+    DrawRectangle(ColorBoxRect, DrawColor);
   end
   else
   begin
-    FColorBox.DrawUiBegin(UIScale);
-    FColorBox.Color:= FColors[AIndex];
-    FColorBox.Draw(ColorBoxRect);
-    FColorBox.DrawUiEnd;
+    FinalColor:= FColorBox;
+    FinalColor.DrawUiBegin(UIScale);
+    FinalColor.Color:= DrawColor;
+    FinalColor.Draw(ColorBoxRect);
+    FinalColor.DrawUiEnd;
+  end;
+
+  { Color Box Frame }
+  if FColorFrame.Empty then
+  begin
+    DrawRectangleOutline(ColorBoxRect, FColorFrame.Color, 2);
+  end
+  else
+  begin
+    FinalColorFrame:= FColorFrame;
+    FinalColorFrame.DrawUiBegin(UIScale);
+    FinalColorFrame.Color:= FColorFrame.Color;
+    FinalColorFrame.Draw(ColorBoxRect);
+    FinalColorFrame.DrawUiEnd;
   end;
 
   { Text }
@@ -316,7 +337,7 @@ function TCastleCheckColorListBox.PropertySections(const PropertyName: String): 
 begin
   if ArrayContainsString(PropertyName, [
        'SquareEmpty', 'SquareChecked', 'SquarePressedBack', 'ColorBoxWidth',
-       'ColorBoxMargin', 'ColorBox', 'ListColors'
+       'ColorBoxMargin', 'ColorBox', 'ColorFrame', 'ListColors'
      ]) then
     Result:= [psBasic]
   else

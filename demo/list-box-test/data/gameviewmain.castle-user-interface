@@ -200,6 +200,19 @@
             "$$ClassName" : "TBorder",
             "AllSides" : 6.0000000000000000E+000
           },
+          "ColorFrame" : {
+            "$$ClassName" : "TCastleImagePersistent",
+            "ColorPersistent" : {
+              "$$ClassName" : "TCastleColorPersistent",
+              "Blue" : 0.0000000000000000E+000,
+              "Red" : 9.7254902124404907E-001
+            },
+            "ProtectedSides" : {
+              "$$ClassName" : "TBorder",
+              "AllSides" : 1.2000000000000000E+001
+            },
+            "Url" : "castle-data:/ui/ColorFrame.png"
+          },
           "Height" : 2.0000000000000000E+002,
           "HorizontalAnchorParent" : "hpMiddle",
           "HorizontalAnchorSelf" : "hpMiddle",
@@ -262,13 +275,26 @@
           "$$ClassName" : "TCastleCheckColorListBox",
           "ClipChildren" : true,
           "ColorBox" : {
-            "$$ClassName" : "TCastleImagePersistent"
+            "$$ClassName" : "TCastleImagePersistent",
+            "ProtectedSides" : {
+              "$$ClassName" : "TBorder",
+              "AllSides" : 1.2000000000000000E+001
+            },
+            "Url" : "castle-data:/ui/ColorSqureBox.png"
           },
           "ColorBoxMargin" : {
             "$$ClassName" : "TBorder",
             "AllSides" : 6.0000000000000000E+000
           },
           "ColorBoxWidth" : 6.4000000000000000E+001,
+          "ColorFrame" : {
+            "$$ClassName" : "TCastleImagePersistent",
+            "ProtectedSides" : {
+              "$$ClassName" : "TBorder",
+              "AllSides" : 1.2000000000000000E+001
+            },
+            "Url" : "castle-data:/ui/ColorSqureFrame.png"
+          },
           "FontSize" : 1.8000000000000000E+001,
           "Height" : 2.0000000000000000E+002,
           "HorizontalAnchorParent" : "hpMiddle",

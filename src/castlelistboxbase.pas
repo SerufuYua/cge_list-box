@@ -302,7 +302,7 @@ begin
 
   { line cursor }
   if FLineCursor.Empty then
-    DrawRectangleOutline(FCursorRect.Grow(-CurWidth div 2), FLineCursor.Color, CurWidth)
+    DrawRectangleOutline(FCursorRect.Grow(-CurWidth / 2), FLineCursor.Color, CurWidth)
   else
   begin
     FLineCursor.DrawUiBegin(UIScale);

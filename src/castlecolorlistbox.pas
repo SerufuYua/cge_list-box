@@ -14,7 +14,7 @@ type
     FColors: Array of TCastleColor;
     FShowText, FShowTextLeft: Boolean;
     FTextWidth: Single;
-    FColorBox: TCastleImagePersistent;
+    FColorBox, FColorFrame: TCastleImagePersistent;
     FColorBoxMargin: TBorder;
     procedure ListChange(Sender: TObject); override;
     procedure CalcTextWidth;
@@ -37,6 +37,7 @@ type
     property ShowTextLeft: Boolean read FShowTextLeft write FShowTextLeft
              {$ifdef FPC}default DefaultShowTextLeft{$endif};
     property ColorBox: TCastleImagePersistent read FColorBox;
+    property ColorFrame: TCastleImagePersistent read FColorFrame;
     property ColorBoxMargin: TBorder read FColorBoxMargin;
 end;
 
@@ -54,6 +55,7 @@ begin
   FShowTextLeft:= DefaultShowTextLeft;
 
   FColorBox:= TCastleImagePersistent.Create;
+  FColorFrame:= TCastleImagePersistent.Create;
 
   FColorBoxMargin:= TBorder.Create(nil);
   FColorBoxMargin.SetSubComponent(true);
@@ -63,6 +65,9 @@ destructor TCastleColorListBox.Destroy;
 begin
   if Assigned(FColorBox) then
     FreeAndNil(FColorBox);
+
+  if Assigned(FColorFrame) then
+    FreeAndNil(FColorFrame);
 
   if Assigned(FColorBoxMargin) then
     FreeAndNil(FColorBoxMargin);
@@ -78,6 +83,8 @@ end;
 
 procedure TCastleColorListBox.RenderLine(const ARect: TFloatRectangle; const AIndex: Integer);
 var
+  FinalColor, FinalColorFrame: TCastleImagePersistent;
+  DrawColor: TCastleColor;
   TextRect, ColorBoxRect: TFloatRectangle;
   Text: String;
   NeedText: Boolean;
@@ -122,17 +129,34 @@ begin
   ColorBoxRect.Width:= ColorBoxRect.Width - FColorBoxMargin.TotalWidth;
   ColorBoxRect.Height:= ColorBoxRect.Height - FColorBoxMargin.TotalHeight;
 
+  { Color Box }
+  DrawColor:= FColors[AIndex] * FColorBox.Color;
+
   if FColorBox.Empty then
   begin
-    DrawRectangle(ColorBoxRect, FColors[AIndex]);
-    DrawRectangleOutline(ColorBoxRect, FColorBox.Color, 2);
+    DrawRectangle(ColorBoxRect, DrawColor);
   end
   else
   begin
-    FColorBox.DrawUiBegin(UIScale);
-    FColorBox.Color:= FColors[AIndex];
-    FColorBox.Draw(ColorBoxRect);
-    FColorBox.DrawUiEnd;
+    FinalColor:= FColorBox;
+    FinalColor.DrawUiBegin(UIScale);
+    FinalColor.Color:= DrawColor;
+    FinalColor.Draw(ColorBoxRect);
+    FinalColor.DrawUiEnd;
+  end;
+
+  { Color Box Frame }
+  if FColorFrame.Empty then
+  begin
+    DrawRectangleOutline(ColorBoxRect, FColorFrame.Color, 2);
+  end
+  else
+  begin
+    FinalColorFrame:= FColorFrame;
+    FinalColorFrame.DrawUiBegin(UIScale);
+    FinalColorFrame.Color:= FColorFrame.Color;
+    FinalColorFrame.Draw(ColorBoxRect);
+    FinalColorFrame.DrawUiEnd;
   end;
 end;
 
@@ -172,7 +196,8 @@ end;
 function TCastleColorListBox.PropertySections(const PropertyName: String): TPropertySections;
 begin
   if ArrayContainsString(PropertyName, [
-       'TextMargin', 'ShowText', 'ShowTextLeft', 'ColorBox', 'ColorBoxMargin'
+       'TextMargin', 'ShowText', 'ShowTextLeft', 'ColorBox', 'ColorFrame',
+       'ColorBoxMargin'
      ]) then
     Result:= [psBasic]
   else
