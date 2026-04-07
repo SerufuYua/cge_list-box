@@ -133,7 +133,7 @@
         {
           "$$ClassName" : "TCastleCheckListBox",
           "ClipChildren" : true,
-          "FontSize" : 2.4000000000000000E+001,
+          "FontSize" : 2.8000000000000000E+001,
           "Height" : 2.0000000000000000E+002,
           "HorizontalAnchorParent" : "hpMiddle",
           "HorizontalAnchorSelf" : "hpMiddle",
@@ -280,6 +280,56 @@
           },
           "VerticalAnchorParent" : "vpTop",
           "VerticalAnchorSelf" : "vpTop"
+        },
+        {
+          "$$ClassName" : "TCastleCheckColorListBox",
+          "ClipChildren" : true,
+          "FontSize" : 2.4000000000000000E+001,
+          "Height" : 2.0000000000000000E+002,
+          "HorizontalAnchorParent" : "hpMiddle",
+          "HorizontalAnchorSelf" : "hpMiddle",
+          "LineCursor" : {
+            "$$ClassName" : "TCastleImagePersistent"
+          },
+          "LineFrame" : {
+            "$$ClassName" : "TCastleImagePersistent"
+          },
+          "List" : [
+            "hello",
+            "aloha",
+            "",
+            "haola",
+            "mihaliot mondare guantamula dekamontanula elcoppa",
+            "lihanot",
+            "lemanstoka",
+            "",
+            "mokalin",
+            ""
+          ],
+          "Name" : "CheckColorListBox1",
+          "ScrollbarFrame" : {
+            "$$ClassName" : "TCastleImagePersistent"
+          },
+          "ScrollbarSlider" : {
+            "$$ClassName" : "TCastleImagePersistent"
+          },
+          "SquareChecked" : {
+            "$$ClassName" : "TCastleImagePersistent"
+          },
+          "SquareEmpty" : {
+            "$$ClassName" : "TCastleImagePersistent"
+          },
+          "SquarePressedBack" : {
+            "$$ClassName" : "TCastleImagePersistent"
+          },
+          "TranslationPersistent" : {
+            "$$ClassName" : "TCastleVector2Persistent",
+            "X" : 1.9500000000000000E+002,
+            "Y" : -6.0000000000000000E+001
+          },
+          "VerticalAnchorParent" : "vpMiddle",
+          "VerticalAnchorSelf" : "vpMiddle",
+          "Width" : 3.7000000000000000E+002
         }
       ]
     }

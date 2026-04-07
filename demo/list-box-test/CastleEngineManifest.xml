@@ -12,7 +12,8 @@ See https://castle-engine.io/project_manifest for documentation of this file.
   caption="List Box Test"
   editor_units="CastleListBox,
                 CastleCheckListBox,
-                CastleColorListBox"
+                CastleColorListBox,
+                CastleCheckColorListBox"
 >
   <compiler_options>
     <search_paths>
