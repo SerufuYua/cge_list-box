@@ -216,16 +216,28 @@
           "Height" : 2.0000000000000000E+002,
           "HorizontalAnchorParent" : "hpMiddle",
           "HorizontalAnchorSelf" : "hpMiddle",
+          "Index" : 1,
           "LineCursor" : {
+            "$$ClassName" : "TCastleImagePersistent",
+            "ProtectedSides" : {
+              "$$ClassName" : "TBorder",
+              "AllSides" : 1.2000000000000000E+001
+            },
+            "Url" : "castle-data:/ui/LineRoundFrame.png"
+          },
+          "LineFrame" : {
             "$$ClassName" : "TCastleImagePersistent",
             "ColorPersistent" : {
               "$$ClassName" : "TCastleColorPersistent",
-              "Blue" : 0.0000000000000000E+000,
-              "Green" : 1.4901961386203766E-001
-            }
-          },
-          "LineFrame" : {
-            "$$ClassName" : "TCastleImagePersistent"
+              "Blue" : 5.3725492954254150E-001,
+              "Green" : 5.3725492954254150E-001,
+              "Red" : 5.3725492954254150E-001
+            },
+            "ProtectedSides" : {
+              "$$ClassName" : "TBorder",
+              "AllSides" : 1.2000000000000000E+001
+            },
+            "Url" : "castle-data:/ui/LineRoundFrame.png"
           },
           "LinePadding" : 2.4000000000000000E+001,
           "List" : [
@@ -238,11 +250,34 @@
           ],
           "Name" : "ColorListBox",
           "ScrollBarLeft" : true,
+          "ScrollBarWidth" : 3.2000000000000000E+001,
           "ScrollbarFrame" : {
-            "$$ClassName" : "TCastleImagePersistent"
+            "$$ClassName" : "TCastleImagePersistent",
+            "ColorPersistent" : {
+              "$$ClassName" : "TCastleColorPersistent",
+              "Blue" : 7.6862746477127075E-001,
+              "Green" : 7.6862746477127075E-001,
+              "Red" : 7.6862746477127075E-001
+            },
+            "ProtectedSides" : {
+              "$$ClassName" : "TBorder",
+              "AllSides" : 1.5000000000000000E+001
+            },
+            "Url" : "castle-data:/ui/ScrollRiundFrame.png"
           },
           "ScrollbarSlider" : {
-            "$$ClassName" : "TCastleImagePersistent"
+            "$$ClassName" : "TCastleImagePersistent",
+            "ColorPersistent" : {
+              "$$ClassName" : "TCastleColorPersistent",
+              "Blue" : 9.0980392694473267E-001,
+              "Green" : 9.0980392694473267E-001,
+              "Red" : 9.0980392694473267E-001
+            },
+            "ProtectedSides" : {
+              "$$ClassName" : "TBorder",
+              "AllSides" : 1.5000000000000000E+001
+            },
+            "Url" : "castle-data:/ui/ScrollRiundSlider.png"
           },
           "ShowText" : true,
           "ShowTextLeft" : true,
