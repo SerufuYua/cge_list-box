@@ -11,6 +11,7 @@ uses
 type
   TCastleColorListBox = class(TCastleListBoxBase)
   protected
+    FColors: Array of TCastleColor;
     FShowText, FShowTextLeft: Boolean;
     FTextMargin, FTextWidth: Single;
     FColorBox: TCastleImagePersistent;
@@ -85,7 +86,6 @@ var
   Text: String;
   NeedText: Boolean;
   si: Single;
-  LineColor: TCastleColor;
 begin
   si:= FTextMargin * UIScale;
   NeedText:= FShowText AND (ARect.Width > (ARect.Height + FTextWidth + 2.0 * si));
@@ -126,25 +126,31 @@ begin
   ColorBoxRect.Width:= ColorBoxRect.Width - FColorBoxMargin.TotalWidth;
   ColorBoxRect.Height:= ColorBoxRect.Height - FColorBoxMargin.TotalHeight;
 
-  LineColor:= HexToColor(FList[AIndex]);
-
   if FColorBox.Empty then
   begin
-    DrawRectangle(ColorBoxRect, LineColor);
+    DrawRectangle(ColorBoxRect, FColors[AIndex]);
     DrawRectangleOutline(ColorBoxRect, FColorBox.Color, 2);
   end
   else
   begin
     FColorBox.DrawUiBegin(UIScale);
-    FColorBox.Color:= LineColor;
+    FColorBox.Color:= FColors[AIndex];
     FColorBox.Draw(ColorBoxRect);
     FColorBox.DrawUiEnd;
   end;
 end;
 
 procedure TCastleColorListBox.ListChange(Sender: TObject);
+var
+  i: Integer;
 begin
   inherited;
+
+  { prepare colors }
+  SetLength(FColors, FList.Count);
+  for i:= 0 to (FList.Count - 1) do
+    FColors[i]:= HexToColor(FList[i]);
+
   CalcTextWidth;
 end;
 
