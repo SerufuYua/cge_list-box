@@ -42,6 +42,8 @@ type
 
     procedure SetCheck(const AIndex: Integer; const ACheck: Boolean);
     function GetCheck(const AIndex: Integer): Boolean;
+    procedure SetColor(const AIndex: Integer; const AValue: TCastleColor);
+    function GetColor(const AIndex: Integer): TCastleColor;
   published
     property ListColors: TStrings read FListColors write SetListColors;
     property ColorBoxWidth: Single read FColorBoxWidth write FColorBoxWidth
@@ -288,6 +290,20 @@ begin
     Result:= FCheckList[AIndex]
   else
     Result:= False;
+end;
+
+procedure TCastleCheckColorListBox.SetColor(const AIndex: Integer; const AValue: TCastleColor);
+begin
+  if ((AIndex > -1) AND (AIndex < FList.Count)) then
+    FListColors[AIndex]:= ColorToHex(AValue);
+end;
+
+function TCastleCheckColorListBox.GetColor(const AIndex: Integer): TCastleColor;
+begin
+  if ((AIndex > -1) AND (AIndex < FList.Count)) then
+    Result:= FColors[AIndex]
+  else
+    Result:= Fuchsia;
 end;
 
 procedure TCastleCheckColorListBox.DoCheck(const AIndex: Integer; const ACheck: Boolean);
