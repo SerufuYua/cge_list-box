@@ -259,31 +259,16 @@
           "VerticalAnchorSelf" : "vpMiddle"
         },
         {
-          "$$ClassName" : "TCastleLabel",
-          "ColorPersistent" : {
-            "$$ClassName" : "TCastleColorPersistent",
-            "Blue" : 1.7647059261798859E-001,
-            "Green" : 6.1176472902297974E-001,
-            "Red" : 9.8823529481887817E-001
-          },
-          "FontSize" : 1.4000000000000000E+001,
-          "HorizontalAnchorParent" : "hpRight",
-          "HorizontalAnchorSelf" : "hpRight",
-          "Name" : "LabelFps",
-          "Text" : [
-            "FPS: xxx"
-          ],
-          "TranslationPersistent" : {
-            "$$ClassName" : "TCastleVector2Persistent",
-            "X" : -5.0000000000000000E+000,
-            "Y" : -5.0000000000000000E+000
-          },
-          "VerticalAnchorParent" : "vpTop",
-          "VerticalAnchorSelf" : "vpTop"
-        },
-        {
           "$$ClassName" : "TCastleCheckColorListBox",
           "ClipChildren" : true,
+          "ColorBox" : {
+            "$$ClassName" : "TCastleImagePersistent"
+          },
+          "ColorBoxMargin" : {
+            "$$ClassName" : "TBorder",
+            "AllSides" : 6.0000000000000000E+000
+          },
+          "ColorBoxWidth" : 6.4000000000000000E+001,
           "FontSize" : 2.4000000000000000E+001,
           "Height" : 2.0000000000000000E+002,
           "HorizontalAnchorParent" : "hpMiddle",
@@ -306,7 +291,7 @@
             "mokalin",
             ""
           ],
-          "Name" : "CheckColorListBox1",
+          "Name" : "CheckColorListBox",
           "ScrollbarFrame" : {
             "$$ClassName" : "TCastleImagePersistent"
           },
@@ -322,6 +307,7 @@
           "SquarePressedBack" : {
             "$$ClassName" : "TCastleImagePersistent"
           },
+          "TextMargin" : 6.0000000000000000E+000,
           "TranslationPersistent" : {
             "$$ClassName" : "TCastleVector2Persistent",
             "X" : 1.9500000000000000E+002,
@@ -330,6 +316,29 @@
           "VerticalAnchorParent" : "vpMiddle",
           "VerticalAnchorSelf" : "vpMiddle",
           "Width" : 3.7000000000000000E+002
+        },
+        {
+          "$$ClassName" : "TCastleLabel",
+          "ColorPersistent" : {
+            "$$ClassName" : "TCastleColorPersistent",
+            "Blue" : 1.7647059261798859E-001,
+            "Green" : 6.1176472902297974E-001,
+            "Red" : 9.8823529481887817E-001
+          },
+          "FontSize" : 1.4000000000000000E+001,
+          "HorizontalAnchorParent" : "hpRight",
+          "HorizontalAnchorSelf" : "hpRight",
+          "Name" : "LabelFps",
+          "Text" : [
+            "FPS: xxx"
+          ],
+          "TranslationPersistent" : {
+            "$$ClassName" : "TCastleVector2Persistent",
+            "X" : -5.0000000000000000E+000,
+            "Y" : -5.0000000000000000E+000
+          },
+          "VerticalAnchorParent" : "vpTop",
+          "VerticalAnchorSelf" : "vpTop"
         }
       ]
     }

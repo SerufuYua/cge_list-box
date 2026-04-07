@@ -6,13 +6,16 @@ interface
 
 uses
   Classes, SysUtils, CastleClassUtils, CastleRectangles, CastleGLImages,
-  CastleKeysMouse, CastleListBox;
+  CastleKeysMouse, CastleVectors, CastleListBoxBase;
 
 type
   TCheckEvent = procedure(Sender: TObject; AIndex: Integer; ACheck: Boolean) of object;
 
-  TCastleCheckColorListBox = class(TCastleListBox)
+  TCastleCheckColorListBox = class(TCastleListBoxBase)
   protected
+    FColorBoxWidth: Single;
+    FColorBoxMargin: TBorder;
+    FColorBox: TCastleImagePersistent;
     FCheckList: Array of Boolean;
     FPressIndex: Integer;
     FCheckRect: TFloatRectangle;
@@ -22,6 +25,8 @@ type
     procedure CalcRectangles; override;
     procedure DoCheck(const AIndex: Integer; const ACheck: Boolean);
   public
+    const
+      DefaultColorBoxWidth = 24;
 
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -33,6 +38,10 @@ type
     procedure SetCheck(const AIndex: Integer; const ACheck: Boolean);
     function GetCheck(const AIndex: Integer): Boolean;
   published
+    property ColorBoxWidth: Single read FColorBoxWidth write FColorBoxWidth
+             {$ifdef FPC}default DefaultColorBoxWidth{$endif};
+    property ColorBoxMargin: TBorder read FColorBoxMargin;
+    property ColorBox: TCastleImagePersistent read FColorBox;
     property SquareEmpty: TCastleImagePersistent read FSquareEmpty;
     property SquareChecked: TCastleImagePersistent read FSquareChecked;
     property SquarePressedBack: TCastleImagePersistent read FSquarePressedBG;
@@ -42,10 +51,8 @@ type
 implementation
 
 uses
-  CastleComponentSerialize, CastleUtils, CastleUIControls, CastleColors
-  {$if defined(CASTLE_DESIGN_MODE)}
-  , CastleGLUtils
-  {$endif};
+  CastleComponentSerialize, CastleUtils, CastleUIControls, CastleColors,
+  CastleGLUtils;
 
 constructor TCastleCheckColorListBox.Create(AOwner: TComponent);
 begin
@@ -53,9 +60,15 @@ begin
 
   FOnCheck:= nil;
   FPressIndex:= -1;
+  FColorBoxWidth:= DefaultColorBoxWidth;
+
   FSquareEmpty:= TCastleImagePersistent.Create;
   FSquareChecked:= TCastleImagePersistent.Create;
   FSquarePressedBG:= TCastleImagePersistent.Create;
+  FColorBox:= TCastleImagePersistent.Create;
+
+  FColorBoxMargin:= TBorder.Create(nil);
+  FColorBoxMargin.SetSubComponent(true);
 end;
 
 destructor TCastleCheckColorListBox.Destroy;
@@ -69,6 +82,11 @@ begin
   if Assigned(FSquarePressedBG) then
     FreeAndNil(FSquarePressedBG);
 
+  if Assigned(FColorBox) then
+    FreeAndNil(FColorBox);
+
+  if Assigned(FColorBoxMargin) then
+    FreeAndNil(FColorBoxMargin);
   inherited;
 end;
 
@@ -116,15 +134,14 @@ var
   FinalSquare, FinalBack: TCastleImagePersistent;
   SquareColor: TCastleColor;
   i, len: Integer;
-  CheckRect, TextRect: TFloatRectangle;
+  CheckRect, ColorBoxRect, TextRect: TFloatRectangle;
   Text: String;
-  si: Single;
+  si, ColorAreaWidth: Single;
 begin
   { CheckBox }
   CheckRect.Height:= Font.Height;
   CheckRect.Width:= CheckRect.Height;
   CheckRect.Bottom:= ARect.Bottom + (ARect.Height - CheckRect.Height) / 2.0;
-
   CheckRect.Left:= ARect.Left + (ARect.Height - CheckRect.Width) / 2.0;
 
   { CheckBox Background }
@@ -140,7 +157,6 @@ begin
     FinalBack.Draw(CheckRect);
     FinalBack.DrawUiEnd;
   end;
-
 
   { CheckBox Square }
   if FCheckList[AIndex] then
@@ -165,8 +181,28 @@ begin
   FinalSquare.Draw(CheckRect);
   FinalSquare.DrawUiEnd;
 
+  { Color Box }
+  ColorAreaWidth:= FColorBoxWidth * UIScale;
+  ColorBoxRect.Left:= ARect.Left + ARect.Height + FColorBoxMargin.TotalLeft;
+  ColorBoxRect.Bottom:= ARect.Bottom + FColorBoxMargin.TotalBottom;
+  ColorBoxRect.Width:= ColorAreaWidth - FColorBoxMargin.TotalWidth;
+  ColorBoxRect.Height:= ARect.Height - FColorBoxMargin.TotalHeight;
+
+  if FColorBox.Empty then
+  begin
+    DrawRectangle(ColorBoxRect, Aqua {FColors[AIndex]});
+    DrawRectangleOutline(ColorBoxRect, FColorBox.Color, 2);
+  end
+  else
+  begin
+    FColorBox.DrawUiBegin(UIScale);
+    FColorBox.Color:= Aqua {FColors[AIndex]};
+    FColorBox.Draw(ColorBoxRect);
+    FColorBox.DrawUiEnd;
+  end;
+
   { Text }
-  si:= ARect.Height + FTextMargin * UIScale;
+  si:= ARect.Height + ColorAreaWidth + FTextMargin * UIScale;
   TextRect:= ARect.RightPart(ARect.Width - si);
 
   { adjust Text length to line width }
@@ -230,7 +266,8 @@ end;
 function TCastleCheckColorListBox.PropertySections(const PropertyName: String): TPropertySections;
 begin
   if ArrayContainsString(PropertyName, [
-       'SquareEmpty', 'SquareChecked', 'SquarePressedBack'
+       'SquareEmpty', 'SquareChecked', 'SquarePressedBack', 'ColorBoxWidth',
+       'ColorBoxMargin', 'ColorBox'
      ]) then
     Result:= [psBasic]
   else
