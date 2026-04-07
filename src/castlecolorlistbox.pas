@@ -15,6 +15,8 @@ type
     FTextMargin, FTextWidth: Single;
     FColorBox: TCastleImagePersistent;
     FColorBoxMargin: TBorder;
+    procedure ListChange(Sender: TObject); override;
+    procedure CalcTextWidth;
   public
     const
       DefaultTextMargin = 12;
@@ -74,7 +76,7 @@ end;
 procedure TCastleColorListBox.FontChanged;
 begin
   inherited;
-  FTextWidth:= Font.MaxTextWidth(FList) + Font.TextWidth('#');
+  CalcTextWidth;
 end;
 
 procedure TCastleColorListBox.RenderLine(const ARect: TFloatRectangle; const AIndex: Integer);
@@ -140,6 +142,12 @@ begin
   end;
 end;
 
+procedure TCastleColorListBox.ListChange(Sender: TObject);
+begin
+  inherited;
+  CalcTextWidth;
+end;
+
 procedure TCastleColorListBox.SetColor(const AIndex: Integer; const AValue: TCastleColor);
 begin
   if ((AIndex > -1) AND (AIndex < FList.Count)) then
@@ -152,6 +160,11 @@ begin
     Result:= HexToColor(FList[AIndex])
   else
     Result:= Fuchsia;
+end;
+
+procedure TCastleColorListBox.CalcTextWidth;
+begin
+  FTextWidth:= Font.MaxTextWidth(FList) + Font.TextWidth('#');
 end;
 
 function TCastleColorListBox.PropertySections(const PropertyName: String): TPropertySections;
