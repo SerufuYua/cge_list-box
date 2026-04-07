@@ -44,6 +44,7 @@
           "Height" : 2.0000000000000000E+002,
           "HorizontalAnchorParent" : "hpMiddle",
           "HorizontalAnchorSelf" : "hpMiddle",
+          "Index" : 3,
           "LineCursor" : {
             "$$ClassName" : "TCastleImagePersistent",
             "ColorPersistent" : {
