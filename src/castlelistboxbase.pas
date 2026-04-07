@@ -36,6 +36,7 @@ type
     procedure SetPadding(const AValue: Single);
     procedure SetAreaPosY(const AValue: Single);
     procedure SetSliderPosY(const AValue: Single);
+    procedure UpdateListPosition;
     procedure CalcLineHeight;
     procedure CalcRectangles; virtual;
     procedure DoClick;
@@ -349,24 +350,15 @@ begin
 end;
 
 procedure TCastleListBoxBase.Resize;
-var
-  MinPosY, MaxPosY, Value: Single;
 begin
   inherited;
-  CalcLineHeight;
-
-  CalcRectangles;
-  Value:= AreaPosY;
-  MaxPosY:= 0.0;
-  MinPosY:= RenderRect.Height - FAreaRect.Height;
-  ClampVar(Value, MinPosY, MaxPosY);
-  AreaPosY:= Value;
+  UpdateListPosition;
 end;
 
 procedure TCastleListBoxBase.FontChanged;
 begin
   inherited;
-  CalcLineHeight;
+  UpdateListPosition;
 end;
 
 procedure TCastleListBoxBase.SetPadding(const AValue: Single);
@@ -412,6 +404,20 @@ begin
     AreaFactor:= 1.0 - (FSliderPosY - MinPosY) / (MaxPosY - MinPosY);
     FAreaTargetPosY:= (RenderRect.Height - FAreaRect.Height) * AreaFactor;
   end;
+end;
+
+procedure TCastleListBoxBase.UpdateListPosition;
+var
+  MinPosY, MaxPosY, Value: Single;
+begin
+  CalcLineHeight;
+
+  CalcRectangles;
+  Value:= AreaPosY;
+  MaxPosY:= 0.0;
+  MinPosY:= RenderRect.Height - FAreaRect.Height;
+  ClampVar(Value, MinPosY, MaxPosY);
+  AreaPosY:= Value;
 end;
 
 procedure TCastleListBoxBase.CalcLineHeight;
