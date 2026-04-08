@@ -276,13 +276,20 @@ end;
 
 procedure TCastleCheckColorListBox.ListChange(Sender: TObject);
 var
-  i: Integer;
+  i, len: Integer;
 begin
   inherited;
 
+  { set Check list }
   SetLength(FCheckList, FList.Count);
   for i:= 0 to High(FCheckList) do
     FCheckList[i]:= True;
+
+  { enlarge color list if needed }
+  len:= FList.Count - FListColors.Count;
+  if (len > 0) then
+    for i:= 1 to len do
+      FListColors.Add('FF00FF'); { Fuchsia }
 
   UpdateColors;
 end;
@@ -323,7 +330,7 @@ end;
 
 procedure TCastleCheckColorListBox.SetColor(const AIndex: Integer; const AValue: TCastleColor);
 begin
-  if ((AIndex > -1) AND (AIndex < FList.Count)) then
+  if ((AIndex > -1) AND (AIndex < FListColors.Count)) then
     FListColors[AIndex]:= ColorToHex(AValue);
 end;
 
