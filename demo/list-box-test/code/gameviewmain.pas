@@ -19,6 +19,7 @@ type
   protected
     procedure ClickList(Sender: TObject);
     procedure ClickColorList(Sender: TObject);
+    procedure ClickCheckColorList(Sender: TObject);
     procedure CheckList(Sender: TObject; AIndex: Integer; ACheck: Boolean);
     procedure ClickShowHex(Sender: TObject);
   published
@@ -28,6 +29,7 @@ type
     ListBox: TCastleListBox;
     CheckListBox: TCastleCheckListBox;
     ColorListBox: TCastleColorListBox;
+    CheckColorListBox: TCastleCheckColorListBox;
     ShowHex: TCastleCheckbox;
     RectangleBG: TCastleRectangleControl;
     Notifications: TCastleNotifications;
@@ -62,11 +64,15 @@ begin
   CheckListBox.OnClick:= {$ifdef FPC}@{$endif}ClickList;
   CheckListBox.OnCheck:= {$ifdef FPC}@{$endif}CheckList;
   ColorListBox.OnClick:= {$ifdef FPC}@{$endif}ClickColorList;
+  CheckColorListBox.OnClick:= {$ifdef FPC}@{$endif}ClickCheckColorList;
   ShowHex.OnChange:= {$ifdef FPC}@{$endif}ClickShowHex;
 
   CheckListBox.SetCheck(1, False);
   CheckListBox.SetCheck(2, False);
   CheckListBox.SetCheck(3, False);
+  CheckColorListBox.SetCheck(2, False);
+  CheckColorListBox.SetCheck(3, False);
+  CheckColorListBox.SetCheck(4, False);
 end;
 
 procedure TViewMain.ClickList(Sender: TObject);
@@ -76,10 +82,37 @@ begin
 end;
 
 procedure TViewMain.ClickColorList(Sender: TObject);
+var
+  ColorBox: TCastleColorListBox;
 begin
-  RectangleBG.Color:= ColorListBox.GetColor(ColorListBox.Index);
-  Notifications.Show('set color: ' +
-                     ColorListBox.GetColor(ColorListBox.Index).ToRawString('%2.3F'));
+  ColorBox:= Sender as TCastleColorListBox;
+
+  if CheckColorListBox.GetCheck(CheckColorListBox.Index) then
+  begin
+    CheckColorListBox.SetColor(CheckColorListBox.Index, ColorBox.GetColor(ColorBox.Index));
+    Notifications.Show('set color: ' +
+                       ColorListBox.GetColor(ColorListBox.Index).ToRawString('%2.3F') +
+                       ' to line ' + IntToStr(CheckColorListBox.Index));
+  end
+  else
+    Notifications.Show('line: ' + IntToStr(CheckColorListBox.Index) + ' is blocked');
+end;
+
+procedure TViewMain.ClickCheckColorList(Sender: TObject);
+var
+  ColorChkBox: TCastleCheckColorListBox;
+begin
+  ColorChkBox:= Sender as TCastleCheckColorListBox;
+
+  if ColorChkBox.GetCheck(ColorChkBox.Index) then
+  begin
+    RectangleBG.Color:= ColorChkBox.GetColor(ColorChkBox.Index);
+    Notifications.Show('set color: ' +
+                       ColorChkBox.GetColor(ColorChkBox.Index).ToRawString('%2.3F'));
+  end
+  else
+    Notifications.Show('line: ' + IntToStr(ColorChkBox.Index) + ' is blocked');
+
 end;
 
 procedure TViewMain.CheckList(Sender: TObject; AIndex: Integer; ACheck: Boolean);
