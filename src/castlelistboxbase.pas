@@ -231,12 +231,22 @@ begin
   if (FClickStarted AND (FClickStartedFinger = Event.FingerIndex)) then
   begin
     FClickStarted:= False;
-    if ((NOT FMoveStarted) AND FClickRect.Contains(Event.Position)) then
+    if NOT FMoveStarted then
     begin
-      Result:= True;
-      h:= FAreaRect.Height - (Event.Position.Y - FAreaRect.Bottom);
-      Index:= Trunc(h / FLineHeight);
-      DoClick;
+      if FClickRect.Contains(Event.Position) then
+      begin
+        Result:= True;
+        h:= FAreaRect.Height - (Event.Position.Y - FAreaRect.Bottom);
+        Index:= Trunc(h / FLineHeight);
+        DoClick;
+      end
+      else if FScrollFrameRect.Contains(Event.Position) then
+      begin
+        if (Event.Position.Y < FScrollSliderRect.Bottom) then
+          SliderPosY:= SliderPosY - FScrollSliderRect.Height
+        else if (Event.Position.Y > FScrollSliderRect.top) then
+          SliderPosY:= SliderPosY + FScrollSliderRect.Height;
+      end;
     end;
   end;
 end;
