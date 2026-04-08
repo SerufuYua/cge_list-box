@@ -223,14 +223,11 @@ begin
 end;
 
 procedure TCastleCheckListBox.ListChange(Sender: TObject);
-var
-  i: Integer;
 begin
   inherited;
 
+  { set Check list }
   SetLength(FCheckList, FList.Count);
-  for i:= 0 to High(FCheckList) do
-    FCheckList[i]:= True;
 end;
 
 procedure TCastleCheckListBox.CalcRectangles;

@@ -290,8 +290,6 @@ begin
 
   { set Check list }
   SetLength(FCheckList, FList.Count);
-  for i:= 0 to High(FCheckList) do
-    FCheckList[i]:= True;
 
   { enlarge color list if needed }
   len:= FList.Count - FListColors.Count;

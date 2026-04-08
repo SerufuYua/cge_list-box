@@ -67,12 +67,12 @@ begin
   CheckColorListBox.OnClick:= {$ifdef FPC}@{$endif}ClickCheckColorList;
   ShowHex.OnChange:= {$ifdef FPC}@{$endif}ClickShowHex;
 
-  CheckListBox.SetCheck(1, False);
-  CheckListBox.SetCheck(2, False);
-  CheckListBox.SetCheck(3, False);
-  CheckColorListBox.SetCheck(2, False);
-  CheckColorListBox.SetCheck(3, False);
-  CheckColorListBox.SetCheck(4, False);
+  CheckListBox.SetCheck(1, True);
+  CheckListBox.SetCheck(2, True);
+  CheckListBox.SetCheck(3, True);
+  CheckColorListBox.SetCheck(2, True);
+  CheckColorListBox.SetCheck(3, True);
+  CheckColorListBox.SetCheck(4, True);
 end;
 
 procedure TViewMain.ClickList(Sender: TObject);
