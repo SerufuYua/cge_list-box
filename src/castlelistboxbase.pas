@@ -23,7 +23,6 @@ type
     FIndex: Integer;
     FLineFrame, FLineCursor: TCastleImagePersistent;
     FScrollbarFrame, FScrollbarSlider: TCastleImagePersistent;
-    FLastClickPosition: TVector2;
     FAreaRect, FCursorRect, FMoveRect, FClickRect: TFloatRectangle;
     FCursorTarget: TVector2;
     FScrollFrameRect, FScrollSliderRect: TFloatRectangle;
@@ -209,7 +208,6 @@ begin
     FClickStarted:= True;
     FMoveStarted:= False;
     FClickStartedFinger:= Event.FingerIndex;
-    FLastClickPosition:= Event.Position;
 
     FMoveMain:= FMoveRect.Contains(Event.Position);
     FMoveSlider:= FScrollSliderRect.Contains(Event.Position);
@@ -263,20 +261,18 @@ begin
     Result:= True;
     if FMoveMain then
     begin
-      shiftY:= FLastClickPosition.Y - Event.Position.Y;
+      shiftY:= Event.OldPosition.Y - Event.Position.Y;
       AreaPosY:= FAreaTargetPosY + shiftY;
-      if NOT TVector2.Equals(FLastClickPosition, Event.Position, 1.0) then
+      if NOT TVector2.Equals(Event.OldPosition, Event.Position, 1.0) then
         FMoveStarted:= True;
-      FLastClickPosition:= Event.Position;
     end
     else
     if FMoveSlider then
     begin
-      shiftY:= FLastClickPosition.Y - Event.Position.Y;
+      shiftY:= Event.OldPosition.Y - Event.Position.Y;
       SliderPosY:= SliderPosY - shiftY;
-      if NOT TVector2.Equals(FLastClickPosition, Event.Position, 1.0) then
+      if NOT TVector2.Equals(Event.OldPosition, Event.Position, 1.0) then
         FMoveStarted:= True;
-      FLastClickPosition:= Event.Position;
     end;
   end;
 end;
