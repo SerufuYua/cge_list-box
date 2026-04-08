@@ -254,6 +254,7 @@ end;
 function TCastleListBoxBase.Release(const Event: TInputPressRelease): boolean;
 var
   h: Single;
+  i: Integer;
 begin
   Result:= inherited;
   if Result or (Event.EventType <> itMouseButton) then Exit;
@@ -267,8 +268,12 @@ begin
       begin
         Result:= True;
         h:= FAreaRect.Height - (Event.Position.Y - FAreaRect.Bottom);
-        Index:= Trunc(h / FLineHeight);
-        DoClick;
+        i:= Trunc(h / FLineHeight);
+        if (i < FList.Count) then
+        begin
+          Index:= i;
+          DoClick;
+        end;
       end
       else if FScrollFrameRect.Contains(Event.Position) then
       begin
