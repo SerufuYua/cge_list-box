@@ -1,3 +1,11 @@
+{
+  Copyright (c) 2026 Serufu Yua
+  --------------------------------------------------
+}
+
+{ List Box with Colors }
+{ Set colors via property List in hex format }
+
 unit CastleColorListBox;
 
 {$mode ObjFPC}{$H+}

@@ -1,3 +1,11 @@
+{
+  Copyright (c) 2026 Serufu Yua
+  --------------------------------------------------
+}
+
+{ Base class of List Boxes }
+
+
 unit CastleListBoxBase;
 
 {$mode ObjFPC}{$H+}

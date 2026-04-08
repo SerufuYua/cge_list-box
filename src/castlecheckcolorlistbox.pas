@@ -1,3 +1,11 @@
+{
+  Copyright (c) 2026 Serufu Yua
+  --------------------------------------------------
+}
+
+{ Box with Text Lines, Check Boxes and Colors }
+{ Set colors via property ListColors in hex format }
+
 unit CastleCheckColorListBox;
 
 {$mode ObjFPC}{$H+}

@@ -1,3 +1,11 @@
+{
+  Copyright (c) 2026 Serufu Yua
+  --------------------------------------------------
+}
+
+{ simple List Box with Text Lines }
+
+
 unit CastleListBox;
 
 {$mode ObjFPC}{$H+}

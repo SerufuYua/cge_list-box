@@ -1,3 +1,11 @@
+{
+  Copyright (c) 2026 Serufu Yua
+  --------------------------------------------------
+}
+
+{ Box with Text Lines and Check Boxes }
+
+
 unit CastleCheckListBox;
 
 {$mode ObjFPC}{$H+}
