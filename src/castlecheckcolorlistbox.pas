@@ -133,9 +133,17 @@ begin
       h:= FAreaRect.Height - (Event.Position.Y - FAreaRect.Bottom);
       FPressIndex:= Trunc(h / FLineHeight);
     end;
+  end
+  else
+  if (Event.EventType = itKey) then
+  begin
+    if Event.IsKey(keySpace) then
+    begin
+      FCheckList[Index]:= NOT FCheckList[Index];
+      DoCheck(Index, FCheckList[Index]);
+    end;
   end;
 end;
-
 
 function TCastleCheckColorListBox.Release(const Event: TInputPressRelease): boolean;
 var
