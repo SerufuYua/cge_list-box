@@ -199,6 +199,8 @@ begin
 end;
 
 function TCastleListBoxBase.Press(const Event: TInputPressRelease): boolean;
+var
+  LinesInPage, NewPos: Integer;
 begin
   Result:= inherited;
   if Result then Exit;
@@ -227,7 +229,25 @@ begin
     if (Event.IsKey(keyArrowUp) AND (Index > 0)) then
       Index:= Index - 1
     else if (Event.IsKey(keyArrowDown) AND (Index < (FList.Count - 1))) then
-      Index:= Index + 1;
+      Index:= Index + 1
+    else if (Event.IsKey(keyPageUp) AND (Index > 0)) then
+    begin
+      LinesInPage:= Trunc(FMoveRect.Height / FLineHeight);
+      NewPos:= Index - LinesInPage;
+      if (NewPos < 0) then
+        Index:= 0
+      else
+        Index:= NewPos;
+    end
+    else if (Event.IsKey(keyPageDown) AND (Index < (FList.Count - 1))) then
+    begin
+      LinesInPage:= Trunc(FMoveRect.Height / FLineHeight);
+      NewPos:= Index + LinesInPage;
+      if (NewPos > (FList.Count - 1)) then
+        Index:= FList.Count - 1
+      else
+        Index:= NewPos;
+    end;
   end;
 end;
 
