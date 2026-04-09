@@ -278,6 +278,6 @@ begin
 end;
 
 initialization
-  RegisterSerializableComponent(TCastleCheckListBox, ['Seq', 'Check List Box']);
+  RegisterSerializableComponent(TCastleCheckListBox, ['List', 'Check List Box']);
 end.
 

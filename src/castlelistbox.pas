@@ -58,6 +58,6 @@ begin
 end;
 
 initialization
-  RegisterSerializableComponent(TCastleListBox, ['Seq', 'List Box']);
+  RegisterSerializableComponent(TCastleListBox, ['List', 'List Box']);
 end.
 

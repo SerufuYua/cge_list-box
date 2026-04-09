@@ -213,6 +213,6 @@ begin
 end;
 
 initialization
-  RegisterSerializableComponent(TCastleColorListBox, ['Seq', 'Color List Box']);
+  RegisterSerializableComponent(TCastleColorListBox, ['List', 'Color List Box']);
 end.
 

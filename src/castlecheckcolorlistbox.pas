@@ -366,6 +366,6 @@ begin
 end;
 
 initialization
-  RegisterSerializableComponent(TCastleCheckColorListBox, ['Seq', 'Check Color List Box']);
+  RegisterSerializableComponent(TCastleCheckColorListBox, ['List', 'Check Color List Box']);
 end.
 
