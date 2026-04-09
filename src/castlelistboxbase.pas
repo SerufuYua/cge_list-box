@@ -24,7 +24,7 @@ type
     FLineFrame, FLineCursor: TCastleImagePersistent;
     FScrollbarFrame, FScrollbarSlider: TCastleImagePersistent;
     FAreaRect, FCursorRect, FMoveRect, FClickRect: TFloatRectangle;
-    FCursorTarget: TVector2;
+    FCursorTargetBottom: Single;
     FScrollFrameRect, FScrollSliderRect: TFloatRectangle;
     FAreaPosY, FAreaTargetPosY, FSliderPosY, FAreaSpeed: Single;
     FLinePadding, FLineHeight, FAreaHeight, FScrollBarWidth: Single;
@@ -178,14 +178,12 @@ begin
   if (CursorSpeed > 0.0) then
   begin
     Speed:= SecondsPassed * CursorSpeed;
-    if NOT TVector2.Equals(FCursorRect.LeftBottom,
-                           FCursorTarget, Epsilon) then
-      FCursorRect.LeftBottom:= Lerp(Speed,
-                                    FCursorRect.LeftBottom,
-                                    FCursorTarget);
+    if (System.Abs(FCursorRect.Bottom - FCursorTargetBottom) > Epsilon) then
+      FCursorRect.Bottom:= Lerp(Speed, FCursorRect.Bottom,
+                                       FCursorTargetBottom);
   end
   else
-    FCursorRect.LeftBottom:= FCursorTarget;
+    FCursorRect.Bottom:= FCursorTargetBottom;
 
   { move area to target }
   if (AreaSpeed > 0.0) then
@@ -479,8 +477,8 @@ var
   MinPosY, MaxPosY, Value: Single;
 begin
   CalcLineHeight;
-
   CalcRectangles;
+  FCursorRect.Bottom:= FCursorTargetBottom;
   Value:= AreaPosY;
   MaxPosY:= 0.0;
   MinPosY:= RenderRect.Height - FAreaRect.Height;
@@ -522,8 +520,8 @@ begin
   FClickRect:= FMoveRect;
 
   { cursor area }
-  FCursorTarget.X:= FAreaRect.Left;
-  FCursorTarget.Y:= FAreaRect.Top - FLineHeight * (Single(FIndex) + 1.0);
+  FCursorTargetBottom:= FAreaRect.Top - FLineHeight * (Single(FIndex) + 1.0);
+  FCursorRect.Left:= FAreaRect.Left;
   FCursorRect.Width:= FAreaRect.Width;
   FCursorRect.Height:= FLineHeight;
 
