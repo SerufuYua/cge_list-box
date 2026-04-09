@@ -52,6 +52,9 @@ type
     function GetCheck(const AIndex: Integer): Boolean;
     procedure SetColor(const AIndex: Integer; const AValue: TCastleColor);
     function GetColor(const AIndex: Integer): TCastleColor;
+    procedure LineInsert(const AIndex: Integer; const ACheck: Boolean; const AColor: TCastleColorRGB; const ALine: string);
+    procedure LineSwap(const AIndexA, AIndexB: Integer);
+    procedure LineDelete(const AIndex: Integer);
   published
     property ListColors: TStrings read FListColors write SetListColors;
     property ColorBoxWidth: Single read FColorBoxWidth write FColorBoxWidth
@@ -346,6 +349,38 @@ begin
     Result:= FColors[AIndex]
   else
     Result:= Fuchsia;
+end;
+
+procedure TCastleCheckColorListBox.LineInsert(const AIndex: Integer; const ACheck: Boolean; const AColor: TCastleColorRGB; const ALine: string);
+begin
+  System.Insert(ACheck, FCheckList, AIndex);
+  TStringList(FListColors).Insert(AIndex, ColorRGBToHex(AColor));
+  TStringList(FList).Insert(AIndex, ALine);
+end;
+
+procedure TCastleCheckColorListBox.LineSwap(const AIndexA, AIndexB: Integer);
+var
+  CheckBuff: Boolean;
+  StrBuff: String;
+begin
+  CheckBuff:= FCheckList[AIndexA];
+  FCheckList[AIndexA]:= FCheckList[AIndexB];
+  FCheckList[AIndexB]:= CheckBuff;
+
+  StrBuff:= FListColors[AIndexA];
+  FListColors[AIndexA]:= FListColors[AIndexB];
+  FListColors[AIndexB]:= StrBuff;
+
+  StrBuff:= FList[AIndexA];
+  FList[AIndexA]:= FList[AIndexB];
+  FList[AIndexB]:= StrBuff;
+end;
+
+procedure TCastleCheckColorListBox.LineDelete(const AIndex: Integer);
+begin
+  System.Delete(FCheckList, AIndex, 1);
+  TStringList(FListColors).Delete(AIndex);
+  TStringList(FList).Delete(AIndex);
 end;
 
 procedure TCastleCheckColorListBox.DoCheck(const AIndex: Integer; const ACheck: Boolean);

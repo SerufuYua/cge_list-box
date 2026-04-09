@@ -43,6 +43,9 @@ type
 
     procedure SetCheck(const AIndex: Integer; const ACheck: Boolean);
     function GetCheck(const AIndex: Integer): Boolean;
+    procedure LineInsert(const AIndex: Integer; const ACheck: Boolean; const ALine: string);
+    procedure LineSwap(const AIndexA, AIndexB: Integer);
+    procedure LineDelete(const AIndex: Integer);
   published
     property CheckRight: Boolean read FCheckRight write FCheckRight
              {$ifdef FPC}default DefaultCheckRight{$endif};
@@ -259,6 +262,32 @@ begin
     Result:= FCheckList[AIndex]
   else
     Result:= False;
+end;
+
+procedure TCastleCheckListBox.LineInsert(const AIndex: Integer; const ACheck: Boolean; const ALine: string);
+begin
+  System.Insert(ACheck, FCheckList, AIndex);
+  TStringList(FList).Insert(AIndex, ALine);
+end;
+
+procedure TCastleCheckListBox.LineSwap(const AIndexA, AIndexB: Integer);
+var
+  CheckBuff: Boolean;
+  StrBuff: String;
+begin
+  CheckBuff:= FCheckList[AIndexA];
+  FCheckList[AIndexA]:= FCheckList[AIndexB];
+  FCheckList[AIndexB]:= CheckBuff;
+
+  StrBuff:= FList[AIndexA];
+  FList[AIndexA]:= FList[AIndexB];
+  FList[AIndexB]:= StrBuff;
+end;
+
+procedure TCastleCheckListBox.LineDelete(const AIndex: Integer);
+begin
+  System.Delete(FCheckList, AIndex, 1);
+  TStringList(FList).Delete(AIndex);
 end;
 
 procedure TCastleCheckListBox.DoCheck(const AIndex: Integer; const ACheck: Boolean);
