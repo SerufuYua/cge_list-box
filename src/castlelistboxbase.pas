@@ -389,8 +389,7 @@ end;
 
 procedure TCastleListBoxBase.ListChange(Sender: TObject);
 begin
-  CalcRectangles;
-  AreaPosY:= 0.0;
+  UpdateListPosition;
 end;
 
 procedure TCastleListBoxBase.SetList(const AValue: TStrings);
