@@ -502,12 +502,17 @@ procedure TCastleListBoxBase.CalcRectangles;
 var
   h, sb: Single;
 begin
-  sb:= ScrollBarWidth * UIScale;
+  h:= FLineHeight * FList.Count;
+
+  if (h < RenderRect.Height) then
+  begin
+    h:= RenderRect.Height;
+    sb:= 0.0;
+  end
+  else
+    sb:= ScrollBarWidth * UIScale;
 
   { main area }
-  h:= FLineHeight * FList.Count;
-  if (h < RenderRect.Height) then
-    h:= RenderRect.Height;
 
   if FScrollBarLeft then
     FAreaRect:= RenderRect.RightPart(RenderRect.Width - sb)
