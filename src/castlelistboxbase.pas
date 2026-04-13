@@ -33,7 +33,7 @@ type
     FScrollbarLeft: Boolean;
     FClickStarted, FMoveStarted, FMoveMain, FMoveSlider: boolean;
     FClickStartedFinger: TFingerIndex;
-    FOnClick, FOnChange: TNotifyEvent;
+    FOnClick, FOnChange, FOnClickSecond: TNotifyEvent;
     FColor: TCastleColor;
     FColorPersistent: TCastleColorPersistent;
     function GetColorForPersistent: TCastleColor;
@@ -48,6 +48,7 @@ type
     procedure CalcLineHeight;
     procedure CalcRectangles; virtual;
     procedure DoClick;
+    procedure DoClickSecond;
     procedure DoChange;
   public
     const
@@ -97,8 +98,12 @@ type
     property LinePadding: Single read FLinePadding write SetPadding
              {$ifdef FPC}default DefaultLinePadding{$endif};
     property ColorPersistent: TCastleColorPersistent read FColorPersistent;
-    property OnClick: TNotifyEvent read FOnClick write FOnClick; { called when got click in list area }
-    property OnChange: TNotifyEvent read FOnChange write FOnChange; { called when Index is changed }
+    { called when got click in list area }
+    property OnClick: TNotifyEvent read FOnClick write FOnClick;
+    { called when got click to selected line, it's not a double click }
+    property OnClickSecond: TNotifyEvent read FOnClickSecond write FOnClickSecond;
+    { called when Index is changed }
+    property OnChange: TNotifyEvent read FOnChange write FOnChange;
   end;
 
 implementation
@@ -269,6 +274,9 @@ begin
         i:= Trunc(h / FLineHeight);
         if (i < FList.Count) then
         begin
+          if (Index = i) then
+            DoClickSecond;
+
           Index:= i;
           DoClick;
         end;
@@ -558,6 +566,12 @@ procedure TCastleListBoxBase.DoClick;
 begin
   if Assigned(OnClick) then
     OnClick(Self);
+end;
+
+procedure TCastleListBoxBase.DoClickSecond;
+begin
+  if Assigned(OnClickSecond) then
+    OnClickSecond(Self);
 end;
 
 procedure TCastleListBoxBase.DoChange;

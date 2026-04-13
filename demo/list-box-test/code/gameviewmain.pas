@@ -18,6 +18,7 @@ type
   TViewMain = class(TCastleView)
   protected
     procedure ClickList(Sender: TObject);
+    procedure ClickSecond(Sender: TObject);
     procedure ClickColorList(Sender: TObject);
     procedure ClickCheckColorList(Sender: TObject);
     procedure CheckList(Sender: TObject; AIndex: Integer; ACheck: Boolean);
@@ -60,9 +61,11 @@ procedure TViewMain.Start;
 begin
   inherited;
 
-  ListBox.OnClick:= {$ifdef FPC}@{$endif}ClickList;
-  CheckListBox.OnClick:= {$ifdef FPC}@{$endif}ClickList;
+  ListBox.OnChange:= {$ifdef FPC}@{$endif}ClickList;
+  ListBox.OnClickSecond:= {$ifdef FPC}@{$endif}ClickSecond;
+  CheckListBox.OnChange:= {$ifdef FPC}@{$endif}ClickList;
   CheckListBox.OnCheck:= {$ifdef FPC}@{$endif}CheckList;
+  CheckListBox.OnClickSecond:= {$ifdef FPC}@{$endif}ClickSecond;
   ColorListBox.OnClick:= {$ifdef FPC}@{$endif}ClickColorList;
   CheckColorListBox.OnClick:= {$ifdef FPC}@{$endif}ClickCheckColorList;
   ShowHex.OnChange:= {$ifdef FPC}@{$endif}ClickShowHex;
@@ -78,6 +81,12 @@ end;
 procedure TViewMain.ClickList(Sender: TObject);
 begin
   Notifications.Show((Sender as TComponent).Name + ': selected line ' +
+                     IntToStr((Sender as TCastleListBoxBase).Index));
+end;
+
+procedure TViewMain.ClickSecond(Sender: TObject);
+begin
+  Notifications.Show((Sender as TComponent).Name + ': second click to line ' +
                      IntToStr((Sender as TCastleListBoxBase).Index));
 end;
 
