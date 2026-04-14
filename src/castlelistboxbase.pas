@@ -30,10 +30,10 @@ type
     FLinePadding, FLineHeight, FAreaHeight, FScrollBarWidth: Single;
     FCursorSpeed: Single;
     FList: TStrings;
-    FScrollbarLeft: Boolean;
+    FScrollbarLeft, FIndexChanged: Boolean;
     FClickStarted, FMoveStarted, FMoveMain, FMoveSlider: boolean;
     FClickStartedFinger: TFingerIndex;
-    FOnClick, FOnChange, FOnClickSecond: TNotifyEvent;
+    FOnClick, FOnChange, FOnClickSecond, FOnCursorArrive: TNotifyEvent;
     FColor: TCastleColor;
     FColorPersistent: TCastleColorPersistent;
     function GetColorForPersistent: TCastleColor;
@@ -50,6 +50,7 @@ type
     procedure DoClick;
     procedure DoClickSecond;
     procedure DoChange;
+    procedure DoCursorArrive;
   public
     const
       DefaultTextMargin = 12;
@@ -104,6 +105,9 @@ type
     property OnClickSecond: TNotifyEvent read FOnClickSecond write FOnClickSecond;
     { called when Index is changed }
     property OnChange: TNotifyEvent read FOnChange write FOnChange;
+    { called when animated cursor arrive the target
+      don't work when CursorSpeed:= 0.0 }
+    property OnCursorArrive: TNotifyEvent read FOnCursorArrive write FOnCursorArrive;
   end;
 
 implementation
@@ -120,6 +124,7 @@ begin
   FAreaPosY:= 0.0;
   FAreaTargetPosY:= 0.0;
   FSliderPosY:= 0.0;
+  FIndexChanged:= False;
   FTextMargin:= DefaultTextMargin;
   FScrollBarLeft:= DefaultScrollBarLeft;
   FCursorSpeed:= DefaultCursorSpeed;
@@ -185,7 +190,15 @@ begin
     Speed:= SecondsPassed * CursorSpeed;
     if (System.Abs(FCursorRect.Bottom - FCursorTargetBottom) > Epsilon) then
       FCursorRect.Bottom:= Lerp(Speed, FCursorRect.Bottom,
-                                       FCursorTargetBottom);
+                                       FCursorTargetBottom)
+    else
+    begin
+      if FIndexChanged then
+      begin
+        FIndexChanged:= False;
+        DoCursorArrive;
+      end;
+    end;
   end
   else
     FCursorRect.Bottom:= FCursorTargetBottom;
@@ -275,7 +288,9 @@ begin
         if (i < FList.Count) then
         begin
           if (Index = i) then
-            DoClickSecond;
+            DoClickSecond
+          else
+            FIndexChanged:= True;
 
           Index:= i;
           DoClick;
@@ -583,6 +598,12 @@ procedure TCastleListBoxBase.DoChange;
 begin
   if Assigned(OnChange) then
     OnChange(Self);
+end;
+
+procedure TCastleListBoxBase.DoCursorArrive;
+begin
+  if Assigned(OnCursorArrive) then
+    OnCursorArrive(Self);
 end;
 
 function TCastleListBoxBase.PropertySections(const PropertyName: String): TPropertySections;

@@ -23,6 +23,7 @@ type
     procedure ClickCheckColorList(Sender: TObject);
     procedure CheckList(Sender: TObject; AIndex: Integer; ACheck: Boolean);
     procedure ClickShowHex(Sender: TObject);
+    procedure CursorArrive(Sender: TObject);
   published
     { Components designed using CGE editor.
       These fields will be automatically initialized at Start. }
@@ -63,9 +64,11 @@ begin
 
   ListBox.OnChange:= {$ifdef FPC}@{$endif}ClickList;
   ListBox.OnClickSecond:= {$ifdef FPC}@{$endif}ClickSecond;
+  ListBox.OnCursorArrive:= {$ifdef FPC}@{$endif}CursorArrive;
   CheckListBox.OnChange:= {$ifdef FPC}@{$endif}ClickList;
   CheckListBox.OnCheck:= {$ifdef FPC}@{$endif}CheckList;
   CheckListBox.OnClickSecond:= {$ifdef FPC}@{$endif}ClickSecond;
+  CheckListBox.OnCursorArrive:= {$ifdef FPC}@{$endif}CursorArrive;
   ColorListBox.OnClick:= {$ifdef FPC}@{$endif}ClickColorList;
   CheckColorListBox.OnClick:= {$ifdef FPC}@{$endif}ClickCheckColorList;
   ShowHex.OnChange:= {$ifdef FPC}@{$endif}ClickShowHex;
@@ -134,6 +137,11 @@ end;
 procedure TViewMain.ClickShowHex(Sender: TObject);
 begin
   ColorListBox.ShowText:= (Sender as TCastleCheckbox).Checked;
+end;
+
+procedure TViewMain.CursorArrive(Sender: TObject);
+begin
+  Notifications.Show('Cursor arrive to Target');
 end;
 
 procedure TViewMain.Update(const SecondsPassed: Single; var HandleInput: Boolean);
