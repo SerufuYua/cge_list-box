@@ -55,6 +55,7 @@ type
     const
       DefaultTextMargin = 12;
       DefaultScrollBarLeft = False;
+      DefaultClipChildren = True;
       DefaultIndex = -1;
       DefaultLinePadding = 12;
       DefaultScrollBarWidth = 24.0;
@@ -79,6 +80,7 @@ type
     property AreaPosY: Single read FAreaPosY write SetAreaPosY;
     property SliderPosY: Single read FSliderPosY write SetSliderPosY;
   published
+    property ClipChildren default DefaultClipChildren;
     property List: TStrings read FList write SetList;
     property TextMargin: Single read FTextMargin write FTextMargin
              {$ifdef FPC}default DefaultTextMargin{$endif};
@@ -148,6 +150,8 @@ begin
   FColorPersistent.InternalGetValue:= {$ifdef FPC}@{$endif}GetColorForPersistent;
   FColorPersistent.InternalSetValue:= {$ifdef FPC}@{$endif}SetColorForPersistent;
   FColorPersistent.InternalDefaultValue:= Color;
+
+  ClipChildren:= DefaultClipChildren;
 end;
 
 destructor TCastleListBoxBase.Destroy;
