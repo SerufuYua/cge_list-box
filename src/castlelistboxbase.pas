@@ -358,29 +358,35 @@ begin
   begin
     LineRect.Bottom:= FAreaRect.Top - FLineHeight * Single(i + 1);
 
-    { line background }
-    if FLineFrame.Empty then
-      FinalLine:= Theme.ImagesPersistent[tiButtonNormal]
-    else
-      FinalLine:= FLineFrame;
+    if ((LineRect.Bottom < RenderRect.Top) AND (LineRect.Top > RenderRect.Bottom)) then
+    begin
+      { line background }
+      if FLineFrame.Empty then
+        FinalLine:= Theme.ImagesPersistent[tiButtonNormal]
+      else
+        FinalLine:= FLineFrame;
 
-    FinalLine.DrawUiBegin(UIScale);
-    FinalLine.Color:= FLineFrame.Color;
-    FinalLine.Draw(LineRect);
-    FinalLine.DrawUiEnd;
+      FinalLine.DrawUiBegin(UIScale);
+      FinalLine.Color:= FLineFrame.Color;
+      FinalLine.Draw(LineRect);
+      FinalLine.DrawUiEnd;
 
-    RenderLine(LineRect, i);
+      RenderLine(LineRect, i);
+    end;
   end;
 
   { line cursor }
-  if FLineCursor.Empty then
-    DrawRectangleOutline(FCursorRect.Grow(-CurWidth / 2), FLineCursor.Color, CurWidth)
-  else
+  if ((FCursorRect.Bottom < RenderRect.Top) AND (FCursorRect.Top > RenderRect.Bottom)) then
   begin
-    FLineCursor.DrawUiBegin(UIScale);
-    FLineCursor.Color:= FLineCursor.Color;
-    FLineCursor.Draw(FCursorRect);
-    FLineCursor.DrawUiEnd;
+    if FLineCursor.Empty then
+      DrawRectangleOutline(FCursorRect.Grow(-CurWidth / 2), FLineCursor.Color, CurWidth)
+    else
+    begin
+      FLineCursor.DrawUiBegin(UIScale);
+      FLineCursor.Color:= FLineCursor.Color;
+      FLineCursor.Draw(FCursorRect);
+      FLineCursor.DrawUiEnd;
+    end;
   end;
 
   { Scrollbar Frame }
