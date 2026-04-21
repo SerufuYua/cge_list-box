@@ -98,6 +98,7 @@ var
   NeedText: Boolean;
   si: Single;
 begin
+  inherited;
   si:= FTextMargin * UIScale;
   NeedText:= FShowText AND (ARect.Width > (ARect.Height + FTextWidth + 2.0 * si));
 

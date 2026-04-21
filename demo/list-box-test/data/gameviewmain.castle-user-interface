@@ -38,7 +38,6 @@
             "Blue" : 1.0000000000000000E+000,
             "Red" : 3.4901961684226990E-001
           },
-          "ClipChildren" : true,
           "CursorSpeed" : 1.6000000000000000E+001,
           "FontSize" : 1.8000000000000000E+001,
           "Height" : 2.0000000000000000E+002,
@@ -64,6 +63,23 @@
               "Blue" : 4.8235294222831726E-001,
               "Green" : 7.4509805440902710E-001,
               "Red" : 4.4705882668495178E-001
+            },
+            "ProtectedSides" : {
+              "$$ClassName" : "TBorder",
+              "Bottom" : 3.0000000000000000E+000,
+              "Left" : 4.0000000000000000E+000,
+              "Right" : 4.0000000000000000E+000,
+              "Top" : 3.0000000000000000E+000
+            },
+            "Url" : "castle-data:/ui/LineFrame.png"
+          },
+          "LineFrameHover" : {
+            "$$ClassName" : "TCastleImagePersistent",
+            "ColorPersistent" : {
+              "$$ClassName" : "TCastleColorPersistent",
+              "Blue" : 5.0196081399917603E-001,
+              "Green" : 7.4509805440902710E-001,
+              "Red" : 6.5490198135375977E-001
             },
             "ProtectedSides" : {
               "$$ClassName" : "TBorder",
@@ -141,7 +157,6 @@
           "CheckPressedBack" : {
             "$$ClassName" : "TCastleImagePersistent"
           },
-          "ClipChildren" : true,
           "CursorSpeed" : 6.0000000000000000E+000,
           "FontSize" : 2.8000000000000000E+001,
           "Height" : 2.0000000000000000E+002,
@@ -156,6 +171,9 @@
             }
           },
           "LineFrame" : {
+            "$$ClassName" : "TCastleImagePersistent"
+          },
+          "LineFrameHover" : {
             "$$ClassName" : "TCastleImagePersistent"
           },
           "List" : [
@@ -188,7 +206,6 @@
         },
         {
           "$$ClassName" : "TCastleColorListBox",
-          "ClipChildren" : true,
           "ColorBox" : {
             "$$ClassName" : "TCastleImagePersistent",
             "ProtectedSides" : {
@@ -233,6 +250,20 @@
               "Blue" : 5.3725492954254150E-001,
               "Green" : 5.3725492954254150E-001,
               "Red" : 5.3725492954254150E-001
+            },
+            "ProtectedSides" : {
+              "$$ClassName" : "TBorder",
+              "AllSides" : 1.2000000000000000E+001
+            },
+            "Url" : "castle-data:/ui/LineRoundFrame.png"
+          },
+          "LineFrameHover" : {
+            "$$ClassName" : "TCastleImagePersistent",
+            "ColorPersistent" : {
+              "$$ClassName" : "TCastleColorPersistent",
+              "Blue" : 6.5098041296005249E-001,
+              "Green" : 6.5098041296005249E-001,
+              "Red" : 6.5098041296005249E-001
             },
             "ProtectedSides" : {
               "$$ClassName" : "TBorder",
@@ -338,7 +369,6 @@
             },
             "Url" : "castle-data:/ui/CheckSquareBack.png"
           },
-          "ClipChildren" : true,
           "ColorBox" : {
             "$$ClassName" : "TCastleImagePersistent",
             "ProtectedSides" : {
@@ -384,6 +414,20 @@
               "$$ClassName" : "TCastleColorPersistent",
               "Blue" : 7.6862746477127075E-001,
               "Green" : 8.6666667461395264E-001,
+              "Red" : 9.0588235855102539E-001
+            },
+            "ProtectedSides" : {
+              "$$ClassName" : "TBorder",
+              "AllSides" : 1.1000000000000000E+001
+            },
+            "Url" : "castle-data:/ui/LineSquareFrame.png"
+          },
+          "LineFrameHover" : {
+            "$$ClassName" : "TCastleImagePersistent",
+            "ColorPersistent" : {
+              "$$ClassName" : "TCastleColorPersistent",
+              "Blue" : 7.0980393886566162E-001,
+              "Green" : 6.9411766529083252E-001,
               "Red" : 9.0588235855102539E-001
             },
             "ProtectedSides" : {

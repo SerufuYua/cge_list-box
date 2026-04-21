@@ -146,6 +146,8 @@ var
   Text: String;
   si: Single;
 begin
+  inherited;
+
   { CheckBox }
   CheckRect.Height:= Font.Height;
   CheckRect.Width:= CheckRect.Height;

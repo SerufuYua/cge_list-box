@@ -176,6 +176,8 @@ var
   Text: String;
   si, ColorAreaWidth: Single;
 begin
+  inherited;
+
   { CheckBox }
   CheckRect.Height:= Font.Height;
   CheckRect.Width:= CheckRect.Height;

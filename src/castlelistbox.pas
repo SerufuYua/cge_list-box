@@ -38,6 +38,7 @@ var
   Text: String;
   si: Single;
 begin
+  inherited;
   si:= FTextMargin * UIScale;
   TextRect:= ARect.RightPart(ARect.Width - si);
 
