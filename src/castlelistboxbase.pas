@@ -353,7 +353,7 @@ begin
         FMoveStarted:= True;
     end;
   end
-  else
+  else if FMoveRect.Contains(Event.Position) then
   begin
     // monitor pointer hover
     h:= FAreaRect.Height - (Event.Position.Y - FAreaRect.Bottom);
@@ -369,7 +369,9 @@ begin
       else
         FHoverIdx:= -1;
     end;
-  end;
+  end
+  else
+    FHoverIdx:= -1;
 end;
 
 procedure TCastleListBoxBase.Render;
