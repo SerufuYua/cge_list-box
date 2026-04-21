@@ -54,6 +54,7 @@ type
     procedure DoClickSecond;
     procedure DoChange;
     procedure DoCursorArrive;
+    procedure DoInternalMouseLeave; override;
   public
     const
       DefaultTextMargin = 12;
@@ -335,8 +336,13 @@ begin
     hoverIdx:= Trunc(h / FLineHeight);
     if (FHoverIdx <> hoverIdx) then
     begin
-      FHoverIdx:= hoverIdx;
-      OnLineHover(self, FHoverIdx);
+      if ((hoverIdx > -1) AND (hoverIdx < FList.Count)) then
+      begin
+        FHoverIdx:= hoverIdx;
+        OnLineHover(self, FHoverIdx);
+      end
+      else
+        FHoverIdx:= -1;
     end;
   end;
 
@@ -636,6 +642,12 @@ procedure TCastleListBoxBase.DoCursorArrive;
 begin
   if Assigned(OnCursorArrive) then
     OnCursorArrive(Self);
+end;
+
+procedure TCastleListBoxBase.DoInternalMouseLeave;
+begin
+  FHoverIdx:= -1;
+  inherited;
 end;
 
 function TCastleListBoxBase.PropertySections(const PropertyName: String): TPropertySections;
