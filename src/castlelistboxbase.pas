@@ -17,10 +17,12 @@ uses
   CastleKeysMouse, CastleRectangles, CastleVectors, CastleGLImages;
 
 type
+  THoverEvent = procedure(Sender: TObject; AIndex: Integer) of object;
+
   TCastleListBoxBase = class(TCastleUserInterfaceFont)
   protected
     FTextMargin: Single;
-    FIndex: Integer;
+    FIndex, FHoverIdx: Integer;
     FLineFrame, FLineCursor: TCastleImagePersistent;
     FScrollbarFrame, FScrollbarSlider: TCastleImagePersistent;
     FAreaRect, FCursorRect, FMoveRect, FClickRect: TFloatRectangle;
@@ -34,6 +36,7 @@ type
     FClickStarted, FMoveStarted, FMoveMain, FMoveSlider: boolean;
     FClickStartedFinger: TFingerIndex;
     FOnClick, FOnChange, FOnClickSecond, FOnCursorArrive: TNotifyEvent;
+    FOnLineHover: THoverEvent;
     FColor: TCastleColor;
     FColorPersistent: TCastleColorPersistent;
     function GetColorForPersistent: TCastleColor;
@@ -107,6 +110,8 @@ type
     property OnClickSecond: TNotifyEvent read FOnClickSecond write FOnClickSecond;
     { called when Index is changed }
     property OnChange: TNotifyEvent read FOnChange write FOnChange;
+    { called when pointer hovered on other Line Index }
+    property OnLineHover: THoverEvent read FOnLineHover write FOnLineHover;
     { called when animated cursor arrive the target
       don't work when CursorSpeed:= 0.0 }
     property OnCursorArrive: TNotifyEvent read FOnCursorArrive write FOnCursorArrive;
@@ -122,7 +127,10 @@ begin
   inherited;
 
   FOnClick:= nil;
+  FOnClickSecond:= nil;
   FOnChange:= nil;
+  FOnLineHover:= nil;
+  FOnCursorArrive:= nil;
   FAreaPosY:= 0.0;
   FAreaTargetPosY:= 0.0;
   FSliderPosY:= 0.0;
@@ -132,6 +140,7 @@ begin
   FCursorSpeed:= DefaultCursorSpeed;
   FAreaSpeed:= DefaultAreaSpeed;
   FIndex:= DefaultIndex;
+  FHoverIdx:= DefaultIndex;
   FLinePadding:= DefaultLinePadding;
   FScrollBarWidth:= DefaultScrollBarWidth;
 
@@ -313,10 +322,23 @@ end;
 
 function TCastleListBoxBase.Motion(const Event: TInputMotion): boolean;
 var
-  shiftY: Single;
+  hoverIdx: Integer;
+  shiftY, h: Single;
 begin
   Result := inherited;
   if Result then Exit; // allow the ancestor to handle event
+
+  // monitor pointer hover
+  if Assigned(OnLineHover) then
+  begin
+    h:= FAreaRect.Height - (Event.Position.Y - FAreaRect.Bottom);
+    hoverIdx:= Trunc(h / FLineHeight);
+    if (FHoverIdx <> hoverIdx) then
+    begin
+      FHoverIdx:= hoverIdx;
+      OnLineHover(self, FHoverIdx);
+    end;
+  end;
 
   if (FClickStarted AND (FClickStartedFinger = Event.FingerIndex)) then
   begin

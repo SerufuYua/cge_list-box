@@ -24,6 +24,7 @@ type
     procedure CheckList(Sender: TObject; AIndex: Integer; ACheck: Boolean);
     procedure ClickShowHex(Sender: TObject);
     procedure CursorArrive(Sender: TObject);
+    procedure CursorHover(Sender: TObject; AIndex: Integer);
   published
     { Components designed using CGE editor.
       These fields will be automatically initialized at Start. }
@@ -65,6 +66,7 @@ begin
   ListBox.OnChange:= {$ifdef FPC}@{$endif}ClickList;
   ListBox.OnClickSecond:= {$ifdef FPC}@{$endif}ClickSecond;
   ListBox.OnCursorArrive:= {$ifdef FPC}@{$endif}CursorArrive;
+  ListBox.OnLineHover:= {$ifdef FPC}@{$endif}CursorHover;
   CheckListBox.OnChange:= {$ifdef FPC}@{$endif}ClickList;
   CheckListBox.OnCheck:= {$ifdef FPC}@{$endif}CheckList;
   CheckListBox.OnClickSecond:= {$ifdef FPC}@{$endif}ClickSecond;
@@ -142,6 +144,11 @@ end;
 procedure TViewMain.CursorArrive(Sender: TObject);
 begin
   Notifications.Show('Cursor arrive to Target');
+end;
+
+procedure TViewMain.CursorHover(Sender: TObject; AIndex: Integer);
+begin
+  Notifications.Show('Hover to ' + IntToStr(AIndex));
 end;
 
 procedure TViewMain.Update(const SecondsPassed: Single; var HandleInput: Boolean);
