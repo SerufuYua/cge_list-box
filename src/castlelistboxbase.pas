@@ -197,7 +197,7 @@ procedure TCastleListBoxBase.Update(const SecondsPassed: Single;
 const
   Epsilon = 0.5;
 var
-  Speed: Single;
+  Move: Single;
 begin
   inherited;
   CalcRectangles;
@@ -206,10 +206,13 @@ begin
   { move cursor to target }
   if (CursorSpeed > 0.0) then
   begin
-    Speed:= SecondsPassed * CursorSpeed;
     if (System.Abs(FCursorRect.Bottom - FCursorTargetBottom) > Epsilon) then
-      FCursorRect.Bottom:= Lerp(Speed, FCursorRect.Bottom,
-                                       FCursorTargetBottom)
+    begin
+      Move:= SecondsPassed * CursorSpeed;
+      Move:= Clamped(Move, 0.0, 1.0);
+      FCursorRect.Bottom:= Lerp(Move, FCursorRect.Bottom,
+                                      FCursorTargetBottom)
+    end
     else
     begin
       if FIndexChanged then
@@ -225,9 +228,12 @@ begin
   { move area to target }
   if (AreaSpeed > 0.0) then
   begin
-    Speed:= SecondsPassed * AreaSpeed;
     if (System.Abs(FAreaPosY - FAreaTargetPosY) > Epsilon) then
-      FAreaPosY:= Lerp(Speed, FAreaPosY, FAreaTargetPosY);
+    begin
+      Move:= SecondsPassed * AreaSpeed;
+      Move:= Clamped(Move, 0.0, 1.0);
+      FAreaPosY:= Lerp(Move, FAreaPosY, FAreaTargetPosY);
+    end;
   end
   else
     FAreaPosY:= FAreaTargetPosY;
