@@ -54,7 +54,7 @@ type
 implementation
 
 uses
-  CastleUtils, CastleComponentSerialize, CastleRectangles, Math;
+  CastleUtils, CastleComponentSerialize, CastleRectangles, CastleGLUtils, Math;
 
 constructor TCastleTextScroller.Create(AOwner: TComponent);
 begin
@@ -93,7 +93,7 @@ end;
 procedure TCastleTextScroller.Update(const SecondsPassed: Single;
                                      var HandleInput: boolean);
 const
-  Epsilon = 0.5;
+  Epsilon = 0.05;
 var
   Move, Idx: Single;
 begin
@@ -120,23 +120,29 @@ var
   i: Integer;
   TextRect: TFloatRectangle;
   TextColor: TCastleColor;
+  LinePos: Single;
 begin
   inherited;
 
   TextRect.Left:= RenderRect.Left;
   TextRect.Width:= RenderRect.Width;
 
+  LinePos:= 0.0;
   for i:= 0 to (FList.Count - 1) do
   begin
     FontScale:= 1.0 * Power(Zoom, System.Abs(Single(i) - FFlowIndex));
 
-    TextRect.Bottom:= RenderRect.Top - FLineHeight * Single(i + 1);
+    TextRect.Bottom:= RenderRect.Top - LinePos - FLineHeight;
     TextRect.Height:= FLineHeight;
 
     TextColor:= Color;
     TextColor.W:= FontScale;
 
+    DrawRectangleOutline(TextRect, Red, 1);
+
     Font.PrintRect(TextRect, TextColor, FList[i], hpMiddle, vpMiddle);
+
+    LinePos:= LinePos + TextRect.Height;
   end;
 end;
 
