@@ -11,6 +11,7 @@ type
   TCastleTextScroller = class(TCastleUserInterfaceFont)
   protected
     FSpeed, FSpacing, FZoom: Single;
+    FLineHeight, FFlowIndex: Single;
     FIndex: Integer;
     FList: TStrings;
     FColor: TCastleColor;
@@ -33,6 +34,7 @@ type
     procedure Update(const SecondsPassed: Single;
                      var HandleInput: boolean); override;
     procedure Render; override;
+    procedure FontChanged; override;
     function PropertySections(const PropertyName: String): TPropertySections; override;
 
     property Color: TCastleColor read FColor write FColor;
@@ -44,7 +46,7 @@ type
              {$ifdef FPC}default DefaultZoom{$endif};
     property Spacing: Single read FSpacing write FSpacing
              {$ifdef FPC}default DefaultSpacing{$endif};
-    property TopIndex: Integer read FIndex write FIndex
+    property Index: Integer read FIndex write FIndex
              {$ifdef FPC}default DefaultIndex{$endif};
     property ColorPersistent: TCastleColorPersistent read FColorPersistent;
   end;
@@ -52,7 +54,7 @@ type
 implementation
 
 uses
-  CastleUtils, CastleComponentSerialize;
+  CastleUtils, CastleComponentSerialize, CastleRectangles, Math;
 
 constructor TCastleTextScroller.Create(AOwner: TComponent);
 begin
@@ -62,6 +64,8 @@ begin
   FSpacing:= DefaultSpacing;
   FIndex:= DefaultIndex;
   FZoom:= DefaultZoom;
+  FFlowIndex:= Single(DefaultIndex);
+  FontChanged;
 
   FList:= TStringList.Create;
   TStringList(FList).OnChange:= {$ifdef FPC}@{$endif}ListChange;
@@ -88,17 +92,58 @@ end;
 
 procedure TCastleTextScroller.Update(const SecondsPassed: Single;
                                      var HandleInput: boolean);
+const
+  Epsilon = 0.5;
+var
+  Move, Idx: Single;
 begin
   inherited;
+
+  { flow Index to target }
+  if (Speed > 0.0) then
+  begin
+    idx:= Single(Index);
+    if (System.Abs(Idx - FFlowIndex) > Epsilon) then
+    begin
+      Move:= SecondsPassed * Speed;
+      Move:= Clamped(Move, 0.0, 1.0);
+      FFlowIndex:= Lerp(Move, FFlowIndex, idx);
+    end;
+  end
+  else
+    FFlowIndex:= idx;
 
 end;
 
 procedure TCastleTextScroller.Render;
+var
+  i: Integer;
+  TextRect: TFloatRectangle;
+  TextColor: TCastleColor;
 begin
   inherited;
 
+  TextRect.Left:= RenderRect.Left;
+  TextRect.Width:= RenderRect.Width;
+
+  for i:= 0 to (FList.Count - 1) do
+  begin
+    FontScale:= 1.0 * Power(Zoom, System.Abs(Single(i) - FFlowIndex));
+
+    TextRect.Bottom:= RenderRect.Top - FLineHeight * Single(i + 1);
+    TextRect.Height:= FLineHeight;
+
+    TextColor:= Color;
+    TextColor.W:= FontScale;
+
+    Font.PrintRect(TextRect, TextColor, FList[i], hpMiddle, vpMiddle);
+  end;
 end;
 
+procedure TCastleTextScroller.FontChanged;
+begin
+  FLineHeight:= Font.Height + Spacing;
+end;
 
 procedure TCastleTextScroller.ListChange(Sender: TObject);
 begin
@@ -123,7 +168,8 @@ end;
 function TCastleTextScroller.PropertySections(const PropertyName: String): TPropertySections;
 begin
   if ArrayContainsString(PropertyName, [
-       'List', 'Speed', 'Spacing', 'TopIndex', 'ColorPersistent', 'Zoom'
+       'List', 'Speed', 'Spacing', 'Index', 'ColorPersistent', 'Zoom',
+       'ClipChildren'
      ]) then
     Result:= [psBasic]
   else

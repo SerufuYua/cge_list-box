@@ -140,10 +140,8 @@
           "TranslationPersistent" : {
             "$$ClassName" : "TCastleVector2Persistent",
             "X" : -1.9000000000000000E+002,
-            "Y" : 1.6000000000000000E+002
+            "Y" : 3.8000000000000000E+002
           },
-          "VerticalAnchorParent" : "vpMiddle",
-          "VerticalAnchorSelf" : "vpMiddle",
           "Width" : 3.7000000000000000E+002
         },
         {
@@ -198,10 +196,8 @@
           "TranslationPersistent" : {
             "$$ClassName" : "TCastleVector2Persistent",
             "X" : 1.9500000000000000E+002,
-            "Y" : 1.6000000000000000E+002
+            "Y" : 3.8000000000000000E+002
           },
-          "VerticalAnchorParent" : "vpMiddle",
-          "VerticalAnchorSelf" : "vpMiddle",
           "Width" : 3.7000000000000000E+002
         },
         {
@@ -317,10 +313,8 @@
           "TranslationPersistent" : {
             "$$ClassName" : "TCastleVector2Persistent",
             "X" : -1.9000000000000000E+002,
-            "Y" : -6.0000000000000000E+001
+            "Y" : 1.6000000000000000E+002
           },
-          "VerticalAnchorParent" : "vpMiddle",
-          "VerticalAnchorSelf" : "vpMiddle",
           "Width" : 3.7000000000000000E+002
         },
         {
@@ -333,10 +327,8 @@
           "TranslationPersistent" : {
             "$$ClassName" : "TCastleVector2Persistent",
             "X" : -2.8000000000000000E+002,
-            "Y" : -1.8000000000000000E+002
-          },
-          "VerticalAnchorParent" : "vpMiddle",
-          "VerticalAnchorSelf" : "vpMiddle"
+            "Y" : 1.2000000000000000E+002
+          }
         },
         {
           "$$ClassName" : "TCastleCheckColorListBox",
@@ -498,10 +490,8 @@
           "TranslationPersistent" : {
             "$$ClassName" : "TCastleVector2Persistent",
             "X" : 1.9500000000000000E+002,
-            "Y" : -6.0000000000000000E+001
+            "Y" : 1.6000000000000000E+002
           },
-          "VerticalAnchorParent" : "vpMiddle",
-          "VerticalAnchorSelf" : "vpMiddle",
           "Width" : 3.7000000000000000E+002
         },
         {
@@ -529,19 +519,30 @@
         },
         {
           "$$ClassName" : "TCastleTextScroller",
+          "FontScale" : 4.8092955350875854E-001,
+          "FontSize" : 3.2000000000000000E+001,
           "HorizontalAnchorParent" : "hpMiddle",
           "HorizontalAnchorSelf" : "hpMiddle",
           "List" : [
             "One Line 1/6",
-            "Two Linw 2/6",
+            "Two Line 2/6",
             "Three Line 3/6",
             "Four Line 4/6",
             "Five Line 5/6",
             "Six Line 6/6"
           ],
           "Name" : "Scroller",
+          "Outline" : 1,
+          "OutlineColorPersistent" : {
+            "$$ClassName" : "TCastleColorPersistent",
+            "Blue" : 2.2745098173618317E-001,
+            "Red" : 1.4901961386203766E-001
+          },
+          "OutlineHighQuality" : true,
+          "Speed" : 1.0000000000000000E+000,
           "VerticalAnchorParent" : "vpTop",
-          "VerticalAnchorSelf" : "vpTop"
+          "VerticalAnchorSelf" : "vpTop",
+          "Zoom" : 8.5000002384185791E-001
         }
       ]
     }
