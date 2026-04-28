@@ -116,7 +116,7 @@ const
   Epsilon = 0.05;
 var
   i: integer;
-  Move, Idx, LinePos, TempScale: Single;
+  Move, Idx, LinePos, TempScale, Exp: Single;
 begin
   inherited;
 
@@ -136,7 +136,8 @@ begin
     FontScale:= 1.0;
     for i:= 1 to Index do
     begin
-      TempScale:= Power(Zoom, System.Abs(Single(i) - FFlowIndex));
+      Exp:= System.Abs(Single(i) - FFlowIndex);
+      TempScale:= Power(Zoom, Exp);
       LinePos:= LinePos - FLineHeight * TempScale;
     end;
     if (System.Abs(LinePos - FFlowLinePos) > Epsilon) then
@@ -152,7 +153,8 @@ begin
     FontScale:= 1.0;
     for i:= 1 to Index do
     begin
-      TempScale:= Power(Zoom, System.Abs(Single(i - Index)));
+      Exp:= System.Abs(Single(i - Index));
+      TempScale:= Power(Zoom, Exp);
       LinePos:= LinePos - FLineHeight * TempScale;
     end;
     FFlowLinePos:= LinePos;
@@ -164,7 +166,7 @@ var
   i: Integer;
   TextRect: TFloatRectangle;
   TextColor: TCastleColor;
-  LinePos: Single;
+  LinePos, Exp: Single;
 begin
   inherited;
 
@@ -174,7 +176,8 @@ begin
   LinePos:= FFlowLinePos;
   for i:= 0 to (FList.Count - 1) do
   begin
-    FontScale:= 1.0 * Power(Zoom, System.Abs(Single(i) - FFlowIndex));
+    Exp:= System.Abs(Single(i) - FFlowIndex);
+    FontScale:= 1.0 * Power(Zoom, Exp);
 
     TextRect.Bottom:= RenderRect.Top - LinePos - FLineHeight;
     TextRect.Height:= FLineHeight;
