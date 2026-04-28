@@ -25,6 +25,7 @@ type
     procedure ClickShowHex(Sender: TObject);
     procedure CursorArrive(Sender: TObject);
     procedure CursorHover(Sender: TObject; AIndex: Integer);
+    procedure ClickUpDown(Sender: TObject);
   published
     { Components designed using CGE editor.
       These fields will be automatically initialized at Start. }
@@ -36,6 +37,9 @@ type
     ShowHex: TCastleCheckbox;
     RectangleBG: TCastleRectangleControl;
     Notifications: TCastleNotifications;
+    Scroller: TCastleTextScroller;
+    ButtonUp, ButtonDown: TCastleButton;
+    LabelIdx: TCastleLabel;
   public
     constructor Create(AOwner: TComponent); override;
     procedure Start; override;
@@ -75,12 +79,17 @@ begin
   CheckColorListBox.OnClick:= {$ifdef FPC}@{$endif}ClickCheckColorList;
   ShowHex.OnChange:= {$ifdef FPC}@{$endif}ClickShowHex;
 
+  ButtonUp.OnClick:= {$ifdef FPC}@{$endif}ClickUpDown;
+  ButtonDown.OnClick:= {$ifdef FPC}@{$endif}ClickUpDown;
+
   CheckListBox.SetCheck(1, True);
   CheckListBox.SetCheck(2, True);
   CheckListBox.SetCheck(3, True);
   CheckColorListBox.SetCheck(2, True);
   CheckColorListBox.SetCheck(3, True);
   CheckColorListBox.SetCheck(4, True);
+
+  LabelIdx.Caption:= IntToStr(Scroller.Index);
 end;
 
 procedure TViewMain.ClickList(Sender: TObject);
@@ -149,6 +158,24 @@ end;
 procedure TViewMain.CursorHover(Sender: TObject; AIndex: Integer);
 begin
   Notifications.Show('Hover to ' + IntToStr(AIndex));
+end;
+
+procedure TViewMain.ClickUpDown(Sender: TObject);
+begin
+  if (NOT (Sender is TComponent)) then Exit;
+
+  case (Sender as TComponent).Name of
+    'ButtonUp':
+    begin
+      Scroller.Index:= Scroller.Index - 1;
+    end;
+    'ButtonDown':
+    begin
+      Scroller.Index:= Scroller.Index + 1;
+    end;
+  end;
+
+  LabelIdx.Caption:= IntToStr(Scroller.Index);
 end;
 
 procedure TViewMain.Update(const SecondsPassed: Single; var HandleInput: Boolean);
