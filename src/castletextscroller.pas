@@ -120,7 +120,7 @@ var
   i: Integer;
   TextRect: TFloatRectangle;
   TextColor: TCastleColor;
-  LinePos: Single;
+  TempScale, LinePos: Single;
 begin
   inherited;
 
@@ -128,6 +128,13 @@ begin
   TextRect.Width:= RenderRect.Width;
 
   LinePos:= 0.0;
+  FontScale:= 1.0;
+  for i:= 1 to Index do
+  begin
+    TempScale:= Power(Zoom, System.Abs(Single(i) - FFlowIndex));
+    LinePos:= LinePos - FLineHeight * TempScale;
+  end;
+
   for i:= 0 to (FList.Count - 1) do
   begin
     FontScale:= 1.0 * Power(Zoom, System.Abs(Single(i) - FFlowIndex));
@@ -148,7 +155,7 @@ end;
 
 procedure TCastleTextScroller.FontChanged;
 begin
-  FLineHeight:= Font.Height + Spacing;
+  FLineHeight:= Font.Height + Spacing * UIScale;
 end;
 
 procedure TCastleTextScroller.ListChange(Sender: TObject);
