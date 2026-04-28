@@ -526,6 +526,22 @@
           },
           "VerticalAnchorParent" : "vpTop",
           "VerticalAnchorSelf" : "vpTop"
+        },
+        {
+          "$$ClassName" : "TCastleTextScroller",
+          "HorizontalAnchorParent" : "hpMiddle",
+          "HorizontalAnchorSelf" : "hpMiddle",
+          "List" : [
+            "One Line 1/6",
+            "Two Linw 2/6",
+            "Three Line 3/6",
+            "Four Line 4/6",
+            "Five Line 5/6",
+            "Six Line 6/6"
+          ],
+          "Name" : "Scroller",
+          "VerticalAnchorParent" : "vpTop",
+          "VerticalAnchorSelf" : "vpTop"
         }
       ]
     }

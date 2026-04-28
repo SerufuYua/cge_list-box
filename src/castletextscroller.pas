@@ -1,0 +1,136 @@
+unit CastleTextScroller;
+
+{$mode ObjFPC}{$H+}
+
+interface
+
+uses
+  Classes, SysUtils, CastleControls, CastleColors, CastleClassUtils;
+
+type
+  TCastleTextScroller = class(TCastleUserInterfaceFont)
+  protected
+    FSpeed, FSpacing, FZoom: Single;
+    FIndex: Integer;
+    FList: TStrings;
+    FColor: TCastleColor;
+    FColorPersistent: TCastleColorPersistent;
+    function GetColorForPersistent: TCastleColor;
+    procedure SetColorForPersistent(const AValue: TCastleColor);
+    procedure ListChange(Sender: TObject); virtual;
+    procedure SetList(const AValue: TStrings);
+  public
+    const
+      DefaultScrollBarLeft = False;
+      DefaultIndex = 0;
+      DefaultSpeed = 16.0;
+      DefaultSpacing = 12.0;
+      DefaultZoom = 0.5;
+      DefaultColor: TCastleColor = (X: 1.0; Y: 1.0; Z: 1.0; W: 1.0);
+
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+    procedure Update(const SecondsPassed: Single;
+                     var HandleInput: boolean); override;
+    procedure Render; override;
+    function PropertySections(const PropertyName: String): TPropertySections; override;
+
+    property Color: TCastleColor read FColor write FColor;
+  published
+    property List: TStrings read FList write SetList;
+    property Speed: Single read FSpeed write FSpeed
+             {$ifdef FPC}default DefaultSpeed{$endif};
+    property Zoom: Single read FZoom write FZoom
+             {$ifdef FPC}default DefaultZoom{$endif};
+    property Spacing: Single read FSpacing write FSpacing
+             {$ifdef FPC}default DefaultSpacing{$endif};
+    property TopIndex: Integer read FIndex write FIndex
+             {$ifdef FPC}default DefaultIndex{$endif};
+    property ColorPersistent: TCastleColorPersistent read FColorPersistent;
+  end;
+
+implementation
+
+uses
+  CastleUtils, CastleComponentSerialize;
+
+constructor TCastleTextScroller.Create(AOwner: TComponent);
+begin
+  inherited;
+
+  FSpeed:= DefaultSpeed;
+  FSpacing:= DefaultSpacing;
+  FIndex:= DefaultIndex;
+  FZoom:= DefaultZoom;
+
+  FList:= TStringList.Create;
+  TStringList(FList).OnChange:= {$ifdef FPC}@{$endif}ListChange;
+
+  { Persistent for ColorBGLow }
+  FColor:= DefaultColor;
+  FColorPersistent:= TCastleColorPersistent.Create(nil);
+  FColorPersistent.SetSubComponent(true);
+  FColorPersistent.InternalGetValue:= {$ifdef FPC}@{$endif}GetColorForPersistent;
+  FColorPersistent.InternalSetValue:= {$ifdef FPC}@{$endif}SetColorForPersistent;
+  FColorPersistent.InternalDefaultValue:= Color;
+end;
+
+destructor TCastleTextScroller.Destroy;
+begin
+  if Assigned(FColorPersistent) then
+    FreeAndNil(FColorPersistent);
+
+  if Assigned(FList) then
+    FreeAndNil(FList);
+
+  inherited;
+end;
+
+procedure TCastleTextScroller.Update(const SecondsPassed: Single;
+                                     var HandleInput: boolean);
+begin
+  inherited;
+
+end;
+
+procedure TCastleTextScroller.Render;
+begin
+  inherited;
+
+end;
+
+
+procedure TCastleTextScroller.ListChange(Sender: TObject);
+begin
+
+end;
+
+procedure TCastleTextScroller.SetList(const AValue: TStrings);
+begin
+  FList.Assign(AValue);
+end;
+
+function TCastleTextScroller.GetColorForPersistent: TCastleColor;
+begin
+  Result:= Color;
+end;
+
+procedure TCastleTextScroller.SetColorForPersistent(const AValue: TCastleColor);
+begin
+  Color:= AValue;
+end;
+
+function TCastleTextScroller.PropertySections(const PropertyName: String): TPropertySections;
+begin
+  if ArrayContainsString(PropertyName, [
+       'List', 'Speed', 'Spacing', 'TopIndex', 'ColorPersistent', 'Zoom'
+     ]) then
+    Result:= [psBasic]
+  else
+    Result:= inherited PropertySections(PropertyName);
+end;
+
+initialization
+  RegisterSerializableComponent(TCastleTextScroller, ['List', 'Text Scroller']);
+end.
+

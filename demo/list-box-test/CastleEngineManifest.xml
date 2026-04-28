@@ -13,7 +13,8 @@ See https://castle-engine.io/project_manifest for documentation of this file.
   editor_units="CastleListBox,
                 CastleCheckListBox,
                 CastleColorListBox,
-                CastleCheckColorListBox"
+                CastleCheckColorListBox,
+                CastleTextScroller"
 >
   <compiler_options>
     <search_paths>

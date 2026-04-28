@@ -11,7 +11,7 @@ uses Classes,
   CastleVectors, CastleComponentSerialize,
   CastleUIControls, CastleControls, CastleKeysMouse, CastleNotifications,
   CastleListBox, CastleCheckListBox, CastleColorListBox,
-  CastleCheckColorListBox;
+  CastleCheckColorListBox, CastleTextScroller;
 
 type
   { Main view, where most of the application logic takes place. }
