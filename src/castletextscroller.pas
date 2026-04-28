@@ -12,6 +12,7 @@ type
   TCastleTextScroller = class(TCastleUserInterfaceFont)
   protected
     FHAlignment: THorizontalPosition;
+    FAutoSizeWidth: Boolean;
     FSpeed, FSpacing, FZoom: Single;
     FLineHeight, FFlowIndex, FFlowLinePos: Single;
     FIndex: Integer;
@@ -22,6 +23,7 @@ type
     procedure SetColorForPersistent(const AValue: TCastleColor);
     procedure ListChange(Sender: TObject); virtual;
     procedure SetList(const AValue: TStrings);
+    procedure PreferredSize(var PreferredWidth, PreferredHeight: Single); override;
   public
     const
       DefaultScrollBarLeft = False;
@@ -30,6 +32,7 @@ type
       DefaultSpacing = 12.0;
       DefaultZoom = 0.5;
       DefaultHAlignment = hpMiddle;
+      DefaultAutoSizeWidth = True;
       DefaultColor: TCastleColor = (X: 1.0; Y: 1.0; Z: 1.0; W: 1.0);
 
     constructor Create(AOwner: TComponent); override;
@@ -38,6 +41,8 @@ type
                      var HandleInput: boolean); override;
     procedure Render; override;
     procedure FontChanged; override;
+    procedure EditorAllowResize(out ResizeWidth, ResizeHeight: Boolean;
+                                out Reason: String); override;
     function PropertySections(const PropertyName: String): TPropertySections; override;
 
     property Color: TCastleColor read FColor write FColor;
@@ -53,13 +58,15 @@ type
              {$ifdef FPC}default DefaultIndex{$endif};
     property HorizontalAlignment: THorizontalPosition read FHAlignment write FHAlignment
              {$ifdef FPC}default DefaultHAlignment{$endif};
+    property AutoSizeWidth: Boolean read FAutoSizeWidth write FAutoSizeWidth
+             {$ifdef FPC}default DefaultAutoSizeWidth{$endif};
     property ColorPersistent: TCastleColorPersistent read FColorPersistent;
   end;
 
 implementation
 
 uses
-  CastleUtils, CastleComponentSerialize, CastleGLUtils, Math;
+  CastleUtils, CastleComponentSerialize, CastleGLUtils, CastleStringUtils, Math;
 
 constructor TCastleTextScroller.Create(AOwner: TComponent);
 begin
@@ -69,6 +76,7 @@ begin
   FSpacing:= DefaultSpacing;
   FIndex:= DefaultIndex;
   FHAlignment:= DefaultHAlignment;
+  FAutoSizeWidth:= DefaultAutoSizeWidth;
   FZoom:= DefaultZoom;
   FFlowIndex:= Single(DefaultIndex);
   FFlowLinePos:= 0.0;
@@ -192,6 +200,26 @@ begin
   FList.Assign(AValue);
 end;
 
+procedure TCastleTextScroller.PreferredSize(var PreferredWidth, PreferredHeight: Single);
+begin
+  if AutoSizeWidth then
+  begin
+    FontScale:= 1.0;
+    PreferredWidth:= Font.MaxTextWidth(FList);
+  end;
+end;
+
+procedure TCastleTextScroller.EditorAllowResize(out ResizeWidth, ResizeHeight: Boolean;
+                                                out Reason: String);
+begin
+  inherited;
+  if AutoSizeWidth then
+  begin
+    ResizeWidth:= False;
+    Reason:= SAppendPart(Reason, NL, 'Turn off "TCastleTextScroller.AutoSizeWidth" to change width.');
+  end;
+end;
+
 function TCastleTextScroller.GetColorForPersistent: TCastleColor;
 begin
   Result:= Color;
@@ -209,6 +237,10 @@ begin
        'ClipChildren', 'HorizontalAlignment'
      ]) then
     Result:= [psBasic]
+  else if ArrayContainsString(PropertyName, [
+       'AutoSizeWidth'
+     ]) then
+    Result:= [psLayout]
   else
     Result:= inherited PropertySections(PropertyName);
 end;

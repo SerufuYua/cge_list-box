@@ -519,8 +519,8 @@
         },
         {
           "$$ClassName" : "TCastleTextScroller",
-          "FontScale" : 4.0922266244888306E-001,
           "FontSize" : 3.2000000000000000E+001,
+          "Height" : 1.2300000000000000E+002,
           "HorizontalAnchorParent" : "hpMiddle",
           "HorizontalAnchorSelf" : "hpMiddle",
           "List" : [
