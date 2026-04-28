@@ -5,11 +5,13 @@ unit CastleTextScroller;
 interface
 
 uses
-  Classes, SysUtils, CastleControls, CastleColors, CastleClassUtils;
+  Classes, SysUtils, CastleControls, CastleColors, CastleClassUtils,
+  CastleRectangles;
 
 type
   TCastleTextScroller = class(TCastleUserInterfaceFont)
   protected
+    FHAlignment: THorizontalPosition;
     FSpeed, FSpacing, FZoom: Single;
     FLineHeight, FFlowIndex: Single;
     FIndex: Integer;
@@ -27,6 +29,7 @@ type
       DefaultSpeed = 16.0;
       DefaultSpacing = 12.0;
       DefaultZoom = 0.5;
+      DefaultHAlignment = hpMiddle;
       DefaultColor: TCastleColor = (X: 1.0; Y: 1.0; Z: 1.0; W: 1.0);
 
     constructor Create(AOwner: TComponent); override;
@@ -48,13 +51,15 @@ type
              {$ifdef FPC}default DefaultSpacing{$endif};
     property Index: Integer read FIndex write FIndex
              {$ifdef FPC}default DefaultIndex{$endif};
+    property HorizontalAlignment: THorizontalPosition read FHAlignment write FHAlignment
+             {$ifdef FPC}default DefaultHAlignment{$endif};
     property ColorPersistent: TCastleColorPersistent read FColorPersistent;
   end;
 
 implementation
 
 uses
-  CastleUtils, CastleComponentSerialize, CastleRectangles, CastleGLUtils, Math;
+  CastleUtils, CastleComponentSerialize, CastleGLUtils, Math;
 
 constructor TCastleTextScroller.Create(AOwner: TComponent);
 begin
@@ -63,6 +68,7 @@ begin
   FSpeed:= DefaultSpeed;
   FSpacing:= DefaultSpacing;
   FIndex:= DefaultIndex;
+  FHAlignment:= DefaultHAlignment;
   FZoom:= DefaultZoom;
   FFlowIndex:= Single(DefaultIndex);
   FontChanged;
@@ -147,10 +153,11 @@ begin
 
     DrawRectangleOutline(TextRect, Red, 1);
 
-    Font.PrintRect(TextRect, TextColor, FList[i], hpMiddle, vpMiddle);
+    Font.PrintRect(TextRect, TextColor, FList[i], HorizontalAlignment, vpMiddle);
 
     LinePos:= LinePos + TextRect.Height;
   end;
+  DrawRectangleOutline(RenderRect, Green, 1);
 end;
 
 procedure TCastleTextScroller.FontChanged;
@@ -182,7 +189,7 @@ function TCastleTextScroller.PropertySections(const PropertyName: String): TProp
 begin
   if ArrayContainsString(PropertyName, [
        'List', 'Speed', 'Spacing', 'Index', 'ColorPersistent', 'Zoom',
-       'ClipChildren'
+       'ClipChildren', 'HorizontalAlignment'
      ]) then
     Result:= [psBasic]
   else
