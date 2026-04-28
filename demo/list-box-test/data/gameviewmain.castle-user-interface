@@ -519,8 +519,22 @@
         },
         {
           "$$ClassName" : "TCastleTextScroller",
+          "AutoSizeHeightByLines" : 4,
+          "Border" : {
+            "$$ClassName" : "TBorder",
+            "AllSides" : 1.0000000000000000E+000
+          },
+          "BorderColorPersistent" : {
+            "$$ClassName" : "TCastleColorPersistent",
+            "Alpha" : 1.0000000000000000E+000,
+            "Blue" : 3.8431373238563538E-001,
+            "Green" : 3.8431373238563538E-001,
+            "Red" : 3.8431373238563538E-001
+          },
+          "ClipChildren" : true,
+          "FontScale" : 6.1412507295608521E-001,
           "FontSize" : 3.2000000000000000E+001,
-          "Height" : 1.2300000000000000E+002,
+          "Height" : 8.0000000000000000E+001,
           "HorizontalAnchorParent" : "hpMiddle",
           "HorizontalAnchorSelf" : "hpMiddle",
           "List" : [

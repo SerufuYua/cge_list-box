@@ -13,6 +13,7 @@ type
   protected
     FHAlignment: THorizontalPosition;
     FAutoSizeWidth: Boolean;
+    FAutoSizeHeightByLines: Integer;
     FSpeed, FSpacing, FZoom: Single;
     FLineHeight, FFlowIndex, FFlowLinePos: Single;
     FIndex: Integer;
@@ -33,6 +34,7 @@ type
       DefaultZoom = 0.5;
       DefaultHAlignment = hpMiddle;
       DefaultAutoSizeWidth = True;
+      DefaultAutoSizeHeightByLines = 0;
       DefaultColor: TCastleColor = (X: 1.0; Y: 1.0; Z: 1.0; W: 1.0);
 
     constructor Create(AOwner: TComponent); override;
@@ -60,6 +62,8 @@ type
              {$ifdef FPC}default DefaultHAlignment{$endif};
     property AutoSizeWidth: Boolean read FAutoSizeWidth write FAutoSizeWidth
              {$ifdef FPC}default DefaultAutoSizeWidth{$endif};
+    property AutoSizeHeightByLines: Integer read FAutoSizeHeightByLines write FAutoSizeHeightByLines
+             {$ifdef FPC}default DefaultAutoSizeHeightByLines{$endif};
     property ColorPersistent: TCastleColorPersistent read FColorPersistent;
   end;
 
@@ -77,6 +81,7 @@ begin
   FIndex:= DefaultIndex;
   FHAlignment:= DefaultHAlignment;
   FAutoSizeWidth:= DefaultAutoSizeWidth;
+  FAutoSizeHeightByLines:= DefaultAutoSizeHeightByLines;
   FZoom:= DefaultZoom;
   FFlowIndex:= Single(DefaultIndex);
   FFlowLinePos:= 0.0;
@@ -147,7 +152,7 @@ begin
     FontScale:= 1.0;
     for i:= 1 to Index do
     begin
-      TempScale:= Power(Zoom, System.Abs(Single(i) - FFlowIndex));
+      TempScale:= Power(Zoom, System.Abs(Single(i - Index)));
       LinePos:= LinePos - FLineHeight * TempScale;
     end;
     FFlowLinePos:= LinePos;
@@ -187,6 +192,7 @@ end;
 
 procedure TCastleTextScroller.FontChanged;
 begin
+  inherited;
   FLineHeight:= Font.Height + Spacing * UIScale;
 end;
 
@@ -201,11 +207,26 @@ begin
 end;
 
 procedure TCastleTextScroller.PreferredSize(var PreferredWidth, PreferredHeight: Single);
+var
+  i: integer;
+  LinePos, Exp: Single;
 begin
   if AutoSizeWidth then
   begin
     FontScale:= 1.0;
     PreferredWidth:= Font.MaxTextWidth(FList);
+  end;
+
+  if (AutoSizeHeightByLines > 0) then
+  begin
+    LinePos:= 0.0;
+    for i:= 0 to (AutoSizeHeightByLines - 1) do
+    begin
+      Exp:= (AutoSizeHeightByLines - 1) - i;
+      FontScale:= 1.0 * Power(Zoom, Exp);
+      LinePos:= LinePos + FLineHeight;
+    end;
+    PreferredHeight:= LinePos;
   end;
 end;
 
@@ -217,6 +238,12 @@ begin
   begin
     ResizeWidth:= False;
     Reason:= SAppendPart(Reason, NL, 'Turn off "TCastleTextScroller.AutoSizeWidth" to change width.');
+  end;
+
+  if (AutoSizeHeightByLines > 0) then
+  begin
+    ResizeHeight:= False;
+    Reason:= SAppendPart(Reason, NL, 'Set "TCastleTextScroller.AutoSizeHeightByLines" to 0 to change height.');
   end;
 end;
 
@@ -238,7 +265,7 @@ begin
      ]) then
     Result:= [psBasic]
   else if ArrayContainsString(PropertyName, [
-       'AutoSizeWidth'
+       'AutoSizeWidth', 'AutoSizeHeightByLines'
      ]) then
     Result:= [psLayout]
   else
