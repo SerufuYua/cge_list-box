@@ -13,7 +13,7 @@ type
   protected
     FHAlignment: THorizontalPosition;
     FSpeed, FSpacing, FZoom: Single;
-    FLineHeight, FFlowIndex: Single;
+    FLineHeight, FFlowIndex, FFlowLinePos: Single;
     FIndex: Integer;
     FList: TStrings;
     FColor: TCastleColor;
@@ -71,6 +71,7 @@ begin
   FHAlignment:= DefaultHAlignment;
   FZoom:= DefaultZoom;
   FFlowIndex:= Single(DefaultIndex);
+  FFlowLinePos:= 0.0;
   FontChanged;
 
   FList:= TStringList.Create;
@@ -101,24 +102,48 @@ procedure TCastleTextScroller.Update(const SecondsPassed: Single;
 const
   Epsilon = 0.05;
 var
-  Move, Idx: Single;
+  i: integer;
+  Move, Idx, LinePos, TempScale: Single;
 begin
   inherited;
 
   { flow Index to target }
   if (Speed > 0.0) then
   begin
+    Move:= SecondsPassed * Speed;
+    Move:= Clamped(Move, 0.0, 1.0);
+
+    { move index }
     idx:= Single(Index);
     if (System.Abs(Idx - FFlowIndex) > Epsilon) then
-    begin
-      Move:= SecondsPassed * Speed;
-      Move:= Clamped(Move, 0.0, 1.0);
       FFlowIndex:= Lerp(Move, FFlowIndex, idx);
+
+    { move lines }
+    LinePos:= 0.0;
+    FontScale:= 1.0;
+    for i:= 1 to Index do
+    begin
+      TempScale:= Power(Zoom, System.Abs(Single(i) - FFlowIndex));
+      LinePos:= LinePos - FLineHeight * TempScale;
     end;
+    if (System.Abs(LinePos - FFlowLinePos) > Epsilon) then
+      FFlowLinePos:= Lerp(Move, FFlowLinePos, LinePos);
   end
   else
-    FFlowIndex:= idx;
+  begin
+    { hard set index }
+    FFlowIndex:= Single(Index);
 
+    { hard set lines }
+    LinePos:= 0.0;
+    FontScale:= 1.0;
+    for i:= 1 to Index do
+    begin
+      TempScale:= Power(Zoom, System.Abs(Single(i) - FFlowIndex));
+      LinePos:= LinePos - FLineHeight * TempScale;
+    end;
+    FFlowLinePos:= LinePos;
+end;
 end;
 
 procedure TCastleTextScroller.Render;
@@ -126,21 +151,14 @@ var
   i: Integer;
   TextRect: TFloatRectangle;
   TextColor: TCastleColor;
-  TempScale, LinePos: Single;
+  LinePos: Single;
 begin
   inherited;
 
   TextRect.Left:= RenderRect.Left;
   TextRect.Width:= RenderRect.Width;
 
-  LinePos:= 0.0;
-  FontScale:= 1.0;
-  for i:= 1 to Index do
-  begin
-    TempScale:= Power(Zoom, System.Abs(Single(i) - FFlowIndex));
-    LinePos:= LinePos - FLineHeight * TempScale;
-  end;
-
+  LinePos:= FFlowLinePos;
   for i:= 0 to (FList.Count - 1) do
   begin
     FontScale:= 1.0 * Power(Zoom, System.Abs(Single(i) - FFlowIndex));
@@ -151,13 +169,12 @@ begin
     TextColor:= Color;
     TextColor.W:= FontScale;
 
-    DrawRectangleOutline(TextRect, Red, 1);
+    DrawRectangleOutline(TextRect, Green, 1);
 
     Font.PrintRect(TextRect, TextColor, FList[i], HorizontalAlignment, vpMiddle);
 
     LinePos:= LinePos + TextRect.Height;
   end;
-  DrawRectangleOutline(RenderRect, Green, 1);
 end;
 
 procedure TCastleTextScroller.FontChanged;
