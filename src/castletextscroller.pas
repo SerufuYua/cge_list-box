@@ -172,7 +172,8 @@ begin
 
     DrawRectangleOutline(TextRect, Green, 1);
 
-    Font.PrintRect(TextRect, TextColor, FList[i], HorizontalAlignment, vpMiddle);
+    if ((TextRect.Bottom < RenderRect.Top) AND (TextRect.Top > RenderRect.Bottom)) then
+      Font.PrintRect(TextRect, TextColor, FList[i], HorizontalAlignment, vpMiddle);
 
     LPos:= LPos + TextRect.Height;
   end;

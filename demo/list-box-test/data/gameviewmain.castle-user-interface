@@ -531,8 +531,7 @@
             "Green" : 3.8431373238563538E-001,
             "Red" : 3.8431373238563538E-001
           },
-          "ClipChildren" : true,
-          "FontScale" : 1.6293101310729980E+000,
+          "FontScale" : 1.5800309181213379E+000,
           "FontSize" : 1.8000000000000000E+001,
           "Height" : 8.0000000000000000E+001,
           "HorizontalAnchorParent" : "hpMiddle",
