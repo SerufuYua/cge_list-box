@@ -168,10 +168,10 @@ begin
     TextRect.Height:= FLineHeight;
 
     TextColor:= Color;
-    TextColor.W:= FontScale / Zoom;
+    TextColor.W:= Color.W * (FontScale - 1.0) / Zoom;
 
     {$if defined(CASTLE_DESIGN_MODE)}
-    DrawRectangleOutline(TextRect, Green, 1);
+    DrawRectangleOutline(TextRect, Olive, 1);
     {$endif}
 
     if ((TextRect.Bottom < RenderRect.Top) AND (TextRect.Top > RenderRect.Bottom)) then
