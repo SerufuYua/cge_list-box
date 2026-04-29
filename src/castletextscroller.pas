@@ -25,13 +25,15 @@ type
     procedure ListChange(Sender: TObject); virtual;
     procedure SetList(const AValue: TStrings);
     procedure PreferredSize(var PreferredWidth, PreferredHeight: Single); override;
+    function TextScale(const AIndex, ABaseIndex: Single): Single;
+    function LinePos(const AIndex: Integer; const ABaseIndex: Single): Single;
   public
     const
       DefaultScrollBarLeft = False;
       DefaultIndex = 0;
       DefaultSpeed = 16.0;
       DefaultSpacing = 12.0;
-      DefaultZoom = 0.5;
+      DefaultZoom = 1.5;
       DefaultHAlignment = hpMiddle;
       DefaultAutoSizeWidth = True;
       DefaultAutoSizeHeightByLines = 0;
@@ -115,8 +117,7 @@ procedure TCastleTextScroller.Update(const SecondsPassed: Single;
 const
   Epsilon = 0.05;
 var
-  i: integer;
-  Move, Idx, LinePos, TempScale, Exp: Single;
+  Move, Idx, LPos: Single;
 begin
   inherited;
 
@@ -132,16 +133,9 @@ begin
       FFlowIndex:= Lerp(Move, FFlowIndex, idx);
 
     { move lines }
-    LinePos:= 0.0;
-    FontScale:= 1.0;
-    for i:= 1 to Index do
-    begin
-      Exp:= System.Abs(Single(i) - FFlowIndex);
-      TempScale:= Power(Zoom, Exp);
-      LinePos:= LinePos - FLineHeight * TempScale;
-    end;
-    if (System.Abs(LinePos - FFlowLinePos) > Epsilon) then
-      FFlowLinePos:= Lerp(Move, FFlowLinePos, LinePos);
+    LPos:= LinePos(Index, FFlowIndex);
+    if (System.Abs(LPos - FFlowLinePos) > Epsilon) then
+      FFlowLinePos:= Lerp(Move, FFlowLinePos, LPos);
   end
   else
   begin
@@ -149,16 +143,8 @@ begin
     FFlowIndex:= Single(Index);
 
     { hard set lines }
-    LinePos:= 0.0;
-    FontScale:= 1.0;
-    for i:= 1 to Index do
-    begin
-      Exp:= System.Abs(Single(i - Index));
-      TempScale:= Power(Zoom, Exp);
-      LinePos:= LinePos - FLineHeight * TempScale;
-    end;
-    FFlowLinePos:= LinePos;
-end;
+    FFlowLinePos:= LinePos(Index, FFlowIndex);
+  end;
 end;
 
 procedure TCastleTextScroller.Render;
@@ -166,30 +152,60 @@ var
   i: Integer;
   TextRect: TFloatRectangle;
   TextColor: TCastleColor;
-  LinePos, Exp: Single;
+  LPos: Single;
 begin
   inherited;
 
   TextRect.Left:= RenderRect.Left;
   TextRect.Width:= RenderRect.Width;
 
-  LinePos:= FFlowLinePos;
+  LPos:= FFlowLinePos;
   for i:= 0 to (FList.Count - 1) do
   begin
-    Exp:= System.Abs(Single(i) - FFlowIndex);
-    FontScale:= 1.0 * Power(Zoom, Exp);
+    FontScale:= TextScale(Single(i), FFlowIndex);
 
-    TextRect.Bottom:= RenderRect.Top - LinePos - FLineHeight;
+    TextRect.Bottom:= RenderRect.Top - LPos - FLineHeight;
     TextRect.Height:= FLineHeight;
 
     TextColor:= Color;
-    TextColor.W:= FontScale;
+    TextColor.W:= FontScale / Zoom;
 
     DrawRectangleOutline(TextRect, Green, 1);
 
     Font.PrintRect(TextRect, TextColor, FList[i], HorizontalAlignment, vpMiddle);
 
-    LinePos:= LinePos + TextRect.Height;
+    LPos:= LPos + TextRect.Height;
+  end;
+end;
+
+function TCastleTextScroller.TextScale(const AIndex, ABaseIndex: Single): Single;
+const
+  X0 = 0.0; Y0 = 1.0;
+  X1 = 1.0; Y1 = 0.5;
+  X2 = 2.0; Y2 = 0.15;
+  X3 = 3.0; Y3 = 0.0;
+var
+  Diff, Proximity: Single;
+begin
+  Diff:= System.Abs(AIndex - ABaseIndex);
+  if      ((X0 <= Diff) AND (Diff < X1)) then Proximity:= Lerp(Diff - X0, Y0, Y1)
+  else if ((X1 <= Diff) AND (Diff < X2)) then Proximity:= Lerp(Diff - X1, Y1, Y2)
+  else if ((X2 <= Diff) AND (Diff < X3)) then Proximity:= Lerp(Diff - X2, Y2, Y3)
+  else                                        Proximity:= Y3;
+
+  Result:= 1.0 + Zoom * Proximity;
+end;
+
+function TCastleTextScroller.LinePos(const AIndex: Integer;
+                                     const ABaseIndex: Single): Single;
+var
+  i: Integer;
+begin
+  Result:= 0.0;
+  for i:= 0 to (AIndex - 1) do
+  begin
+    FontScale:= TextScale(Single(i), ABaseIndex);
+    Result:= Result - FLineHeight;
   end;
 end;
 
@@ -210,26 +226,16 @@ begin
 end;
 
 procedure TCastleTextScroller.PreferredSize(var PreferredWidth, PreferredHeight: Single);
-var
-  i: integer;
-  LinePos, Exp: Single;
 begin
   if AutoSizeWidth then
   begin
-    FontScale:= 1.0;
+    FontScale:= 1.0 + Zoom;
     PreferredWidth:= Font.MaxTextWidth(FList);
   end;
 
   if (AutoSizeHeightByLines > 0) then
   begin
-    LinePos:= 0.0;
-    for i:= 0 to (AutoSizeHeightByLines - 1) do
-    begin
-      Exp:= (AutoSizeHeightByLines - 1) - i;
-      FontScale:= 1.0 * Power(Zoom, Exp);
-      LinePos:= LinePos + FLineHeight;
-    end;
-    PreferredHeight:= LinePos;
+    PreferredHeight:= -LinePos(AutoSizeHeightByLines, 0.0);
   end;
 end;
 
