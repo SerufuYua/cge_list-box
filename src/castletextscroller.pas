@@ -170,7 +170,9 @@ begin
     TextColor:= Color;
     TextColor.W:= FontScale / Zoom;
 
+    {$if defined(CASTLE_DESIGN_MODE)}
     DrawRectangleOutline(TextRect, Green, 1);
+    {$endif}
 
     if ((TextRect.Bottom < RenderRect.Top) AND (TextRect.Top > RenderRect.Bottom)) then
       Font.PrintRect(TextRect, TextColor, FList[i], HorizontalAlignment, vpMiddle);
