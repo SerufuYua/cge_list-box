@@ -18,10 +18,13 @@ type
     FLineHeight, FFlowIndex, FFlowLinePos: Single;
     FIndex: Integer;
     FList: TStrings;
-    FColor: TCastleColor;
-    FColorPersistent: TCastleColorPersistent;
-    function GetColorForPersistent: TCastleColor;
-    procedure SetColorForPersistent(const AValue: TCastleColor);
+    FColorFront, FColorBack: TCastleColor;
+    FColorFrontPersistent: TCastleColorPersistent;
+    FColorBackPersistent: TCastleColorPersistent;
+    function GetColorFrontForPersistent: TCastleColor;
+    procedure SetColorFrontForPersistent(const AValue: TCastleColor);
+    function GetColorBackForPersistent: TCastleColor;
+    procedure SetColorBackForPersistent(const AValue: TCastleColor);
     procedure ListChange(Sender: TObject); virtual;
     procedure SetList(const AValue: TStrings);
     procedure PreferredSize(var PreferredWidth, PreferredHeight: Single); override;
@@ -37,7 +40,8 @@ type
       DefaultHAlignment = hpMiddle;
       DefaultAutoSizeWidth = True;
       DefaultAutoSizeHeightByLines = 0;
-      DefaultColor: TCastleColor = (X: 1.0; Y: 1.0; Z: 1.0; W: 1.0);
+      DefaultColorFront: TCastleColor = (X: 1.0; Y: 1.0; Z: 1.0; W: 1.0);
+      DefaultColorBack: TCastleColor = (X: 0.5; Y: 0.5; Z: 0.5; W: 0.5);
 
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -49,7 +53,8 @@ type
                                 out Reason: String); override;
     function PropertySections(const PropertyName: String): TPropertySections; override;
 
-    property Color: TCastleColor read FColor write FColor;
+    property ColorFront: TCastleColor read FColorFront write FColorFront;
+    property ColorBack: TCastleColor read FColorBack write FColorBack;
   published
     property List: TStrings read FList write SetList;
     property Speed: Single read FSpeed write FSpeed
@@ -66,13 +71,15 @@ type
              {$ifdef FPC}default DefaultAutoSizeWidth{$endif};
     property AutoSizeHeightByLines: Integer read FAutoSizeHeightByLines write FAutoSizeHeightByLines
              {$ifdef FPC}default DefaultAutoSizeHeightByLines{$endif};
-    property ColorPersistent: TCastleColorPersistent read FColorPersistent;
+    property ColorFrontPersistent: TCastleColorPersistent read FColorFrontPersistent;
+    property ColorBackPersistent: TCastleColorPersistent read FColorBackPersistent;
   end;
 
 implementation
 
 uses
-  CastleUtils, CastleComponentSerialize, CastleGLUtils, CastleStringUtils, Math;
+  CastleUtils, CastleComponentSerialize, CastleGLUtils, CastleStringUtils,
+  CastleVectors, Math;
 
 constructor TCastleTextScroller.Create(AOwner: TComponent);
 begin
@@ -92,19 +99,30 @@ begin
   FList:= TStringList.Create;
   TStringList(FList).OnChange:= {$ifdef FPC}@{$endif}ListChange;
 
-  { Persistent for ColorBGLow }
-  FColor:= DefaultColor;
-  FColorPersistent:= TCastleColorPersistent.Create(nil);
-  FColorPersistent.SetSubComponent(true);
-  FColorPersistent.InternalGetValue:= {$ifdef FPC}@{$endif}GetColorForPersistent;
-  FColorPersistent.InternalSetValue:= {$ifdef FPC}@{$endif}SetColorForPersistent;
-  FColorPersistent.InternalDefaultValue:= Color;
+  { Persistent for Color Front }
+  FColorFront:= DefaultColorFront;
+  FColorFrontPersistent:= TCastleColorPersistent.Create(nil);
+  FColorFrontPersistent.SetSubComponent(true);
+  FColorFrontPersistent.InternalGetValue:= {$ifdef FPC}@{$endif}GetColorFrontForPersistent;
+  FColorFrontPersistent.InternalSetValue:= {$ifdef FPC}@{$endif}SetColorFrontForPersistent;
+  FColorFrontPersistent.InternalDefaultValue:= ColorFront;
+
+  { Persistent for Color Back }
+  FColorBack:= DefaultColorBack;
+  FColorBackPersistent:= TCastleColorPersistent.Create(nil);
+  FColorBackPersistent.SetSubComponent(true);
+  FColorBackPersistent.InternalGetValue:= {$ifdef FPC}@{$endif}GetColorBackForPersistent;
+  FColorBackPersistent.InternalSetValue:= {$ifdef FPC}@{$endif}SetColorBackForPersistent;
+  FColorBackPersistent.InternalDefaultValue:= ColorBack;
 end;
 
 destructor TCastleTextScroller.Destroy;
 begin
-  if Assigned(FColorPersistent) then
-    FreeAndNil(FColorPersistent);
+  if Assigned(FColorFrontPersistent) then
+    FreeAndNil(FColorFrontPersistent);
+
+  if Assigned(FColorBackPersistent) then
+    FreeAndNil(FColorBackPersistent);
 
   if Assigned(FList) then
     FreeAndNil(FList);
@@ -167,8 +185,7 @@ begin
     TextRect.Bottom:= RenderRect.Top - LPos - FLineHeight;
     TextRect.Height:= FLineHeight;
 
-    TextColor:= Color;
-    TextColor.W:= Color.W * (FontScale - 1.0) / Zoom;
+    TextColor:= Lerp((FontScale - 1.0) / Zoom, ColorBack, ColorFront);
 
     {$if defined(CASTLE_DESIGN_MODE)}
     DrawRectangleOutline(TextRect, Olive, 1);
@@ -259,21 +276,31 @@ begin
   end;
 end;
 
-function TCastleTextScroller.GetColorForPersistent: TCastleColor;
+function TCastleTextScroller.GetColorFrontForPersistent: TCastleColor;
 begin
-  Result:= Color;
+  Result:= ColorFront;
 end;
 
-procedure TCastleTextScroller.SetColorForPersistent(const AValue: TCastleColor);
+procedure TCastleTextScroller.SetColorFrontForPersistent(const AValue: TCastleColor);
 begin
-  Color:= AValue;
+  ColorFront:= AValue;
+end;
+
+function TCastleTextScroller.GetColorBackForPersistent: TCastleColor;
+begin
+  Result:= ColorBack;
+end;
+
+procedure TCastleTextScroller.SetColorBackForPersistent(const AValue: TCastleColor);
+begin
+  ColorBack:= AValue;
 end;
 
 function TCastleTextScroller.PropertySections(const PropertyName: String): TPropertySections;
 begin
   if ArrayContainsString(PropertyName, [
-       'List', 'Speed', 'Spacing', 'Index', 'ColorPersistent', 'Zoom',
-       'ClipChildren', 'HorizontalAlignment'
+       'List', 'Speed', 'Spacing', 'Index', 'ColorFrontPersistent',
+       'ColorBackPersistent', 'Zoom', 'ClipChildren', 'HorizontalAlignment'
      ]) then
     Result:= [psBasic]
   else if ArrayContainsString(PropertyName, [
