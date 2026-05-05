@@ -185,14 +185,21 @@ begin
     TextRect.Bottom:= RenderRect.Top - LPos - FLineHeight;
     TextRect.Height:= FLineHeight;
 
-    TextColor:= Lerp((FontScale - 1.0) / Zoom, ColorBack, ColorFront);
-
     {$if defined(CASTLE_DESIGN_MODE)}
     DrawRectangleOutline(TextRect, Olive, 1);
     {$endif}
 
     if ((TextRect.Bottom < RenderRect.Top) AND (TextRect.Top > RenderRect.Bottom)) then
+    begin
+      TextColor:= Lerp((FontScale - 1.0) / Zoom, ColorBack, ColorFront);
+
+      if (TextRect.Bottom < RenderRect.Bottom) then
+        TextColor.W:= TextColor.W * (1.0 - (RenderRect.Bottom - TextRect.Bottom) / TextRect.Height)
+      else if (TextRect.Top > RenderRect.Top) then
+        TextColor.W:= TextColor.W * (1.0 - (TextRect.Top - RenderRect.Top) / TextRect.Height);
+
       Font.PrintRect(TextRect, TextColor, FList[i], HorizontalAlignment, vpMiddle);
+    end;
 
     LPos:= LPos + TextRect.Height;
   end;
