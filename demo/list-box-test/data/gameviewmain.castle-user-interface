@@ -15,6 +15,670 @@
       "Name" : "RectangleBG",
       "$Children" : [
         {
+          "$$ClassName" : "TCastleVerticalGroup",
+          "HorizontalAnchorParent" : "hpMiddle",
+          "HorizontalAnchorSelf" : "hpMiddle",
+          "Name" : "VerticalGroup1",
+          "Spacing" : 1.2000000000000000E+001,
+          "TranslationPersistent" : {
+            "$$ClassName" : "TCastleVector2Persistent",
+            "Y" : -2.0000000000000000E+001
+          },
+          "VerticalAnchorParent" : "vpTop",
+          "VerticalAnchorSelf" : "vpTop",
+          "$Children" : [
+            {
+              "$$ClassName" : "TCastleHorizontalGroup",
+              "Border" : {
+                "$$ClassName" : "TBorder",
+                "AllSides" : 2.0000000000000000E+000
+              },
+              "BorderColorPersistent" : {
+                "$$ClassName" : "TCastleColorPersistent",
+                "Alpha" : 1.0000000000000000E+000,
+                "Blue" : 2.7450981736183167E-001,
+                "Green" : 2.7450981736183167E-001,
+                "Red" : 2.7450981736183167E-001
+              },
+              "Name" : "HorizontalGroup1",
+              "Padding" : 4.0000000000000000E+000,
+              "Spacing" : 8.0000000000000000E+000,
+              "VerticalAnchorParent" : "vpTop",
+              "VerticalAnchorSelf" : "vpTop",
+              "$Children" : [
+                {
+                  "$$ClassName" : "TCastleVerticalGroup",
+                  "Alignment" : "hpRight",
+                  "Name" : "VerticalGroup2",
+                  "Spacing" : 8.0000000000000000E+000,
+                  "TranslationPersistent" : {
+                    "$$ClassName" : "TCastleVector2Persistent",
+                    "X" : 4.0000000000000000E+000
+                  },
+                  "VerticalAnchorParent" : "vpMiddle",
+                  "VerticalAnchorSelf" : "vpMiddle",
+                  "$Children" : [
+                    {
+                      "$$ClassName" : "TCastleHorizontalGroup",
+                      "HorizontalAnchorParent" : "hpRight",
+                      "HorizontalAnchorSelf" : "hpRight",
+                      "Name" : "HorizontalGroup11",
+                      "Spacing" : 8.0000000000000000E+000,
+                      "VerticalAnchorParent" : "vpTop",
+                      "VerticalAnchorSelf" : "vpTop",
+                      "$Children" : [
+                        {
+                          "$$ClassName" : "TCastleLabel",
+                          "Alignment" : "hpRight",
+                          "Name" : "LabelIdx",
+                          "Text" : [
+                            "100"
+                          ],
+                          "VerticalAnchorParent" : "vpMiddle",
+                          "VerticalAnchorSelf" : "vpMiddle"
+                        },
+                        {
+                          "$$ClassName" : "TCastleButton",
+                          "Caption" : "Up",
+                          "CustomBackgroundDisabled" : {
+                            "$$ClassName" : "TCastleImagePersistent"
+                          },
+                          "CustomBackgroundFocused" : {
+                            "$$ClassName" : "TCastleImagePersistent"
+                          },
+                          "CustomBackgroundNormal" : {
+                            "$$ClassName" : "TCastleImagePersistent"
+                          },
+                          "CustomBackgroundPressed" : {
+                            "$$ClassName" : "TCastleImagePersistent"
+                          },
+                          "Image" : {
+                            "$$ClassName" : "TCastleImagePersistent"
+                          },
+                          "Name" : "ButtonUp",
+                          "TranslationPersistent" : {
+                            "$$ClassName" : "TCastleVector2Persistent",
+                            "X" : 4.7000000000000000E+001
+                          },
+                          "VerticalAnchorParent" : "vpMiddle",
+                          "VerticalAnchorSelf" : "vpMiddle"
+                        }
+                      ]
+                    },
+                    {
+                      "$$ClassName" : "TCastleButton",
+                      "Caption" : "Down",
+                      "CustomBackgroundDisabled" : {
+                        "$$ClassName" : "TCastleImagePersistent"
+                      },
+                      "CustomBackgroundFocused" : {
+                        "$$ClassName" : "TCastleImagePersistent"
+                      },
+                      "CustomBackgroundNormal" : {
+                        "$$ClassName" : "TCastleImagePersistent"
+                      },
+                      "CustomBackgroundPressed" : {
+                        "$$ClassName" : "TCastleImagePersistent"
+                      },
+                      "HorizontalAnchorParent" : "hpRight",
+                      "HorizontalAnchorSelf" : "hpRight",
+                      "Image" : {
+                        "$$ClassName" : "TCastleImagePersistent"
+                      },
+                      "Name" : "ButtonDown",
+                      "TranslationPersistent" : {
+                        "$$ClassName" : "TCastleVector2Persistent",
+                        "Y" : -4.7000000000000000E+001
+                      },
+                      "VerticalAnchorParent" : "vpTop",
+                      "VerticalAnchorSelf" : "vpTop"
+                    }
+                  ]
+                },
+                {
+                  "$$ClassName" : "TCastleTextScroller",
+                  "AutoSizeHeightByLines" : 3,
+                  "Border" : {
+                    "$$ClassName" : "TBorder",
+                    "Bottom" : 1.0000000000000000E+000,
+                    "Top" : 1.0000000000000000E+000
+                  },
+                  "BorderColorPersistent" : {
+                    "$$ClassName" : "TCastleColorPersistent",
+                    "Alpha" : 1.0000000000000000E+000,
+                    "Blue" : 3.8431373238563538E-001,
+                    "Green" : 3.8431373238563538E-001,
+                    "Red" : 3.8431373238563538E-001
+                  },
+                  "ClipChildren" : true,
+                  "ColorBackPersistent" : {
+                    "$$ClassName" : "TCastleColorPersistent",
+                    "Alpha" : 5.0196081399917603E-001,
+                    "Blue" : 1.0000000000000000E+000,
+                    "Green" : 7.8431377187371254E-003,
+                    "Red" : 4.7058823704719543E-001
+                  },
+                  "ColorFrontPersistent" : {
+                    "$$ClassName" : "TCastleColorPersistent",
+                    "Blue" : 0.0000000000000000E+000,
+                    "Green" : 0.0000000000000000E+000,
+                    "Red" : 0.0000000000000000E+000
+                  },
+                  "FontScale" : 1.1800000667572021E+000,
+                  "FontSize" : 1.8000000000000000E+001,
+                  "Height" : 8.0000000000000000E+001,
+                  "Index" : 1,
+                  "List" : [
+                    "One Line 1/6",
+                    "Two Line 2/6",
+                    "Three Line 3/6",
+                    "Four Line 4/6",
+                    "Five Line 5/6",
+                    "Six Line 6/6"
+                  ],
+                  "Name" : "Scroller",
+                  "OutlineColorPersistent" : {
+                    "$$ClassName" : "TCastleColorPersistent",
+                    "Blue" : 2.2745098173618317E-001,
+                    "Red" : 1.4901961386203766E-001
+                  },
+                  "OutlineHighQuality" : true,
+                  "Speed" : 4.0000000000000000E+000,
+                  "TranslationPersistent" : {
+                    "$$ClassName" : "TCastleVector2Persistent",
+                    "X" : 1.0700000000000000E+002
+                  },
+                  "VerticalAnchorParent" : "vpMiddle",
+                  "VerticalAnchorSelf" : "vpMiddle",
+                  "Zoom" : 1.2000000476837158E+000
+                }
+              ]
+            },
+            {
+              "$$ClassName" : "TCastleHorizontalGroup",
+              "Name" : "HorizontalGroup2",
+              "Spacing" : 2.4000000000000000E+001,
+              "TranslationPersistent" : {
+                "$$ClassName" : "TCastleVector2Persistent",
+                "Y" : -1.4715798950195312E+002
+              },
+              "VerticalAnchorParent" : "vpTop",
+              "VerticalAnchorSelf" : "vpTop",
+              "$Children" : [
+                {
+                  "$$ClassName" : "TCastleListBox",
+                  "AreaSpeed" : 1.8000000000000000E+001,
+                  "Border" : {
+                    "$$ClassName" : "TBorder",
+                    "AllSides" : 2.0000000000000000E+000
+                  },
+                  "BorderColorPersistent" : {
+                    "$$ClassName" : "TCastleColorPersistent",
+                    "Alpha" : 1.0000000000000000E+000,
+                    "Blue" : 1.0000000000000000E+000,
+                    "Red" : 3.4901961684226990E-001
+                  },
+                  "CursorSpeed" : 1.6000000000000000E+001,
+                  "FontSize" : 1.8000000000000000E+001,
+                  "Height" : 2.0000000000000000E+002,
+                  "Index" : 3,
+                  "LineCursor" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "ColorPersistent" : {
+                      "$$ClassName" : "TCastleColorPersistent",
+                      "Blue" : 0.0000000000000000E+000
+                    },
+                    "ProtectedSides" : {
+                      "$$ClassName" : "TBorder",
+                      "AllSides" : 9.0000000000000000E+000
+                    },
+                    "Url" : "castle-data:/ui/LineCursor.png"
+                  },
+                  "LineFrame" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "ColorPersistent" : {
+                      "$$ClassName" : "TCastleColorPersistent",
+                      "Blue" : 4.8235294222831726E-001,
+                      "Green" : 7.4509805440902710E-001,
+                      "Red" : 4.4705882668495178E-001
+                    },
+                    "ProtectedSides" : {
+                      "$$ClassName" : "TBorder",
+                      "Bottom" : 3.0000000000000000E+000,
+                      "Left" : 4.0000000000000000E+000,
+                      "Right" : 4.0000000000000000E+000,
+                      "Top" : 3.0000000000000000E+000
+                    },
+                    "Url" : "castle-data:/ui/LineFrame.png"
+                  },
+                  "LineFrameHover" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "ColorPersistent" : {
+                      "$$ClassName" : "TCastleColorPersistent",
+                      "Blue" : 5.0196081399917603E-001,
+                      "Green" : 7.4509805440902710E-001,
+                      "Red" : 6.5490198135375977E-001
+                    },
+                    "ProtectedSides" : {
+                      "$$ClassName" : "TBorder",
+                      "Bottom" : 3.0000000000000000E+000,
+                      "Left" : 4.0000000000000000E+000,
+                      "Right" : 4.0000000000000000E+000,
+                      "Top" : 3.0000000000000000E+000
+                    },
+                    "Url" : "castle-data:/ui/LineFrame.png"
+                  },
+                  "LinePadding" : 8.0000000000000000E+000,
+                  "List" : [
+                    "hello",
+                    "aloha",
+                    "",
+                    "haola",
+                    "mihaliot mondare guantamula dekamontanula elcoppa",
+                    "lihanot",
+                    "lemanstoka",
+                    "",
+                    "mokalin",
+                    ""
+                  ],
+                  "Name" : "ListBox",
+                  "Outline" : 1,
+                  "OutlineHighQuality" : true,
+                  "ScrollBarLeft" : true,
+                  "ScrollBarWidth" : 1.6000000000000000E+001,
+                  "ScrollbarFrame" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "ColorPersistent" : {
+                      "$$ClassName" : "TCastleColorPersistent",
+                      "Blue" : 2.9019609093666077E-001,
+                      "Red" : 7.8039216995239258E-001
+                    },
+                    "ProtectedSides" : {
+                      "$$ClassName" : "TBorder",
+                      "Bottom" : 1.5000000000000000E+001,
+                      "Top" : 1.5000000000000000E+001
+                    },
+                    "Url" : "castle-data:/ui/ScrollFrame.png"
+                  },
+                  "ScrollbarSlider" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "ColorPersistent" : {
+                      "$$ClassName" : "TCastleColorPersistent",
+                      "Blue" : 4.5882353186607361E-001,
+                      "Red" : 6.6666668653488159E-001
+                    },
+                    "ProtectedSides" : {
+                      "$$ClassName" : "TBorder",
+                      "Bottom" : 2.4000000000000000E+001,
+                      "Top" : 2.4000000000000000E+001
+                    },
+                    "Url" : "castle-data:/ui/ScrollScroll.png"
+                  },
+                  "TextMargin" : 2.2000000000000000E+001,
+                  "VerticalAnchorParent" : "vpMiddle",
+                  "VerticalAnchorSelf" : "vpMiddle",
+                  "Width" : 3.7000000000000000E+002
+                },
+                {
+                  "$$ClassName" : "TCastleCheckListBox",
+                  "CheckChecked" : {
+                    "$$ClassName" : "TCastleImagePersistent"
+                  },
+                  "CheckEmpty" : {
+                    "$$ClassName" : "TCastleImagePersistent"
+                  },
+                  "CheckPressedBack" : {
+                    "$$ClassName" : "TCastleImagePersistent"
+                  },
+                  "CursorSpeed" : 6.0000000000000000E+000,
+                  "FontSize" : 2.8000000000000000E+001,
+                  "Height" : 2.0000000000000000E+002,
+                  "LineCursor" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "ColorPersistent" : {
+                      "$$ClassName" : "TCastleColorPersistent",
+                      "Blue" : 0.0000000000000000E+000,
+                      "Green" : 9.0980392694473267E-001
+                    }
+                  },
+                  "LineFrame" : {
+                    "$$ClassName" : "TCastleImagePersistent"
+                  },
+                  "LineFrameHover" : {
+                    "$$ClassName" : "TCastleImagePersistent"
+                  },
+                  "List" : [
+                    "hello",
+                    "aloha",
+                    "",
+                    "haola",
+                    "mihaliot mondare guantamula dekamontanula elcoppa",
+                    "lihanot",
+                    "lemanstoka",
+                    "",
+                    "mokalin",
+                    ""
+                  ],
+                  "Name" : "CheckListBox",
+                  "ScrollbarFrame" : {
+                    "$$ClassName" : "TCastleImagePersistent"
+                  },
+                  "ScrollbarSlider" : {
+                    "$$ClassName" : "TCastleImagePersistent"
+                  },
+                  "TranslationPersistent" : {
+                    "$$ClassName" : "TCastleVector2Persistent",
+                    "X" : 3.9400000000000000E+002
+                  },
+                  "VerticalAnchorParent" : "vpMiddle",
+                  "VerticalAnchorSelf" : "vpMiddle",
+                  "Width" : 3.7000000000000000E+002
+                }
+              ]
+            },
+            {
+              "$$ClassName" : "TCastleHorizontalGroup",
+              "Name" : "HorizontalGroup3",
+              "Spacing" : 2.4000000000000000E+001,
+              "TranslationPersistent" : {
+                "$$ClassName" : "TCastleVector2Persistent",
+                "Y" : -3.5915798950195312E+002
+              },
+              "VerticalAnchorParent" : "vpTop",
+              "VerticalAnchorSelf" : "vpTop",
+              "$Children" : [
+                {
+                  "$$ClassName" : "TCastleColorListBox",
+                  "ColorBox" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "ProtectedSides" : {
+                      "$$ClassName" : "TBorder",
+                      "AllSides" : 1.2000000000000000E+001
+                    },
+                    "Url" : "castle-data:/ui/ColorBox.png"
+                  },
+                  "ColorBoxMargin" : {
+                    "$$ClassName" : "TBorder",
+                    "AllSides" : 6.0000000000000000E+000
+                  },
+                  "ColorFrame" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "ColorPersistent" : {
+                      "$$ClassName" : "TCastleColorPersistent",
+                      "Blue" : 0.0000000000000000E+000,
+                      "Red" : 9.7254902124404907E-001
+                    },
+                    "ProtectedSides" : {
+                      "$$ClassName" : "TBorder",
+                      "AllSides" : 1.2000000000000000E+001
+                    },
+                    "Url" : "castle-data:/ui/ColorFrame.png"
+                  },
+                  "Height" : 2.0000000000000000E+002,
+                  "Index" : 1,
+                  "LineCursor" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "ProtectedSides" : {
+                      "$$ClassName" : "TBorder",
+                      "AllSides" : 1.2000000000000000E+001
+                    },
+                    "Url" : "castle-data:/ui/LineRoundFrame.png"
+                  },
+                  "LineFrame" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "ColorPersistent" : {
+                      "$$ClassName" : "TCastleColorPersistent",
+                      "Blue" : 5.3725492954254150E-001,
+                      "Green" : 5.3725492954254150E-001,
+                      "Red" : 5.3725492954254150E-001
+                    },
+                    "ProtectedSides" : {
+                      "$$ClassName" : "TBorder",
+                      "AllSides" : 1.2000000000000000E+001
+                    },
+                    "Url" : "castle-data:/ui/LineRoundFrame.png"
+                  },
+                  "LineFrameHover" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "ColorPersistent" : {
+                      "$$ClassName" : "TCastleColorPersistent",
+                      "Blue" : 6.5098041296005249E-001,
+                      "Green" : 6.5098041296005249E-001,
+                      "Red" : 6.5098041296005249E-001
+                    },
+                    "ProtectedSides" : {
+                      "$$ClassName" : "TBorder",
+                      "AllSides" : 1.2000000000000000E+001
+                    },
+                    "Url" : "castle-data:/ui/LineRoundFrame.png"
+                  },
+                  "LinePadding" : 2.4000000000000000E+001,
+                  "List" : [
+                    "8FFF00",
+                    "69FFF4",
+                    "FF696D",
+                    "A9FFC8",
+                    "81BFFF",
+                    "DC2DFF"
+                  ],
+                  "Name" : "ColorListBox",
+                  "ScrollBarLeft" : true,
+                  "ScrollBarWidth" : 3.2000000000000000E+001,
+                  "ScrollbarFrame" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "ColorPersistent" : {
+                      "$$ClassName" : "TCastleColorPersistent",
+                      "Blue" : 7.6862746477127075E-001,
+                      "Green" : 7.6862746477127075E-001,
+                      "Red" : 7.6862746477127075E-001
+                    },
+                    "ProtectedSides" : {
+                      "$$ClassName" : "TBorder",
+                      "AllSides" : 1.5000000000000000E+001
+                    },
+                    "Url" : "castle-data:/ui/ScrollRiundFrame.png"
+                  },
+                  "ScrollbarSlider" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "ColorPersistent" : {
+                      "$$ClassName" : "TCastleColorPersistent",
+                      "Blue" : 9.0980392694473267E-001,
+                      "Green" : 9.0980392694473267E-001,
+                      "Red" : 9.0980392694473267E-001
+                    },
+                    "ProtectedSides" : {
+                      "$$ClassName" : "TBorder",
+                      "AllSides" : 1.5000000000000000E+001
+                    },
+                    "Url" : "castle-data:/ui/ScrollRiundSlider.png"
+                  },
+                  "ShowText" : true,
+                  "ShowTextLeft" : true,
+                  "TextMargin" : 2.4000000000000000E+001,
+                  "VerticalAnchorParent" : "vpMiddle",
+                  "VerticalAnchorSelf" : "vpMiddle",
+                  "Width" : 3.7000000000000000E+002
+                },
+                {
+                  "$$ClassName" : "TCastleCheckColorListBox",
+                  "Border" : {
+                    "$$ClassName" : "TBorder",
+                    "Bottom" : 4.0000000000000000E+000,
+                    "Top" : 4.0000000000000000E+000
+                  },
+                  "BorderColorPersistent" : {
+                    "$$ClassName" : "TCastleColorPersistent",
+                    "Alpha" : 1.0000000000000000E+000,
+                    "Blue" : 4.4313725829124451E-001,
+                    "Green" : 8.7843137979507446E-001,
+                    "Red" : 9.1372549533843994E-001
+                  },
+                  "CheckChecked" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "Url" : "castle-data:/ui/CheckSquareChecked.png"
+                  },
+                  "CheckEmpty" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "Url" : "castle-data:/ui/CheckSquareEmpty.png"
+                  },
+                  "CheckPressedBack" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "ColorPersistent" : {
+                      "$$ClassName" : "TCastleColorPersistent",
+                      "Blue" : 0.0000000000000000E+000,
+                      "Red" : 9.9215686321258545E-001
+                    },
+                    "Url" : "castle-data:/ui/CheckSquareBack.png"
+                  },
+                  "ColorBox" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "ProtectedSides" : {
+                      "$$ClassName" : "TBorder",
+                      "AllSides" : 1.2000000000000000E+001
+                    },
+                    "Url" : "castle-data:/ui/ColorSqureBox.png"
+                  },
+                  "ColorBoxMargin" : {
+                    "$$ClassName" : "TBorder",
+                    "AllSides" : 6.0000000000000000E+000
+                  },
+                  "ColorBoxWidth" : 6.4000000000000000E+001,
+                  "ColorFrame" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "ProtectedSides" : {
+                      "$$ClassName" : "TBorder",
+                      "AllSides" : 1.2000000000000000E+001
+                    },
+                    "Url" : "castle-data:/ui/ColorSqureFrame.png"
+                  },
+                  "FontSize" : 1.8000000000000000E+001,
+                  "Height" : 2.0000000000000000E+002,
+                  "Index" : 3,
+                  "LineCursor" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "ColorPersistent" : {
+                      "$$ClassName" : "TCastleColorPersistent",
+                      "Blue" : 0.0000000000000000E+000,
+                      "Green" : 9.1372549533843994E-001
+                    },
+                    "ProtectedSides" : {
+                      "$$ClassName" : "TBorder",
+                      "AllSides" : 1.1000000000000000E+001
+                    },
+                    "Url" : "castle-data:/ui/LineSquareCursor.png"
+                  },
+                  "LineFrame" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "ColorPersistent" : {
+                      "$$ClassName" : "TCastleColorPersistent",
+                      "Blue" : 7.6862746477127075E-001,
+                      "Green" : 8.6666667461395264E-001,
+                      "Red" : 9.0588235855102539E-001
+                    },
+                    "ProtectedSides" : {
+                      "$$ClassName" : "TBorder",
+                      "AllSides" : 1.1000000000000000E+001
+                    },
+                    "Url" : "castle-data:/ui/LineSquareFrame.png"
+                  },
+                  "LineFrameHover" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "ColorPersistent" : {
+                      "$$ClassName" : "TCastleColorPersistent",
+                      "Blue" : 7.0980393886566162E-001,
+                      "Green" : 6.9411766529083252E-001,
+                      "Red" : 9.0588235855102539E-001
+                    },
+                    "ProtectedSides" : {
+                      "$$ClassName" : "TBorder",
+                      "AllSides" : 1.1000000000000000E+001
+                    },
+                    "Url" : "castle-data:/ui/LineSquareFrame.png"
+                  },
+                  "List" : [
+                    "hello",
+                    "aloha",
+                    "",
+                    "haola",
+                    "mihaliot mondare guantamula dekamontanula elcoppa",
+                    "lihanot",
+                    "lemanstoka",
+                    "",
+                    "mokalin",
+                    ""
+                  ],
+                  "ListColors" : [
+                    "8FFF00",
+                    "69FFF4",
+                    "FF5A00",
+                    "7A47FF",
+                    "5FFFFF",
+                    "FFE570",
+                    "0EFF22",
+                    "FF3050",
+                    "BDFF4C",
+                    "1AFFAD",
+                    "FFB5C8"
+                  ],
+                  "Name" : "CheckColorListBox",
+                  "Outline" : 1,
+                  "ScrollBarWidth" : 1.6000000000000000E+001,
+                  "ScrollbarFrame" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "ColorPersistent" : {
+                      "$$ClassName" : "TCastleColorPersistent",
+                      "Blue" : 7.6862746477127075E-001,
+                      "Green" : 8.6666667461395264E-001,
+                      "Red" : 9.0588235855102539E-001
+                    },
+                    "ProtectedSides" : {
+                      "$$ClassName" : "TBorder",
+                      "Bottom" : 6.0000000000000000E+000,
+                      "Top" : 6.0000000000000000E+000
+                    },
+                    "Url" : "castle-data:/ui/ScrollSquareFrame.png"
+                  },
+                  "ScrollbarSlider" : {
+                    "$$ClassName" : "TCastleImagePersistent",
+                    "ColorPersistent" : {
+                      "$$ClassName" : "TCastleColorPersistent",
+                      "Blue" : 7.6862746477127075E-001,
+                      "Green" : 8.6666667461395264E-001,
+                      "Red" : 9.0588235855102539E-001
+                    },
+                    "ProtectedSides" : {
+                      "$$ClassName" : "TBorder",
+                      "Bottom" : 6.0000000000000000E+000,
+                      "Top" : 6.0000000000000000E+000
+                    },
+                    "Url" : "castle-data:/ui/ScrollSquareScroll.png"
+                  },
+                  "TextMargin" : 6.0000000000000000E+000,
+                  "TranslationPersistent" : {
+                    "$$ClassName" : "TCastleVector2Persistent",
+                    "X" : 3.9400000000000000E+002
+                  },
+                  "VerticalAnchorParent" : "vpMiddle",
+                  "VerticalAnchorSelf" : "vpMiddle",
+                  "Width" : 3.7000000000000000E+002
+                }
+              ]
+            },
+            {
+              "$$ClassName" : "TCastleCheckbox",
+              "Caption" : "Show color text",
+              "Checked" : true,
+              "Name" : "ShowHex",
+              "TranslationPersistent" : {
+                "$$ClassName" : "TCastleVector2Persistent",
+                "Y" : -5.7115795898437500E+002
+              },
+              "VerticalAnchorParent" : "vpTop",
+              "VerticalAnchorSelf" : "vpTop"
+            }
+          ]
+        },
+        {
           "$$ClassName" : "TCastleNotifications",
           "Name" : "Notifications",
           "Outline" : 1,
@@ -24,475 +688,6 @@
             "X" : 2.0000000000000000E+001,
             "Y" : 2.0000000000000000E+001
           }
-        },
-        {
-          "$$ClassName" : "TCastleListBox",
-          "AreaSpeed" : 1.8000000000000000E+001,
-          "Border" : {
-            "$$ClassName" : "TBorder",
-            "AllSides" : 2.0000000000000000E+000
-          },
-          "BorderColorPersistent" : {
-            "$$ClassName" : "TCastleColorPersistent",
-            "Alpha" : 1.0000000000000000E+000,
-            "Blue" : 1.0000000000000000E+000,
-            "Red" : 3.4901961684226990E-001
-          },
-          "CursorSpeed" : 1.6000000000000000E+001,
-          "FontSize" : 1.8000000000000000E+001,
-          "Height" : 2.0000000000000000E+002,
-          "HorizontalAnchorParent" : "hpMiddle",
-          "HorizontalAnchorSelf" : "hpMiddle",
-          "Index" : 3,
-          "LineCursor" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "ColorPersistent" : {
-              "$$ClassName" : "TCastleColorPersistent",
-              "Blue" : 0.0000000000000000E+000
-            },
-            "ProtectedSides" : {
-              "$$ClassName" : "TBorder",
-              "AllSides" : 9.0000000000000000E+000
-            },
-            "Url" : "castle-data:/ui/LineCursor.png"
-          },
-          "LineFrame" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "ColorPersistent" : {
-              "$$ClassName" : "TCastleColorPersistent",
-              "Blue" : 4.8235294222831726E-001,
-              "Green" : 7.4509805440902710E-001,
-              "Red" : 4.4705882668495178E-001
-            },
-            "ProtectedSides" : {
-              "$$ClassName" : "TBorder",
-              "Bottom" : 3.0000000000000000E+000,
-              "Left" : 4.0000000000000000E+000,
-              "Right" : 4.0000000000000000E+000,
-              "Top" : 3.0000000000000000E+000
-            },
-            "Url" : "castle-data:/ui/LineFrame.png"
-          },
-          "LineFrameHover" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "ColorPersistent" : {
-              "$$ClassName" : "TCastleColorPersistent",
-              "Blue" : 5.0196081399917603E-001,
-              "Green" : 7.4509805440902710E-001,
-              "Red" : 6.5490198135375977E-001
-            },
-            "ProtectedSides" : {
-              "$$ClassName" : "TBorder",
-              "Bottom" : 3.0000000000000000E+000,
-              "Left" : 4.0000000000000000E+000,
-              "Right" : 4.0000000000000000E+000,
-              "Top" : 3.0000000000000000E+000
-            },
-            "Url" : "castle-data:/ui/LineFrame.png"
-          },
-          "LinePadding" : 8.0000000000000000E+000,
-          "List" : [
-            "hello",
-            "aloha",
-            "",
-            "haola",
-            "mihaliot mondare guantamula dekamontanula elcoppa",
-            "lihanot",
-            "lemanstoka",
-            "",
-            "mokalin",
-            ""
-          ],
-          "Name" : "ListBox",
-          "Outline" : 1,
-          "OutlineHighQuality" : true,
-          "ScrollBarLeft" : true,
-          "ScrollBarWidth" : 1.6000000000000000E+001,
-          "ScrollbarFrame" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "ColorPersistent" : {
-              "$$ClassName" : "TCastleColorPersistent",
-              "Blue" : 2.9019609093666077E-001,
-              "Red" : 7.8039216995239258E-001
-            },
-            "ProtectedSides" : {
-              "$$ClassName" : "TBorder",
-              "Bottom" : 1.5000000000000000E+001,
-              "Top" : 1.5000000000000000E+001
-            },
-            "Url" : "castle-data:/ui/ScrollFrame.png"
-          },
-          "ScrollbarSlider" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "ColorPersistent" : {
-              "$$ClassName" : "TCastleColorPersistent",
-              "Blue" : 4.5882353186607361E-001,
-              "Red" : 6.6666668653488159E-001
-            },
-            "ProtectedSides" : {
-              "$$ClassName" : "TBorder",
-              "Bottom" : 2.4000000000000000E+001,
-              "Top" : 2.4000000000000000E+001
-            },
-            "Url" : "castle-data:/ui/ScrollScroll.png"
-          },
-          "TextMargin" : 2.2000000000000000E+001,
-          "TranslationPersistent" : {
-            "$$ClassName" : "TCastleVector2Persistent",
-            "X" : -1.9000000000000000E+002,
-            "Y" : 3.8000000000000000E+002
-          },
-          "Width" : 3.7000000000000000E+002
-        },
-        {
-          "$$ClassName" : "TCastleCheckListBox",
-          "CheckChecked" : {
-            "$$ClassName" : "TCastleImagePersistent"
-          },
-          "CheckEmpty" : {
-            "$$ClassName" : "TCastleImagePersistent"
-          },
-          "CheckPressedBack" : {
-            "$$ClassName" : "TCastleImagePersistent"
-          },
-          "CursorSpeed" : 6.0000000000000000E+000,
-          "FontSize" : 2.8000000000000000E+001,
-          "Height" : 2.0000000000000000E+002,
-          "HorizontalAnchorParent" : "hpMiddle",
-          "HorizontalAnchorSelf" : "hpMiddle",
-          "LineCursor" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "ColorPersistent" : {
-              "$$ClassName" : "TCastleColorPersistent",
-              "Blue" : 0.0000000000000000E+000,
-              "Green" : 9.0980392694473267E-001
-            }
-          },
-          "LineFrame" : {
-            "$$ClassName" : "TCastleImagePersistent"
-          },
-          "LineFrameHover" : {
-            "$$ClassName" : "TCastleImagePersistent"
-          },
-          "List" : [
-            "hello",
-            "aloha",
-            "",
-            "haola",
-            "mihaliot mondare guantamula dekamontanula elcoppa",
-            "lihanot",
-            "lemanstoka",
-            "",
-            "mokalin",
-            ""
-          ],
-          "Name" : "CheckListBox",
-          "ScrollbarFrame" : {
-            "$$ClassName" : "TCastleImagePersistent"
-          },
-          "ScrollbarSlider" : {
-            "$$ClassName" : "TCastleImagePersistent"
-          },
-          "TranslationPersistent" : {
-            "$$ClassName" : "TCastleVector2Persistent",
-            "X" : 1.9500000000000000E+002,
-            "Y" : 3.8000000000000000E+002
-          },
-          "Width" : 3.7000000000000000E+002
-        },
-        {
-          "$$ClassName" : "TCastleColorListBox",
-          "ColorBox" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "ProtectedSides" : {
-              "$$ClassName" : "TBorder",
-              "AllSides" : 1.2000000000000000E+001
-            },
-            "Url" : "castle-data:/ui/ColorBox.png"
-          },
-          "ColorBoxMargin" : {
-            "$$ClassName" : "TBorder",
-            "AllSides" : 6.0000000000000000E+000
-          },
-          "ColorFrame" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "ColorPersistent" : {
-              "$$ClassName" : "TCastleColorPersistent",
-              "Blue" : 0.0000000000000000E+000,
-              "Red" : 9.7254902124404907E-001
-            },
-            "ProtectedSides" : {
-              "$$ClassName" : "TBorder",
-              "AllSides" : 1.2000000000000000E+001
-            },
-            "Url" : "castle-data:/ui/ColorFrame.png"
-          },
-          "Height" : 2.0000000000000000E+002,
-          "HorizontalAnchorParent" : "hpMiddle",
-          "HorizontalAnchorSelf" : "hpMiddle",
-          "Index" : 1,
-          "LineCursor" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "ProtectedSides" : {
-              "$$ClassName" : "TBorder",
-              "AllSides" : 1.2000000000000000E+001
-            },
-            "Url" : "castle-data:/ui/LineRoundFrame.png"
-          },
-          "LineFrame" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "ColorPersistent" : {
-              "$$ClassName" : "TCastleColorPersistent",
-              "Blue" : 5.3725492954254150E-001,
-              "Green" : 5.3725492954254150E-001,
-              "Red" : 5.3725492954254150E-001
-            },
-            "ProtectedSides" : {
-              "$$ClassName" : "TBorder",
-              "AllSides" : 1.2000000000000000E+001
-            },
-            "Url" : "castle-data:/ui/LineRoundFrame.png"
-          },
-          "LineFrameHover" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "ColorPersistent" : {
-              "$$ClassName" : "TCastleColorPersistent",
-              "Blue" : 6.5098041296005249E-001,
-              "Green" : 6.5098041296005249E-001,
-              "Red" : 6.5098041296005249E-001
-            },
-            "ProtectedSides" : {
-              "$$ClassName" : "TBorder",
-              "AllSides" : 1.2000000000000000E+001
-            },
-            "Url" : "castle-data:/ui/LineRoundFrame.png"
-          },
-          "LinePadding" : 2.4000000000000000E+001,
-          "List" : [
-            "8FFF00",
-            "69FFF4",
-            "FF696D",
-            "A9FFC8",
-            "81BFFF",
-            "DC2DFF"
-          ],
-          "Name" : "ColorListBox",
-          "ScrollBarLeft" : true,
-          "ScrollBarWidth" : 3.2000000000000000E+001,
-          "ScrollbarFrame" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "ColorPersistent" : {
-              "$$ClassName" : "TCastleColorPersistent",
-              "Blue" : 7.6862746477127075E-001,
-              "Green" : 7.6862746477127075E-001,
-              "Red" : 7.6862746477127075E-001
-            },
-            "ProtectedSides" : {
-              "$$ClassName" : "TBorder",
-              "AllSides" : 1.5000000000000000E+001
-            },
-            "Url" : "castle-data:/ui/ScrollRiundFrame.png"
-          },
-          "ScrollbarSlider" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "ColorPersistent" : {
-              "$$ClassName" : "TCastleColorPersistent",
-              "Blue" : 9.0980392694473267E-001,
-              "Green" : 9.0980392694473267E-001,
-              "Red" : 9.0980392694473267E-001
-            },
-            "ProtectedSides" : {
-              "$$ClassName" : "TBorder",
-              "AllSides" : 1.5000000000000000E+001
-            },
-            "Url" : "castle-data:/ui/ScrollRiundSlider.png"
-          },
-          "ShowText" : true,
-          "ShowTextLeft" : true,
-          "TextMargin" : 2.4000000000000000E+001,
-          "TranslationPersistent" : {
-            "$$ClassName" : "TCastleVector2Persistent",
-            "X" : -1.9000000000000000E+002,
-            "Y" : 1.6000000000000000E+002
-          },
-          "Width" : 3.7000000000000000E+002
-        },
-        {
-          "$$ClassName" : "TCastleCheckbox",
-          "Caption" : "Show color text",
-          "Checked" : true,
-          "HorizontalAnchorParent" : "hpMiddle",
-          "HorizontalAnchorSelf" : "hpMiddle",
-          "Name" : "ShowHex",
-          "TranslationPersistent" : {
-            "$$ClassName" : "TCastleVector2Persistent",
-            "X" : -2.8000000000000000E+002,
-            "Y" : 1.2000000000000000E+002
-          }
-        },
-        {
-          "$$ClassName" : "TCastleCheckColorListBox",
-          "Border" : {
-            "$$ClassName" : "TBorder",
-            "Bottom" : 4.0000000000000000E+000,
-            "Top" : 4.0000000000000000E+000
-          },
-          "BorderColorPersistent" : {
-            "$$ClassName" : "TCastleColorPersistent",
-            "Alpha" : 1.0000000000000000E+000,
-            "Blue" : 4.4313725829124451E-001,
-            "Green" : 8.7843137979507446E-001,
-            "Red" : 9.1372549533843994E-001
-          },
-          "CheckChecked" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "Url" : "castle-data:/ui/CheckSquareChecked.png"
-          },
-          "CheckEmpty" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "Url" : "castle-data:/ui/CheckSquareEmpty.png"
-          },
-          "CheckPressedBack" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "ColorPersistent" : {
-              "$$ClassName" : "TCastleColorPersistent",
-              "Blue" : 0.0000000000000000E+000,
-              "Red" : 9.9215686321258545E-001
-            },
-            "Url" : "castle-data:/ui/CheckSquareBack.png"
-          },
-          "ColorBox" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "ProtectedSides" : {
-              "$$ClassName" : "TBorder",
-              "AllSides" : 1.2000000000000000E+001
-            },
-            "Url" : "castle-data:/ui/ColorSqureBox.png"
-          },
-          "ColorBoxMargin" : {
-            "$$ClassName" : "TBorder",
-            "AllSides" : 6.0000000000000000E+000
-          },
-          "ColorBoxWidth" : 6.4000000000000000E+001,
-          "ColorFrame" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "ProtectedSides" : {
-              "$$ClassName" : "TBorder",
-              "AllSides" : 1.2000000000000000E+001
-            },
-            "Url" : "castle-data:/ui/ColorSqureFrame.png"
-          },
-          "FontSize" : 1.8000000000000000E+001,
-          "Height" : 2.0000000000000000E+002,
-          "HorizontalAnchorParent" : "hpMiddle",
-          "HorizontalAnchorSelf" : "hpMiddle",
-          "Index" : 3,
-          "LineCursor" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "ColorPersistent" : {
-              "$$ClassName" : "TCastleColorPersistent",
-              "Blue" : 0.0000000000000000E+000,
-              "Green" : 9.1372549533843994E-001
-            },
-            "ProtectedSides" : {
-              "$$ClassName" : "TBorder",
-              "AllSides" : 1.1000000000000000E+001
-            },
-            "Url" : "castle-data:/ui/LineSquareCursor.png"
-          },
-          "LineFrame" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "ColorPersistent" : {
-              "$$ClassName" : "TCastleColorPersistent",
-              "Blue" : 7.6862746477127075E-001,
-              "Green" : 8.6666667461395264E-001,
-              "Red" : 9.0588235855102539E-001
-            },
-            "ProtectedSides" : {
-              "$$ClassName" : "TBorder",
-              "AllSides" : 1.1000000000000000E+001
-            },
-            "Url" : "castle-data:/ui/LineSquareFrame.png"
-          },
-          "LineFrameHover" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "ColorPersistent" : {
-              "$$ClassName" : "TCastleColorPersistent",
-              "Blue" : 7.0980393886566162E-001,
-              "Green" : 6.9411766529083252E-001,
-              "Red" : 9.0588235855102539E-001
-            },
-            "ProtectedSides" : {
-              "$$ClassName" : "TBorder",
-              "AllSides" : 1.1000000000000000E+001
-            },
-            "Url" : "castle-data:/ui/LineSquareFrame.png"
-          },
-          "List" : [
-            "hello",
-            "aloha",
-            "",
-            "haola",
-            "mihaliot mondare guantamula dekamontanula elcoppa",
-            "lihanot",
-            "lemanstoka",
-            "",
-            "mokalin",
-            ""
-          ],
-          "ListColors" : [
-            "8FFF00",
-            "69FFF4",
-            "FF5A00",
-            "7A47FF",
-            "5FFFFF",
-            "FFE570",
-            "0EFF22",
-            "FF3050",
-            "BDFF4C",
-            "1AFFAD",
-            "FFB5C8"
-          ],
-          "Name" : "CheckColorListBox",
-          "Outline" : 1,
-          "ScrollBarWidth" : 1.6000000000000000E+001,
-          "ScrollbarFrame" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "ColorPersistent" : {
-              "$$ClassName" : "TCastleColorPersistent",
-              "Blue" : 7.6862746477127075E-001,
-              "Green" : 8.6666667461395264E-001,
-              "Red" : 9.0588235855102539E-001
-            },
-            "ProtectedSides" : {
-              "$$ClassName" : "TBorder",
-              "Bottom" : 6.0000000000000000E+000,
-              "Top" : 6.0000000000000000E+000
-            },
-            "Url" : "castle-data:/ui/ScrollSquareFrame.png"
-          },
-          "ScrollbarSlider" : {
-            "$$ClassName" : "TCastleImagePersistent",
-            "ColorPersistent" : {
-              "$$ClassName" : "TCastleColorPersistent",
-              "Blue" : 7.6862746477127075E-001,
-              "Green" : 8.6666667461395264E-001,
-              "Red" : 9.0588235855102539E-001
-            },
-            "ProtectedSides" : {
-              "$$ClassName" : "TBorder",
-              "Bottom" : 6.0000000000000000E+000,
-              "Top" : 6.0000000000000000E+000
-            },
-            "Url" : "castle-data:/ui/ScrollSquareScroll.png"
-          },
-          "TextMargin" : 6.0000000000000000E+000,
-          "TranslationPersistent" : {
-            "$$ClassName" : "TCastleVector2Persistent",
-            "X" : 1.9500000000000000E+002,
-            "Y" : 1.6000000000000000E+002
-          },
-          "Width" : 3.7000000000000000E+002
         },
         {
           "$$ClassName" : "TCastleLabel",
@@ -511,184 +706,11 @@
           ],
           "TranslationPersistent" : {
             "$$ClassName" : "TCastleVector2Persistent",
-            "X" : -5.0000000000000000E+000,
-            "Y" : -5.0000000000000000E+000
+            "X" : -2.0000000000000000E+001,
+            "Y" : -2.0000000000000000E+001
           },
           "VerticalAnchorParent" : "vpTop",
           "VerticalAnchorSelf" : "vpTop"
-        },
-        {
-          "$$ClassName" : "TCastleHorizontalGroup",
-          "Border" : {
-            "$$ClassName" : "TBorder",
-            "AllSides" : 2.0000000000000000E+000
-          },
-          "BorderColorPersistent" : {
-            "$$ClassName" : "TCastleColorPersistent",
-            "Alpha" : 1.0000000000000000E+000,
-            "Blue" : 2.7450981736183167E-001,
-            "Green" : 2.7450981736183167E-001,
-            "Red" : 2.7450981736183167E-001
-          },
-          "HorizontalAnchorParent" : "hpMiddle",
-          "HorizontalAnchorSelf" : "hpMiddle",
-          "Name" : "HorizontalGroup1",
-          "Padding" : 4.0000000000000000E+000,
-          "Spacing" : 8.0000000000000000E+000,
-          "TranslationPersistent" : {
-            "$$ClassName" : "TCastleVector2Persistent",
-            "Y" : -4.0000000000000000E+001
-          },
-          "VerticalAnchorParent" : "vpTop",
-          "VerticalAnchorSelf" : "vpTop",
-          "$Children" : [
-            {
-              "$$ClassName" : "TCastleVerticalGroup",
-              "Alignment" : "hpRight",
-              "Name" : "VerticalGroup1",
-              "Spacing" : 8.0000000000000000E+000,
-              "TranslationPersistent" : {
-                "$$ClassName" : "TCastleVector2Persistent",
-                "X" : 4.0000000000000000E+000
-              },
-              "VerticalAnchorParent" : "vpMiddle",
-              "VerticalAnchorSelf" : "vpMiddle",
-              "$Children" : [
-                {
-                  "$$ClassName" : "TCastleHorizontalGroup",
-                  "HorizontalAnchorParent" : "hpRight",
-                  "HorizontalAnchorSelf" : "hpRight",
-                  "Name" : "HorizontalGroup2",
-                  "Spacing" : 8.0000000000000000E+000,
-                  "VerticalAnchorParent" : "vpTop",
-                  "VerticalAnchorSelf" : "vpTop",
-                  "$Children" : [
-                    {
-                      "$$ClassName" : "TCastleLabel",
-                      "Alignment" : "hpRight",
-                      "Name" : "LabelIdx",
-                      "Text" : [
-                        "100"
-                      ],
-                      "VerticalAnchorParent" : "vpMiddle",
-                      "VerticalAnchorSelf" : "vpMiddle"
-                    },
-                    {
-                      "$$ClassName" : "TCastleButton",
-                      "Caption" : "Up",
-                      "CustomBackgroundDisabled" : {
-                        "$$ClassName" : "TCastleImagePersistent"
-                      },
-                      "CustomBackgroundFocused" : {
-                        "$$ClassName" : "TCastleImagePersistent"
-                      },
-                      "CustomBackgroundNormal" : {
-                        "$$ClassName" : "TCastleImagePersistent"
-                      },
-                      "CustomBackgroundPressed" : {
-                        "$$ClassName" : "TCastleImagePersistent"
-                      },
-                      "Image" : {
-                        "$$ClassName" : "TCastleImagePersistent"
-                      },
-                      "Name" : "ButtonUp",
-                      "TranslationPersistent" : {
-                        "$$ClassName" : "TCastleVector2Persistent",
-                        "X" : 4.7000000000000000E+001
-                      },
-                      "VerticalAnchorParent" : "vpMiddle",
-                      "VerticalAnchorSelf" : "vpMiddle"
-                    }
-                  ]
-                },
-                {
-                  "$$ClassName" : "TCastleButton",
-                  "Caption" : "Down",
-                  "CustomBackgroundDisabled" : {
-                    "$$ClassName" : "TCastleImagePersistent"
-                  },
-                  "CustomBackgroundFocused" : {
-                    "$$ClassName" : "TCastleImagePersistent"
-                  },
-                  "CustomBackgroundNormal" : {
-                    "$$ClassName" : "TCastleImagePersistent"
-                  },
-                  "CustomBackgroundPressed" : {
-                    "$$ClassName" : "TCastleImagePersistent"
-                  },
-                  "HorizontalAnchorParent" : "hpRight",
-                  "HorizontalAnchorSelf" : "hpRight",
-                  "Image" : {
-                    "$$ClassName" : "TCastleImagePersistent"
-                  },
-                  "Name" : "ButtonDown",
-                  "TranslationPersistent" : {
-                    "$$ClassName" : "TCastleVector2Persistent",
-                    "Y" : -4.7000000000000000E+001
-                  },
-                  "VerticalAnchorParent" : "vpTop",
-                  "VerticalAnchorSelf" : "vpTop"
-                }
-              ]
-            },
-            {
-              "$$ClassName" : "TCastleTextScroller",
-              "AutoSizeHeightByLines" : 3,
-              "Border" : {
-                "$$ClassName" : "TBorder",
-                "Bottom" : 1.0000000000000000E+000,
-                "Top" : 1.0000000000000000E+000
-              },
-              "BorderColorPersistent" : {
-                "$$ClassName" : "TCastleColorPersistent",
-                "Alpha" : 1.0000000000000000E+000,
-                "Blue" : 3.8431373238563538E-001,
-                "Green" : 3.8431373238563538E-001,
-                "Red" : 3.8431373238563538E-001
-              },
-              "ClipChildren" : true,
-              "ColorBackPersistent" : {
-                "$$ClassName" : "TCastleColorPersistent",
-                "Alpha" : 5.0196081399917603E-001,
-                "Blue" : 1.0000000000000000E+000,
-                "Green" : 7.8431377187371254E-003,
-                "Red" : 4.7058823704719543E-001
-              },
-              "ColorFrontPersistent" : {
-                "$$ClassName" : "TCastleColorPersistent",
-                "Blue" : 0.0000000000000000E+000,
-                "Green" : 0.0000000000000000E+000,
-                "Red" : 0.0000000000000000E+000
-              },
-              "FontScale" : 1.1800000667572021E+000,
-              "FontSize" : 1.8000000000000000E+001,
-              "Height" : 8.0000000000000000E+001,
-              "Index" : 1,
-              "List" : [
-                "One Line 1/6",
-                "Two Line 2/6",
-                "Three Line 3/6",
-                "Four Line 4/6",
-                "Five Line 5/6",
-                "Six Line 6/6"
-              ],
-              "Name" : "Scroller",
-              "OutlineColorPersistent" : {
-                "$$ClassName" : "TCastleColorPersistent",
-                "Blue" : 2.2745098173618317E-001,
-                "Red" : 1.4901961386203766E-001
-              },
-              "OutlineHighQuality" : true,
-              "Speed" : 4.0000000000000000E+000,
-              "TranslationPersistent" : {
-                "$$ClassName" : "TCastleVector2Persistent",
-                "X" : 1.0700000000000000E+002
-              },
-              "VerticalAnchorParent" : "vpMiddle",
-              "VerticalAnchorSelf" : "vpMiddle",
-              "Zoom" : 1.2000000476837158E+000
-            }
-          ]
         }
       ]
     }

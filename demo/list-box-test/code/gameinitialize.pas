@@ -50,7 +50,7 @@ initialization
 
   Window := TCastleWindow.Create(Application);
   Window.Width:= 800;
-  Window.Height:= 900;
+  Window.Height:= 800;
   Application.MainWindow := Window;
 
   { Optionally, adjust window fullscreen state and size at this point.

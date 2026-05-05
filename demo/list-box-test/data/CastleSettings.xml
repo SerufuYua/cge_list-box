@@ -9,6 +9,6 @@ See https://castle-engine.io/manual_castle_settings.php for documentation of thi
   <ui_scaling
     mode="EncloseReferenceSize"
     reference_width="800"
-    reference_height="600"
+    reference_height="800"
   />
 </castle_settings>
