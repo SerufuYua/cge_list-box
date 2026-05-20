@@ -1,3 +1,12 @@
+{
+  Copyright (c) 2026 Serufu Yua
+  --------------------------------------------------
+}
+
+{ Simple scroller text lines with zoom to telected }
+{ Code-selecting line only }
+
+
 unit CastleTextScroller;
 
 {$mode ObjFPC}{$H+}
