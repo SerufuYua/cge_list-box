@@ -1,3 +1,10 @@
+{
+  Copyright (c) 2026 Serufu Yua
+  --------------------------------------------------
+}
+
+{ UI element for grouping parents by grid }
+
 unit CastleGridGroup;
 
 {$mode ObjFPC}{$H+}
