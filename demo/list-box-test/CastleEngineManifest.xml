@@ -14,7 +14,8 @@ See https://castle-engine.io/project_manifest for documentation of this file.
                 CastleCheckListBox,
                 CastleColorListBox,
                 CastleCheckColorListBox,
-                CastleTextScroller"
+                CastleTextScroller,
+                CastleGridGroup"
 >
   <compiler_options>
     <search_paths>
