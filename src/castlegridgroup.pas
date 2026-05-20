@@ -3,7 +3,7 @@
   --------------------------------------------------
 }
 
-{ UI element for grouping parents by grid }
+{ Container that packs the children by grid }
 
 unit CastleGridGroup;
 
