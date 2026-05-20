@@ -3,7 +3,7 @@
   --------------------------------------------------
 }
 
-{ Simple scroller text lines with zoom to telected }
+{ Simple scroller for text lines with zoom to selected }
 { Code-selecting line only }
 
 

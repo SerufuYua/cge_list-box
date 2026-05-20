@@ -3,7 +3,7 @@
   --------------------------------------------------
 }
 
-{ Box with Text Lines and Check Boxes }
+{ List Box with Text and Check Boxes }
 
 
 unit CastleCheckListBox;

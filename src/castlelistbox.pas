@@ -3,7 +3,7 @@
   --------------------------------------------------
 }
 
-{ Simple List Box with Text Lines }
+{ Simple List Box with Text }
 
 
 unit CastleListBox;

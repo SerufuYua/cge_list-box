@@ -3,7 +3,7 @@
   --------------------------------------------------
 }
 
-{ Box with Text Lines, Check Boxes and Colors }
+{ List Box with Text, Check Boxes and Colors }
 { Set colors via property ListColors in hex format }
 
 unit CastleCheckColorListBox;

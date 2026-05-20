@@ -4,16 +4,18 @@ List Boxes UI for [Castle Game Engine](https://castle-engine.io/).
 
 Copyright (c) 2026 Serufu Yua
 
-Content:
+## Content:
 
- - CastleListBox - Simple List Box with Text Lines;
+ - CastleListBox - Simple List Box with Text;
 
- - CastleCheckListBox - Box with Text Lines and Check Boxes;
+ - CastleCheckListBox - List Box with Text and Check Boxes;
 
  - CastleColorListBox - List Box with Colors;
 
- - CastleCheckColorListBox - Box with Text Lines, Check Boxes and Colors;
+ - CastleCheckColorListBox - List Box with Text, Check Boxes and Colors;
 
- - CastleTextScroller - Simple scroller text lines with zoom to telected;
+### Addition:
+
+ - CastleTextScroller - Simple scroller for text lines with zoom to selected;
 
  - CastleGridGroup - Container that packs the children by grid.
